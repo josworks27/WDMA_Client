@@ -1,68 +1,72 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Tech Stack
 
-## Available Scripts
+## Front-end
+JavaScript, React, React Hooks, Redux, D3
 
-In the project directory, you can run:
+## Back-end
+JavaScript, Express, Sequelize, MySQL, Multer, Bcrypt, JWT
 
-### `yarn start`
+## Etc
+dotenv, Socket.io, AWS(S3)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# 프로젝트 진행 문서
+https://www.notion.so/WDMA-Wedding-Dress-Management-Application-618a3b782f7b4770b35087b69551c2c9
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+# 프로젝트 개요
+일본 웨딩 드레스 전문업체인 'ANJERI' 의 웨딩 드레스 관리 장부를 웹 애플리케이션으로 대체하기 위한 프로젝트입니다.
 
-### `yarn test`
+# 기능별 Flow
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 관리자 등록 및 로그인
+**관리자 등록**
+* 메일 인증을 통한 계정 확인
+* 이름, 비밀번호, 소속점포 입력
+* 로그인
 
-### `yarn build`
+**forget**
+* E-mail 찾기
+  * 이름 & 소속점포 입력하여 계정으로 사용되는 E-mail 찾기
+* 비밀번호 찾기
+  * 계정으로 사용되는 E-mail 입력하면 임시 비밀번호를 해당 E-mail 주소로 송신
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 홈
+* 애플리케이션 초기 화면
+* 등록된 모든 드레스 나열
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## 드레스 추가
+* 모델명, 가격, 부속품(1~3 종류), 관리점포 입력
+* 드레스 이미지 1~3장 업로드
+* 대표 이미지 선택
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 드레스 검색
+* 화면 이동 없는 방식
+* 드레스 모델명 입력하면 해당하는 드레스만 표시
 
-### `yarn eject`
+## 채팅
+* 관리자 간의 커뮤니케이션 수단
+* 관리자의 이름, 전달 내용, 전달 시간 표시
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 드레스 통계
+* 드레스별 대여, 시착, 세탁, 타 점포 이관 등 통계 데이터 표시
+* 고객 연령층별, 계절별, 분기별 선호도 등의 유의미한 통계 데이터 표시
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 프로필
+**내 정보**
+* E-mail, 이름, 소속 점포 확인 및 변경
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**드레스 관리 이력**
+* 드레스 별 자신이 입력한 관리 이력 표시
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**비밀번호 변경**
+* 계정 비밀번호 변경
 
-## Learn More
+## 드레스 상세
+**신규 이벤트**
+* 드레스별 신규 이벤트 작성
+* 이벤트 종류 선택 (고객 대여, 시착, 세탁, 지점 대여)
+* 이벤트별 세부 내용 입력
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+**드레스 편집**
+* 기존 등록된 드레스의 정보 변경
+* 모델명, 가격, 부속품, 관리점포, 사진
+* 드레스 정보 삭제
