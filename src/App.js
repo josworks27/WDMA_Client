@@ -2,7 +2,11 @@ import React from 'react';
 import './App.css';
 
 function App() {
-  return <div className="App">HELLO WORLD!</div>;
+  return (
+    <div>
+      <div className="App">This Component is Entry APP</div>
+    </div>
+  );
 }
 
 export default App;
