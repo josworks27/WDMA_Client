@@ -19,6 +19,9 @@ import {
   MAIL_AUTH_REQUEST,
   MAIL_AUTH_SUCCESS,
   MAIL_AUTH_FAILURE,
+  MAIL_CHECK_REQUEST,
+  MAIL_CHECK_SUCCESS,
+  MAIL_CHECK_FAILURE,
 } from './user';
 
 // user saga 세팅
@@ -103,9 +106,9 @@ function mailAuthAPI(data) {
 
 function* mailAuthAsync(action) {
   try {
-    const result = yield call(mailAuthAPI, action.data);
+    yield call(mailAuthAPI, action.data);
 
-    yield put({ type: MAIL_AUTH_SUCCESS, payload: result });
+    yield put({ type: MAIL_AUTH_SUCCESS });
   } catch (err) {
     yield put({ type: MAIL_AUTH_FAILURE, error: err });
   }
@@ -113,6 +116,25 @@ function* mailAuthAsync(action) {
 
 function* watchMailAuthAsync() {
   yield takeLatest(MAIL_AUTH_REQUEST, mailAuthAsync);
+}
+
+// * Mail Check
+function mailCheckAPI(data) {
+  return axios.post('/auth/check', data);
+}
+
+function* mailCheckAsync(action) {
+  try {
+    yield call(mailCheckAPI, action.data);
+
+    yield put({ type: MAIL_CHECK_SUCCESS });
+  } catch (err) {
+    yield put({ type: MAIL_CHECK_FAILURE, error: err });
+  }
+}
+
+function* watchMailCheckAsync() {
+  yield takeLatest(MAIL_CHECK_REQUEST, mailCheckAsync);
 }
 
 // ! fork
@@ -123,6 +145,7 @@ function* userSaga() {
     fork(watchLoadUserAsync),
     fork(watchSignupAsync),
     fork(watchMailAuthAsync),
+    fork(watchMailCheckAsync),
   ]);
 }
 

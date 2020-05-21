@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import ValidationAuth from './ValidationAuth';
+import ValidationCheck from './ValidationCheck';
 import { MAIL_AUTH_REQUEST } from '../../store/modules/user';
 
-const ValidationInput = ({ history }) => {
+const ValidationAuth = ({ history }) => {
   const [email, setEmail] = useState('');
 
   const { mail, mailAuthError } = useSelector((state) => state.userReducer);
@@ -19,14 +19,14 @@ const ValidationInput = ({ history }) => {
 
     if (!email.includes('@') || !email.includes('.')) {
       alert('Please Check your Email address');
+    } else {
+      dispatch({
+        type: MAIL_AUTH_REQUEST,
+        data: {
+          email,
+        },
+      });
     }
-
-    dispatch({
-      type: MAIL_AUTH_REQUEST,
-      data: {
-        email,
-      },
-    });
   };
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const ValidationInput = ({ history }) => {
   return (
     <>
       {mail ? (
-        <ValidationAuth history={history} mail={email} />
+        <ValidationCheck history={history} email={email} />
       ) : (
         <div className="container">
           <h1>Please input your Email address</h1>
@@ -62,4 +62,4 @@ const ValidationInput = ({ history }) => {
   );
 };
 
-export default ValidationInput;
+export default ValidationAuth;

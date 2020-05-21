@@ -70,7 +70,7 @@ const SigninInput = ({ history }) => {
       <div>
         <ul>
           <li>
-            <Link to="/validation">Sign Up</Link>
+            <Link to="/signup">Sign Up</Link>
           </li>
           <li>
             <Link to="/forgot">Forgot</Link>

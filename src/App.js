@@ -3,8 +3,9 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Signin from './pages/Signin';
+import Signup from './pages/Signup';
+
 import './App.css';
-import Validation from './pages/Validation';
 
 const App = () => {
   const token = localStorage.getItem('token');
@@ -18,7 +19,7 @@ const App = () => {
           path="/signin"
           render={() => (token ? <Redirect to="/" /> : <Signin />)}
         />
-        <Route exact path="/validation" component={Validation} />
+        <Route exact path="/signup" component={Signup} />
       </Switch>
     </div>
   );

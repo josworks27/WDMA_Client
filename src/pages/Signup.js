@@ -1,10 +1,12 @@
 import React from 'react';
 
-const Signup = () => {
+import ValidationAuth from '../components/signup/ValidationAuth';
+
+const Signup = ({ history }) => {
   return (
-    <div>
-      <div>Signup</div>
-    </div>
+    <>
+      <ValidationAuth history={history} />
+    </>
   );
 };
 
