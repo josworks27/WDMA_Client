@@ -4,6 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from './pages/Home';
 import Signin from './pages/Signin';
 import './App.css';
+import Validation from './pages/Validation';
 
 const App = () => {
   const token = localStorage.getItem('token');
@@ -17,6 +18,7 @@ const App = () => {
           path="/signin"
           render={() => (token ? <Redirect to="/" /> : <Signin />)}
         />
+        <Route exact path="/validation" component={Validation} />
       </Switch>
     </div>
   );

@@ -15,12 +15,19 @@ export const SIGN_UP_REQUEST = 'SIGN-UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN-UP_SUCCESS';
 export const SIGN_UP_FAILURE = 'SIGN-UP_FAILURE';
 
+export const MAIL_AUTH_REQUEST = 'MAIL_AUTH_REQUEST';
+export const MAIL_AUTH_SUCCESS = 'MAIL_AUTH_SUCCESS';
+export const MAIL_AUTH_FAILURE = 'MAIL_AUTH_FAILURE';
+
 // 리듀서 초기값 정의
 const initialState = {
   isSignin: false,
   signinError: '',
   isSignup: false,
   signupError: '',
+  isMailAuth: false,
+  mailAuthError: '',
+  mail: false,
   me: null,
   load: [],
 };
@@ -98,6 +105,27 @@ const userReducer = (state = initialState, action) => {
         isSignup: false,
         signupError: action.error,
         me: null,
+      };
+    case MAIL_AUTH_REQUEST:
+      return {
+        ...state,
+        isMailAuth: true,
+        mailAuthError: '',
+        mail: false,
+      };
+    case MAIL_AUTH_SUCCESS:
+      return {
+        ...state,
+        isMailAuth: false,
+        mailAuthError: '',
+        mail: true,
+      };
+    case MAIL_AUTH_FAILURE:
+      return {
+        ...state,
+        isMailAuth: false,
+        mailAuthError: action.error,
+        mail: false,
       };
     default: {
       return state;

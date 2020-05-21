@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
-import { SIGN_IN_REQUEST } from '../store/modules/user';
+import { SIGN_IN_REQUEST } from '../../store/modules/user';
+import './SigninInput.css';
 
 const SigninInput = ({ history }) => {
   const [account, setAccount] = useState({
@@ -15,12 +16,13 @@ const SigninInput = ({ history }) => {
 
   const { email, password } = account;
 
-  function handleOnChange(event) {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setAccount({ ...account, [name]: value });
-  }
+  };
 
-  function handleSubmit() {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     dispatch({
       type: SIGN_IN_REQUEST,
       data: {
@@ -28,7 +30,7 @@ const SigninInput = ({ history }) => {
         password,
       },
     });
-  }
+  };
 
   useEffect(() => {
     if (me) {
@@ -37,41 +39,46 @@ const SigninInput = ({ history }) => {
     }
 
     if (signinError) {
-      alert('로그인 오류');
+      alert('Sign In Error');
     }
   }, [me, signinError]);
 
   return (
     <div className="container">
+      <h1>Sign In</h1>
       <div className="input-form">
-        <h1>로그인</h1>
-        <div className="form-group">
-          <span>이메일</span>
+        <form onSubmit={handleSubmit}>
           <input
             type="text"
             name="email"
-            placeholder="이메일"
+            placeholder="Email address"
             value={email}
-            onChange={handleOnChange}
+            onChange={handleChange}
             required
           />
-        </div>
-        <div className="form-group">
-          <span>비밀번호</span>
           <input
-            type="text"
+            type="password"
             name="password"
-            placeholder="비밀번호"
+            placeholder="Password"
             value={password}
-            onChange={handleOnChange}
+            onChange={handleChange}
             required
           />
-        </div>
-        <button type="submit" onClick={handleSubmit}>
-          Submit
-        </button>
-        <div />
+          <button type="submit">Sign In</button>
+        </form>
       </div>
+      <div>
+        <ul>
+          <li>
+            <Link to="/validation">Sign Up</Link>
+          </li>
+          <li>
+            <Link to="/forgot">Forgot</Link>
+          </li>
+        </ul>
+      </div>
+      <div />
+      <div />
     </div>
   );
 };

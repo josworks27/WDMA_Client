@@ -1,11 +1,11 @@
 import React from 'react';
-import SigninInput from '../components/SigninInput';
+import SigninInput from '../components/Signin/SigninInput';
 
 const Signin = () => {
   return (
-    <div>
+    <>
       <SigninInput />
-    </div>
+    </>
   );
 };
 

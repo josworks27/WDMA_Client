@@ -16,6 +16,9 @@ import {
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
   SIGN_UP_FAILURE,
+  MAIL_AUTH_REQUEST,
+  MAIL_AUTH_SUCCESS,
+  MAIL_AUTH_FAILURE,
 } from './user';
 
 // user saga 세팅
@@ -93,6 +96,25 @@ function* watchSignupAsync() {
   yield takeLatest(SIGN_UP_REQUEST, signupAsync);
 }
 
+// * Mail Auth
+function mailAuthAPI(data) {
+  return axios.post('/auth', data);
+}
+
+function* mailAuthAsync(action) {
+  try {
+    const result = yield call(mailAuthAPI, action.data);
+
+    yield put({ type: MAIL_AUTH_SUCCESS, payload: result });
+  } catch (err) {
+    yield put({ type: MAIL_AUTH_FAILURE, error: err });
+  }
+}
+
+function* watchMailAuthAsync() {
+  yield takeLatest(MAIL_AUTH_REQUEST, mailAuthAsync);
+}
+
 // ! fork
 function* userSaga() {
   yield all([
@@ -100,6 +122,7 @@ function* userSaga() {
     fork(watchSignoutAsync),
     fork(watchLoadUserAsync),
     fork(watchSignupAsync),
+    fork(watchMailAuthAsync),
   ]);
 }
 
