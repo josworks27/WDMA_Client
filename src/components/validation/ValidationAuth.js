@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import ValidationCheck from './ValidationCheck';
-import { MAIL_AUTH_REQUEST } from '../../store/modules/user';
+import { MAIL_AUTH_REQUEST } from '../../store/modules/user/user';
 
 const ValidationAuth = () => {
   const [userInputEmail, setUserInputEmail] = useState('');

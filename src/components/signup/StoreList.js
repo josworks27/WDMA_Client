@@ -1,9 +1,9 @@
 import React from 'react';
 
-const StoreList = ({ stores, onChange, value }) => {
+const StoreList = ({ stores, onChange, belongStore }) => {
   return (
     <>
-      <select name="store" value={value} onChange={onChange}>
+      <select name="store" value={belongStore} onChange={onChange}>
         {stores.map((store) => {
           return (
             <option key={store.id} value={store.name}>

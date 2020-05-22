@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-
-import { SIGN_IN_REQUEST } from '../../store/modules/user';
+import { SIGN_IN_REQUEST } from '../../store/modules/user/user';
 import './SigninInput.css';
 
 const SigninInput = ({ history }) => {
@@ -41,7 +40,7 @@ const SigninInput = ({ history }) => {
     if (signinError.message === 'Request failed with status code 404') {
       alert('Non-Existing Email');
     }
-  }, [me, signinError]);
+  }, [me, signinError, history]);
 
   return (
     <div className="container">
