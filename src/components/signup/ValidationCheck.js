@@ -4,10 +4,12 @@ import useOnlyNumber from '../../utl/hooks/useOnlyNumber';
 import { MAIL_CHECK_REQUEST } from '../../store/modules/user';
 import SignupInput from './SignupInput';
 
-const ValidationCheck = ({ history, email }) => {
-  const { authNumber, handleChange } = useOnlyNumber(email);
+const ValidationCheck = ({ history }) => {
   const dispatch = useDispatch();
-  const { checked, mailCheckError } = useSelector((state) => state.userReducer);
+  const { checked, mailCheckError, email } = useSelector(
+    (state) => state.userReducer,
+  );
+  const { authNumber, handleChange } = useOnlyNumber(email);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -30,7 +32,7 @@ const ValidationCheck = ({ history, email }) => {
   return (
     <>
       {checked ? (
-        <SignupInput history={history} email={email} />
+        <SignupInput history={history} />
       ) : (
         <div className="container">
           <h1>Please input the number you received</h1>

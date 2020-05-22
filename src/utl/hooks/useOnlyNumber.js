@@ -15,7 +15,6 @@ const useOnlyNumber = (email) => {
   useEffect(() => {
     // 시간이 지연되면 경고 알림
     setTimeout(() => {
-      console.log(checked);
       if (!checked) {
         alert(`Your Email address is ${email}`);
       }

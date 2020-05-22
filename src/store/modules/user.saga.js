@@ -106,9 +106,9 @@ function mailAuthAPI(data) {
 
 function* mailAuthAsync(action) {
   try {
-    yield call(mailAuthAPI, action.data);
+    const result = yield call(mailAuthAPI, action.data);
 
-    yield put({ type: MAIL_AUTH_SUCCESS });
+    yield put({ type: MAIL_AUTH_SUCCESS, payload: result.data });
   } catch (err) {
     yield put({ type: MAIL_AUTH_FAILURE, error: err });
   }

@@ -35,7 +35,7 @@ const initialState = {
   mailCheckError: '',
   me: null,
   load: [],
-  mail: false,
+  email: '',
   checked: false,
 };
 
@@ -118,21 +118,21 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isMailAuth: true,
         mailAuthError: '',
-        mail: false,
+        email: '',
       };
     case MAIL_AUTH_SUCCESS:
       return {
         ...state,
         isMailAuth: false,
         mailAuthError: '',
-        mail: true,
+        email: action.payload.data,
       };
     case MAIL_AUTH_FAILURE:
       return {
         ...state,
         isMailAuth: false,
         mailAuthError: action.error,
-        mail: false,
+        email: '',
       };
     case MAIL_CHECK_REQUEST:
       return {

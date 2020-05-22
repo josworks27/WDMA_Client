@@ -5,25 +5,25 @@ import ValidationCheck from './ValidationCheck';
 import { MAIL_AUTH_REQUEST } from '../../store/modules/user';
 
 const ValidationAuth = ({ history }) => {
-  const [email, setEmail] = useState('');
+  const [userInputEmail, setUserInputEmail] = useState('');
 
-  const { mail, mailAuthError } = useSelector((state) => state.userReducer);
+  const { email, mailAuthError } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
-    setEmail(event.target.value);
+    setUserInputEmail(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!email.includes('@') || !email.includes('.')) {
+    if (!userInputEmail.includes('@') || !userInputEmail.includes('.')) {
       alert('Please Check your Email address');
     } else {
       dispatch({
         type: MAIL_AUTH_REQUEST,
         data: {
-          email,
+          email: userInputEmail,
         },
       });
     }
@@ -37,8 +37,8 @@ const ValidationAuth = ({ history }) => {
 
   return (
     <>
-      {mail ? (
-        <ValidationCheck history={history} email={email} />
+      {email ? (
+        <ValidationCheck history={history} />
       ) : (
         <div className="container">
           <h1>Please input your Email address</h1>
@@ -48,7 +48,7 @@ const ValidationAuth = ({ history }) => {
                 type="text"
                 name="email"
                 placeholder="Email address"
-                value={email}
+                value={userInputEmail}
                 onChange={handleChange}
                 required
               />
