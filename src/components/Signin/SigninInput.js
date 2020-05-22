@@ -38,8 +38,8 @@ const SigninInput = ({ history }) => {
       history.push('/');
     }
 
-    if (signinError) {
-      alert('Sign In Error');
+    if (signinError.message === 'Request failed with status code 404') {
+      alert('Non-Existing Email');
     }
   }, [me, signinError]);
 
@@ -70,7 +70,7 @@ const SigninInput = ({ history }) => {
       <div>
         <ul>
           <li>
-            <Link to="/signup">Sign Up</Link>
+            <Link to="/validation">Sign Up</Link>
           </li>
           <li>
             <Link to="/forgot">Forgot</Link>

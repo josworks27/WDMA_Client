@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ValidationCheck from './ValidationCheck';
 import { MAIL_AUTH_REQUEST } from '../../store/modules/user';
 
-const ValidationAuth = ({ history }) => {
+const ValidationAuth = () => {
   const [userInputEmail, setUserInputEmail] = useState('');
 
   const { email, mailAuthError } = useSelector((state) => state.userReducer);
@@ -30,15 +30,15 @@ const ValidationAuth = ({ history }) => {
   };
 
   useEffect(() => {
-    if (mailAuthError) {
-      alert('Email Auth Error');
+    if (mailAuthError.message === 'Request failed with status code 409') {
+      alert('Existing Email');
     }
   }, [mailAuthError]);
 
   return (
     <>
       {email ? (
-        <ValidationCheck history={history} />
+        <ValidationCheck />
       ) : (
         <div className="container">
           <h1>Please input your Email address</h1>

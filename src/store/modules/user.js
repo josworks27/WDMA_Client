@@ -37,6 +37,7 @@ const initialState = {
   load: [],
   email: '',
   checked: false,
+  store: [],
 };
 
 // 리듀서 정의
@@ -140,6 +141,7 @@ const userReducer = (state = initialState, action) => {
         isMailCheck: true,
         mailCheckError: '',
         checked: false,
+        store: [],
       };
     case MAIL_CHECK_SUCCESS:
       return {
@@ -147,6 +149,7 @@ const userReducer = (state = initialState, action) => {
         isMailCheck: false,
         mailCheckError: '',
         checked: true,
+        store: action.payload.data,
       };
     case MAIL_CHECK_FAILURE:
       return {
@@ -154,6 +157,7 @@ const userReducer = (state = initialState, action) => {
         isMailCheck: false,
         mailCheckError: action.error,
         checked: false,
+        store: [],
       };
     default: {
       return state;

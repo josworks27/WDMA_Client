@@ -125,9 +125,9 @@ function mailCheckAPI(data) {
 
 function* mailCheckAsync(action) {
   try {
-    yield call(mailCheckAPI, action.data);
+    const result = yield call(mailCheckAPI, action.data);
 
-    yield put({ type: MAIL_CHECK_SUCCESS });
+    yield put({ type: MAIL_CHECK_SUCCESS, payload: result.data });
   } catch (err) {
     yield put({ type: MAIL_CHECK_FAILURE, error: err });
   }

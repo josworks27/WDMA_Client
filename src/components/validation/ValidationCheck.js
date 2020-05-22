@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import useOnlyNumber from '../../utl/hooks/useOnlyNumber';
 import { MAIL_CHECK_REQUEST } from '../../store/modules/user';
-import SignupInput from './SignupInput';
+import Signup from '../../pages/Signup';
 
-const ValidationCheck = ({ history }) => {
+const ValidationCheck = () => {
   const dispatch = useDispatch();
   const { checked, mailCheckError, email } = useSelector(
     (state) => state.userReducer,
@@ -25,14 +26,14 @@ const ValidationCheck = ({ history }) => {
 
   useEffect(() => {
     if (mailCheckError) {
-      alert('Request failed');
+      alert(mailCheckError);
     }
   }, [mailCheckError]);
 
   return (
     <>
       {checked ? (
-        <SignupInput history={history} />
+        <Redirect to="/signup" />
       ) : (
         <div className="container">
           <h1>Please input the number you received</h1>
@@ -41,7 +42,7 @@ const ValidationCheck = ({ history }) => {
               <input
                 type="text"
                 name="auth"
-                placeholder="Received number"
+                placeholder="received number"
                 value={authNumber}
                 onChange={handleChange}
                 required

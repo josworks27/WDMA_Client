@@ -12,14 +12,14 @@ const useOnlyNumber = (email) => {
     if (!Number.isNaN(changedValue)) SetAuthNumber(value);
   };
 
-  useEffect(() => {
-    // 시간이 지연되면 경고 알림
-    setTimeout(() => {
-      if (!checked) {
-        alert(`Your Email address is ${email}`);
-      }
-    }, 30000);
-  }, []);
+  // useEffect(() => {
+  //   // 시간이 지연되면 경고 알림
+  //   setTimeout(() => {
+  //     if (!checked) {
+  //       alert(`Your Email address is ${email}`);
+  //     }
+  //   }, 30000);
+  // }, []);
 
   return { authNumber, handleChange };
 };
