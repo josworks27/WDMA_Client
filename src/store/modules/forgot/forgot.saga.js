@@ -8,12 +8,15 @@ import {
   FORGOT_MAIL_REQUEST,
   FORGOT_MAIL_SUCCESS,
   FORGOT_MAIL_FAILURE,
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_FAILURE,
 } from './forgot';
 
 // forgot saga 세팅
 // * Forgot Store
 function forgotStoreAPI() {
-  return axios.get('/find');
+  return axios.get('/forgot');
 }
 
 function* forgotStoreAsync() {
@@ -32,7 +35,7 @@ function* watchForgotStoreAsync() {
 
 // * Forgot Mail
 function forgotMailAPI(data) {
-  return axios.post('/find', data);
+  return axios.post('/forgot', data);
 }
 
 function* forgotMailAsync(action) {
@@ -48,9 +51,32 @@ function* watchForgotMailAsync() {
   yield takeLatest(FORGOT_MAIL_REQUEST, forgotMailAsync);
 }
 
+// * Forgot Password
+function forgotPasswordAPI(data) {
+  return axios.put('/forgot', data);
+}
+
+function* forgotPasswordAsync(action) {
+  try {
+    yield call(forgotPasswordAPI, action.data);
+
+    yield put({ type: FORGOT_PASSWORD_SUCCESS });
+  } catch (err) {
+    yield put({ type: FORGOT_PASSWORD_FAILURE, error: err });
+  }
+}
+
+function* watchForgotPasswordAsync() {
+  yield takeLatest(FORGOT_PASSWORD_REQUEST, forgotPasswordAsync);
+}
+
 // ! fork
 function* forgotSaga() {
-  yield all([fork(watchForgotStoreAsync), fork(watchForgotMailAsync)]);
+  yield all([
+    fork(watchForgotStoreAsync),
+    fork(watchForgotMailAsync),
+    fork(watchForgotPasswordAsync),
+  ]);
 }
 
 export default forgotSaga;
