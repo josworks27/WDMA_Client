@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import useOnlyNumber from '../../utl/hooks/useOnlyNumber';
+import useOnlyNumber from '../../util/hooks/useOnlyNumber';
 import { MAIL_CHECK_REQUEST } from '../../store/modules/user/user';
 
 const ValidationCheck = () => {

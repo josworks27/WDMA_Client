@@ -1,5 +1,5 @@
 import { all, fork, takeLatest, call, put } from 'redux-saga/effects';
-import axios from '../../../utl/axiosHelper';
+import axios from '../../../util/axiosHelper';
 
 import {
   FORGOT_STORE_REQUEST,

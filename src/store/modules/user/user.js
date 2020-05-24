@@ -1,4 +1,6 @@
 // 액션 타입 정의
+export const USER_RESET = 'USER_RESET';
+
 export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 export const SIGN_IN_FAILURE = 'SIGN_IN_FAILURE';
@@ -43,6 +45,22 @@ const initialState = {
 // 리듀서 정의
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case USER_RESET:
+      return {
+        isSignin: false,
+        signinError: '',
+        isSignup: false,
+        signupError: '',
+        isMailAuth: false,
+        mailAuthError: '',
+        isMailCheck: false,
+        mailCheckError: '',
+        me: null,
+        load: [],
+        email: '',
+        checked: false,
+        store: [],
+      };
     case SIGN_IN_REQUEST:
       return {
         ...state,

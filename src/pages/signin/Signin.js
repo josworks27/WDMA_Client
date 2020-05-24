@@ -1,10 +1,10 @@
 import React from 'react';
 import SigninInput from '../../components/signin/SigninInput';
 
-const Signin = () => {
+const Signin = ({ history }) => {
   return (
     <>
-      <SigninInput />
+      <SigninInput history={history} />
     </>
   );
 };

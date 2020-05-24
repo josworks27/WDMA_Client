@@ -1,7 +1,7 @@
 // user.saga은 비동기처리를 위해 store의 미들웨어로써 요청이 처리될 수 있게 하기 위함
 // modules/user.js에서 액션함수를 만들지 않는 이유는 여기서 액션함수의 역할을 비동기처리로 명령하기 때문
 import { all, fork, takeLatest, call, put } from 'redux-saga/effects';
-import axios from '../../../utl/axiosHelper';
+import axios from '../../../util/axiosHelper';
 
 import {
   SIGN_IN_REQUEST,
