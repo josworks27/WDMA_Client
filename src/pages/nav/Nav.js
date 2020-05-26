@@ -6,7 +6,7 @@ const Nav = () => {
     <div className="container">
       <ul>
         <li>
-          <Link to="/dress">Dress</Link>
+          <Link to="/dress">All Dresses</Link>
         </li>
         <li>
           <Link to="/add">Add dress</Link>

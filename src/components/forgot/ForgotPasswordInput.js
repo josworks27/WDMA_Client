@@ -30,7 +30,7 @@ const ForgotPasswordInput = ({ history }) => {
     if (findPasswordError) {
       alert(findPasswordError);
     }
-  }, [changed, findPasswordError]);
+  }, [changed, findPasswordError, email, dispatch]);
 
   const handleSubmit = (event) => {
     event.preventDefault();

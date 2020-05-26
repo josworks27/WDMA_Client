@@ -22,7 +22,7 @@ const ForgotMailInput = ({ history }) => {
     dispatch({
       type: FORGOT_STORE_REQUEST,
     });
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (findStoreError) {
@@ -32,7 +32,7 @@ const ForgotMailInput = ({ history }) => {
     if (findMailError) {
       alert(findMailError);
     }
-  }, [findStoreError, findMailError]);
+  }, [findStoreError, findMailError, dispatch]);
 
   const handleChange = (event) => {
     const { target } = event;
