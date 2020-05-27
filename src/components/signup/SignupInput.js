@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import StoreList from './StoreList';
-import { SIGN_UP_REQUEST } from '../../store/modules/user/user';
+import { SIGN_UP_REQUEST, USER_RESET } from '../../store/modules/user/user';
 
 const SignupInput = ({ history }) => {
   const [userInfo, setUserInfo] = useState({
@@ -19,6 +19,10 @@ const SignupInput = ({ history }) => {
 
   useEffect(() => {
     if (me) {
+      dispatch({
+        type: USER_RESET,
+      });
+
       history.push('/');
     }
 

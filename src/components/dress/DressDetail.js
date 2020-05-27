@@ -1,15 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
 import { GET_DRESS_REQUEST } from '../../store/modules/dress/dress';
-
 import DressDetailInfo from './DressDetailInfo';
 import DressDetailEvent from './DressDetailEvent';
+import AddEventModal from './AddEventModal';
 
 const DressDetail = ({ match }) => {
   let token = Cookies.get('token');
   const { id } = match.params;
+
+  const [addEvent, setAddEvent] = useState({
+    eventType: 'eventType',
+    date: '',
+    details: '',
+    customerName: '',
+    customerBirth: '',
+    customerGender: '',
+  });
+  const [showModal, setShowModal] = useState(false);
   const { dress, images, events } = useSelector((state) => state.dressReducer);
   const dispatch = useDispatch();
 
@@ -21,6 +31,32 @@ const DressDetail = ({ match }) => {
       },
     });
   }, [dispatch, id]);
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+  const handleCloseModal = () => {
+    // 폼 밸류 디스패치로 서버에 요청 보내기
+    // dispatch({});
+
+    setShowModal(false);
+  };
+
+  const handleChange = (event) => {
+    const { value, name } = event.target;
+    console.log('??', value, name);
+    setAddEvent({
+      ...addEvent,
+      [name]: value,
+    });
+
+    console.log(addEvent);
+  };
+
+  // const handleRequestClose = () => {
+  //   // 닫았을 때, 디스패치로 서버에 데이터 요청 보내기
+  //   alert('??');
+  // };
 
   return (
     <>
@@ -34,7 +70,14 @@ const DressDetail = ({ match }) => {
             <DressDetailEvent events={events} />
           </div>
           <div>
-            <button type="button">Create event</button>
+            <AddEventModal
+              showModal={showModal}
+              handleCloseModal={handleCloseModal}
+              handleOpenModal={handleOpenModal}
+              handleChange={handleChange}
+              addEvent={addEvent}
+              // handleRequestClose={handleRequestClose}
+            />
           </div>
           <div>
             <button type="button">Edit dress</button>
