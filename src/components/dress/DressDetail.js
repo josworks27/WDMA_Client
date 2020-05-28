@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
-import { GET_DRESS_REQUEST } from '../../store/modules/dress/dress';
+import {
+  GET_DRESS_REQUEST,
+  POST_EVENT_REQUEST,
+} from '../../store/modules/dress/dress';
 import DressDetailInfo from './DressDetailInfo';
 import DressDetailEvent from './DressDetailEvent';
 import AddEventModal from './AddEventModal';
@@ -12,15 +15,17 @@ const DressDetail = ({ match }) => {
   const { id } = match.params;
 
   const [addEvent, setAddEvent] = useState({
-    eventType: 'eventType',
-    date: '',
+    eventType: 'customerRent',
+    date: new Date(),
     details: '',
     customerName: '',
-    customerBirth: '',
-    customerGender: '',
+    customerBirth: new Date(),
+    customerGender: 'Male',
   });
   const [showModal, setShowModal] = useState(false);
-  const { dress, images, events } = useSelector((state) => state.dressReducer);
+  const { dress, images, events, eventId, postEventError } = useSelector(
+    (state) => state.dressReducer,
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,33 +35,69 @@ const DressDetail = ({ match }) => {
         dressId: id,
       },
     });
-  }, [dispatch, id]);
+  }, [dispatch, id, eventId]);
 
   const handleOpenModal = () => {
     setShowModal(true);
   };
   const handleCloseModal = () => {
-    // 폼 밸류 디스패치로 서버에 요청 보내기
-    // dispatch({});
+    if (
+      addEvent.eventType === 'cleaning' ||
+      addEvent.eventType === 'storeRent'
+    ) {
+      setAddEvent({
+        ...addEvent,
+        customerName: '',
+        customerBirth: new Date(),
+        customerGender: 'Male',
+      });
+    }
 
-    setShowModal(false);
+    // 폼 밸류 디스패치로 서버에 요청 보내기
+    dispatch({
+      type: POST_EVENT_REQUEST,
+      data: {
+        dressId: id,
+        eventType: addEvent.eventType,
+        date: `${addEvent.date.getFullYear()}-${
+          addEvent.date.getMonth() + 1
+        }-${addEvent.date.getDate()}`,
+        details: addEvent.details,
+        customerName: addEvent.customerName,
+        customerBirth: `${addEvent.customerBirth.getFullYear()}-${
+          addEvent.customerBirth.getMonth() + 1
+        }-${addEvent.customerBirth.getDate()}`,
+        customerGender: addEvent.customerGender,
+      },
+    });
+
+    // 다음 작업을 위해 state 초기화
+    setAddEvent({
+      ...addEvent,
+      eventType: 'customerRent',
+      date: new Date(),
+      details: '',
+      customerName: '',
+      customerBirth: new Date(),
+      customerGender: 'Male',
+    });
+
+    // 에러가 있을 경우 경고
+    if (postEventError) {
+      alert(postEventError);
+    } else {
+      // 아니면 정상적으로 모달창 종료
+      setShowModal(false);
+    }
   };
 
   const handleChange = (event) => {
     const { value, name } = event.target;
-    console.log('??', value, name);
     setAddEvent({
       ...addEvent,
       [name]: value,
     });
-
-    console.log(addEvent);
   };
-
-  // const handleRequestClose = () => {
-  //   // 닫았을 때, 디스패치로 서버에 데이터 요청 보내기
-  //   alert('??');
-  // };
 
   return (
     <>
@@ -76,9 +117,13 @@ const DressDetail = ({ match }) => {
               handleOpenModal={handleOpenModal}
               handleChange={handleChange}
               addEvent={addEvent}
-              // handleRequestClose={handleRequestClose}
+              setAddEvent={setAddEvent}
+              // handleSelected={handleSelected}
             />
           </div>
+          <button type="button" onClick={handleOpenModal}>
+            Create event
+          </button>
           <div>
             <button type="button">Edit dress</button>
           </div>

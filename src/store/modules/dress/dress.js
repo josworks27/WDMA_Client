@@ -9,6 +9,10 @@ export const GET_DRESS_REQUEST = 'GET_DRESS_REQUEST';
 export const GET_DRESS_SUCCESS = 'GET_DRESS_SUCCESS';
 export const GET_DRESS_FAILURE = 'GET_DRESS_FAILURE';
 
+export const POST_EVENT_REQUEST = 'POST_EVENT_REQUEST';
+export const POST_EVENT_SUCCESS = 'POST_EVENT_SUCCESS';
+export const POST_EVENT_FAILURE = 'POST_EVENT_FAILURE';
+
 // 리듀서 초기값 정의
 const initialState = {
   isFindingDresses: false,
@@ -19,6 +23,9 @@ const initialState = {
   dress: {},
   events: [],
   images: [],
+  isPostingEvent: false,
+  postEventError: '',
+  eventId: '',
 };
 
 const dressReducer = (state = initialState, action) => {
@@ -77,6 +84,27 @@ const dressReducer = (state = initialState, action) => {
         dress: {},
         events: [],
         images: [],
+      };
+    case POST_EVENT_REQUEST:
+      return {
+        ...state,
+        isPostingEvent: true,
+        postEventError: '',
+        eventId: '',
+      };
+    case POST_EVENT_SUCCESS:
+      return {
+        ...state,
+        isPostingEvent: false,
+        postEventError: '',
+        eventId: action.payload,
+      };
+    case POST_EVENT_FAILURE:
+      return {
+        ...state,
+        isPostingEvent: false,
+        postEventError: action.error,
+        eventId: '',
       };
     default: {
       return state;

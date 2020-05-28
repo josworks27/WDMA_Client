@@ -8,9 +8,9 @@ const DressDetailInfo = ({ events }) => {
         <ul>
           {events.map((event) => (
             <li key={event.id}>
-              {event.details
+              {event.type === 'customerRent' || event.type === 'fitting'
                 ? `[${event.date}] [${event.type}] [${event['customer.name']} San] : ${event.details}`
-                : `[${event.date}] [${event.type}] [${event['customer.name']} San]`}
+                : `[${event.date}] [${event.type}] : ${event.details}`}
             </li>
           ))}
         </ul>
