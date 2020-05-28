@@ -37,6 +37,7 @@ const customStyles = {
 const AddEventModal = ({
   showModal,
   handleCloseModal,
+  handleSaveModal,
   handleChange,
   addEvent,
   setAddEvent,
@@ -140,8 +141,11 @@ const AddEventModal = ({
             </form>
           )}
 
-          <button type="button" onClick={handleCloseModal}>
+          <button type="button" onClick={handleSaveModal}>
             Save an event
+          </button>
+          <button type="button" onClick={handleCloseModal}>
+            Close
           </button>
         </ReactModal>
       </div>

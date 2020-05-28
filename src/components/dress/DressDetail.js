@@ -40,7 +40,23 @@ const DressDetail = ({ match }) => {
   const handleOpenModal = () => {
     setShowModal(true);
   };
+
   const handleCloseModal = () => {
+    // 다음 작업을 위해 state 초기화
+    setAddEvent({
+      ...addEvent,
+      eventType: 'customerRent',
+      date: new Date(),
+      details: '',
+      customerName: '',
+      customerBirth: new Date(),
+      customerGender: 'Male',
+    });
+
+    setShowModal(false);
+  };
+
+  const handleSaveModal = () => {
     if (
       addEvent.eventType === 'cleaning' ||
       addEvent.eventType === 'storeRent'
@@ -113,8 +129,8 @@ const DressDetail = ({ match }) => {
           <div>
             <AddEventModal
               showModal={showModal}
+              handleSaveModal={handleSaveModal}
               handleCloseModal={handleCloseModal}
-              handleOpenModal={handleOpenModal}
               handleChange={handleChange}
               addEvent={addEvent}
               setAddEvent={setAddEvent}
