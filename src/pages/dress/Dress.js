@@ -1,8 +1,8 @@
 import React from 'react';
 import Cookies from 'js-cookie';
-import { Redirect, Route } from 'react-router-dom';
-import DressList from '../../components/dress/DressList';
-import DressDetail from '../../components/dress/DressDetail';
+import { Redirect } from 'react-router-dom';
+import DressList from '../../components/dressDetail/DressList';
+// import DressDetail from '../../components/dressDetail/DressDetail';
 
 const Dress = ({ match }) => {
   let token = Cookies.get('token');
@@ -14,8 +14,9 @@ const Dress = ({ match }) => {
       ) : (
         <div>
           <h1>Dress</h1>
-          <Route exact path={`${match.path}`} component={DressList} />
-          <Route path={`${match.path}/:id`} component={DressDetail} />
+          {/* <Route exact path={`${match.path}`} component={DressList} />
+          <Route path={`${match.path}/:id`} component={DressDetail} /> */}
+          <DressList match={match} />
         </div>
       )}
     </>

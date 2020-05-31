@@ -22,6 +22,9 @@ import {
   MAIL_CHECK_REQUEST,
   MAIL_CHECK_SUCCESS,
   MAIL_CHECK_FAILURE,
+  STORE_LIST_REQUEST,
+  STORE_LIST_SUCCESS,
+  STORE_LIST_FAILURE,
 } from './user';
 
 // user saga 세팅
@@ -137,6 +140,25 @@ function* watchMailCheckAsync() {
   yield takeLatest(MAIL_CHECK_REQUEST, mailCheckAsync);
 }
 
+// * Store List
+function storeListAPI() {
+  return axios.get('/store');
+}
+
+function* storeListAsync() {
+  try {
+    const result = yield call(storeListAPI);
+
+    yield put({ type: STORE_LIST_SUCCESS, payload: result.data });
+  } catch (err) {
+    yield put({ type: STORE_LIST_FAILURE, error: err });
+  }
+}
+
+function* watchStoreListAsync() {
+  yield takeLatest(STORE_LIST_REQUEST, storeListAsync);
+}
+
 // ! fork
 function* userSaga() {
   yield all([
@@ -146,6 +168,7 @@ function* userSaga() {
     fork(watchSignupAsync),
     fork(watchMailAuthAsync),
     fork(watchMailCheckAsync),
+    fork(watchStoreListAsync),
   ]);
 }
 

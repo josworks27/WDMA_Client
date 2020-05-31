@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
+import DressDetailInfo from './DressDetailInfo';
+import DressDetailEvent from './DressDetailEvent';
+import AddEventModal from './AddEventModal';
 import {
   GET_DRESS_REQUEST,
   POST_EVENT_REQUEST,
 } from '../../store/modules/dress/dress';
-import DressDetailInfo from './DressDetailInfo';
-import DressDetailEvent from './DressDetailEvent';
-import AddEventModal from './AddEventModal';
+import EditDressModal from './EditDressModal';
 
 const DressDetail = ({ match }) => {
   let token = Cookies.get('token');
@@ -22,7 +23,8 @@ const DressDetail = ({ match }) => {
     customerBirth: new Date(),
     customerGender: 'Male',
   });
-  const [showModal, setShowModal] = useState(false);
+  const [showAddEventModal, setShowAddEventModal] = useState(false);
+  const [showEditDressModal, setShowEditDressModal] = useState(false);
   const { dress, images, events, eventId, postEventError } = useSelector(
     (state) => state.dressReducer,
   );
@@ -37,23 +39,31 @@ const DressDetail = ({ match }) => {
     });
   }, [dispatch, id, eventId]);
 
-  const handleOpenModal = () => {
-    setShowModal(true);
+  const handleOpenModal = (event) => {
+    if (event.target.name === 'add-event-button') {
+      setShowAddEventModal(true);
+    } else {
+      setShowEditDressModal(true);
+    }
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModal = (event) => {
     // 다음 작업을 위해 state 초기화
-    setAddEvent({
-      ...addEvent,
-      eventType: 'customerRent',
-      date: new Date(),
-      details: '',
-      customerName: '',
-      customerBirth: new Date(),
-      customerGender: 'Male',
-    });
+    if (event.target.name === 'close-add-event-modal') {
+      setAddEvent({
+        ...addEvent,
+        eventType: 'customerRent',
+        date: new Date(),
+        details: '',
+        customerName: '',
+        customerBirth: new Date(),
+        customerGender: 'Male',
+      });
 
-    setShowModal(false);
+      setShowAddEventModal(false);
+    } else {
+      setShowEditDressModal(false);
+    }
   };
 
   const handleSaveModal = () => {
@@ -103,7 +113,7 @@ const DressDetail = ({ match }) => {
       alert(postEventError);
     } else {
       // 아니면 정상적으로 모달창 종료
-      setShowModal(false);
+      setShowAddEventModal(false);
     }
   };
 
@@ -128,7 +138,7 @@ const DressDetail = ({ match }) => {
           </div>
           <div>
             <AddEventModal
-              showModal={showModal}
+              showModal={showAddEventModal}
               handleSaveModal={handleSaveModal}
               handleCloseModal={handleCloseModal}
               handleChange={handleChange}
@@ -137,11 +147,27 @@ const DressDetail = ({ match }) => {
               // handleSelected={handleSelected}
             />
           </div>
-          <button type="button" onClick={handleOpenModal}>
-            Create event
+          <button
+            type="button"
+            name="add-event-button"
+            onClick={handleOpenModal}
+          >
+            Add event
           </button>
           <div>
-            <button type="button">Edit dress</button>
+            <EditDressModal
+              showModal={showEditDressModal}
+              handleCloseModal={handleCloseModal}
+              dress={dress}
+              // handleChange={}
+            />
+            <button
+              type="button"
+              name="edit-dress-button"
+              onClick={handleOpenModal}
+            >
+              Edit dress
+            </button>
           </div>
         </>
       )}

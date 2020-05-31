@@ -17,7 +17,7 @@ const ImageSlider = ({ images }) => {
       <Slider {...settings}>
         {images.map((image) => {
           return (
-            <div>
+            <div key={image.id}>
               <img src={image.filePath} alt="" />
             </div>
           );

@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { STORE_LIST_REQUEST } from '../../store/modules/user/user';
 
-const StoreList = ({ stores, onChange, belongStore }) => {
+const StoreList = ({ onChange, belongStore }) => {
+  const { store } = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
+  // 스토어 리스트 요청
+  useEffect(() => {
+    dispatch({
+      type: STORE_LIST_REQUEST,
+    });
+  }, [dispatch]);
+
   return (
     <>
       <select name="store" value={belongStore} onChange={onChange}>
-        {stores.map((store) => {
+        {store.map((item) => {
           return (
-            <option key={store.id} value={store.name}>
-              {store.name}
+            <option key={item.id} value={item.name}>
+              {item.name}
             </option>
           );
         })}

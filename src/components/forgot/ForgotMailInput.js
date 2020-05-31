@@ -14,7 +14,7 @@ const ForgotMailInput = ({ history }) => {
   });
 
   const dispatch = useDispatch();
-  const { store, findStoreError, user, findMailError } = useSelector(
+  const { findStoreError, user, findMailError } = useSelector(
     (state) => state.forgotReducer,
   );
 
@@ -35,9 +35,7 @@ const ForgotMailInput = ({ history }) => {
   }, [findStoreError, findMailError, dispatch]);
 
   const handleChange = (event) => {
-    const { target } = event;
-    const { name } = target;
-    const { value } = target;
+    const { name, value } = event.target;
 
     setUserInfo({
       ...userInfo,
@@ -73,7 +71,7 @@ const ForgotMailInput = ({ history }) => {
               required
             />
             <StoreList
-              stores={store}
+              // stores={store}
               onChange={handleChange}
               value={userInfo.store}
             />

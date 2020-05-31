@@ -13,6 +13,14 @@ export const POST_EVENT_REQUEST = 'POST_EVENT_REQUEST';
 export const POST_EVENT_SUCCESS = 'POST_EVENT_SUCCESS';
 export const POST_EVENT_FAILURE = 'POST_EVENT_FAILURE';
 
+export const POST_DRESS_REQUEST = 'POST_DRESS_REQUEST';
+export const POST_DRESS_SUCCESS = 'POST_DRESS_SUCCESS';
+export const POST_DRESS_FAILURE = 'POST_DRESS_FAILURE';
+
+export const PUT_DRESS_REQUEST = 'PUT_DRESS_REQUEST';
+export const PUT_DRESS_SUCCESS = 'PUT_DRESS_SUCCESS';
+export const PUT_DRESS_FAILURE = 'PUT_DRESS_FAILURE';
+
 // 리듀서 초기값 정의
 const initialState = {
   isFindingDresses: false,
@@ -26,6 +34,12 @@ const initialState = {
   isPostingEvent: false,
   postEventError: '',
   eventId: '',
+  isPostingDress: false,
+  postDressError: '',
+  dressId: '',
+  isPuttingDress: false,
+  putDressError: '',
+  putDressId: '',
 };
 
 const dressReducer = (state = initialState, action) => {
@@ -36,6 +50,20 @@ const dressReducer = (state = initialState, action) => {
         isFindingDresses: false,
         findDressesError: '',
         dresses: [],
+        isGettingDress: false,
+        getDressError: '',
+        dress: {},
+        events: [],
+        images: [],
+        isPostingEvent: false,
+        postEventError: '',
+        eventId: '',
+        isPostingDress: false,
+        postDressError: '',
+        dressId: '',
+        isPuttingDress: false,
+        putDressError: '',
+        putDressId: '',
       };
     case ALL_DRESS_REQUEST:
       return {
@@ -105,6 +133,48 @@ const dressReducer = (state = initialState, action) => {
         isPostingEvent: false,
         postEventError: action.error,
         eventId: '',
+      };
+    case POST_DRESS_REQUEST:
+      return {
+        ...state,
+        isPostingDress: true,
+        postDressError: '',
+        dressId: '',
+      };
+    case POST_DRESS_SUCCESS:
+      return {
+        ...state,
+        isPostingDress: false,
+        postDressError: '',
+        dressId: action.payload.data,
+      };
+    case POST_DRESS_FAILURE:
+      return {
+        ...state,
+        isPostingDress: false,
+        postDressError: action.error,
+        dressId: '',
+      };
+    case PUT_DRESS_REQUEST:
+      return {
+        ...state,
+        isPuttingDress: true,
+        putDressError: '',
+        putDressId: '',
+      };
+    case PUT_DRESS_SUCCESS:
+      return {
+        ...state,
+        isPuttingDress: false,
+        putDressError: '',
+        putDressId: action.payload.data,
+      };
+    case PUT_DRESS_FAILURE:
+      return {
+        ...state,
+        isPuttingDress: false,
+        putDressError: action.error,
+        putDressId: '',
       };
     default: {
       return state;

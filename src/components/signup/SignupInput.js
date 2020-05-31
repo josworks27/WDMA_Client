@@ -29,7 +29,7 @@ const SignupInput = ({ history }) => {
     if (signupError) {
       alert(signupError);
     }
-  }, [me, signupError, history]);
+  }, [me, signupError, history, dispatch]);
 
   const validateForm = () => {
     if (userInfo.password1 !== userInfo.password2) {

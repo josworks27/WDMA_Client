@@ -11,6 +11,12 @@ import {
   POST_EVENT_REQUEST,
   POST_EVENT_SUCCESS,
   POST_EVENT_FAILURE,
+  POST_DRESS_REQUEST,
+  POST_DRESS_SUCCESS,
+  POST_DRESS_FAILURE,
+  PUT_DRESS_SUCCESS,
+  PUT_DRESS_FAILURE,
+  PUT_DRESS_REQUEST,
 } from './dress';
 
 // dress saga 세팅
@@ -70,12 +76,62 @@ function* watchPostEventAsync() {
   yield takeLatest(POST_EVENT_REQUEST, postEventAsync);
 }
 
+// * Post Dress
+function postDressAPI(data) {
+  return axios({
+    method: 'post',
+    url: '/dresses',
+    data: data.formData,
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+}
+
+function* postDressAsync(action) {
+  try {
+    const result = yield call(postDressAPI, action.data);
+
+    yield put({ type: POST_DRESS_SUCCESS, payload: result.data });
+  } catch (err) {
+    yield put({ type: POST_DRESS_FAILURE, error: err });
+  }
+}
+
+function* watchPostDressAsync() {
+  yield takeLatest(POST_DRESS_REQUEST, postDressAsync);
+}
+
+// * Put Dress
+function putDressAPI(data) {
+  return axios({
+    method: 'put',
+    url: '/dresses',
+    data: data.formData,
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+}
+
+function* putDressAsync(action) {
+  try {
+    const result = yield call(putDressAPI, action.data);
+
+    yield put({ type: PUT_DRESS_SUCCESS, payload: result.data });
+  } catch (err) {
+    yield put({ type: PUT_DRESS_FAILURE, error: err });
+  }
+}
+
+function* watchPutDressAsync() {
+  yield takeLatest(PUT_DRESS_REQUEST, putDressAsync);
+}
+
 // ! fork
 function* dressSaga() {
   yield all([
     fork(watchAllDressAsync),
     fork(watchGetDressAsync),
     fork(watchPostEventAsync),
+    fork(watchPostDressAsync),
+    fork(watchPutDressAsync),
   ]);
 }
 

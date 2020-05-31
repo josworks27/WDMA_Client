@@ -144,7 +144,11 @@ const AddEventModal = ({
           <button type="button" onClick={handleSaveModal}>
             Save an event
           </button>
-          <button type="button" onClick={handleCloseModal}>
+          <button
+            type="button"
+            name="close-add-event-modal"
+            onClick={handleCloseModal}
+          >
             Close
           </button>
         </ReactModal>
@@ -154,8 +158,3 @@ const AddEventModal = ({
 };
 
 export default AddEventModal;
-
-// 1. 이벤트
-// 2. 일자
-// 3. 세부내용
-// 4. 고객정보 (이벤트가 고객렌트, 피팅일 경우만 보이게)

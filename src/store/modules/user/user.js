@@ -25,6 +25,10 @@ export const MAIL_CHECK_REQUEST = 'MAIL_CHECK_REQUEST';
 export const MAIL_CHECK_SUCCESS = 'MAIL_CHECK_SUCCESS';
 export const MAIL_CHECK_FAILURE = 'MAIL_CHECK_FAILURE';
 
+export const STORE_LIST_REQUEST = 'STORE_LIST_REQUEST';
+export const STORE_LIST_SUCCESS = 'STORE_LIST_SUCCESS';
+export const STORE_LIST_FAILURE = 'STORE_LIST_FAILURE';
+
 // 리듀서 초기값 정의
 const initialState = {
   isSignin: false,
@@ -39,6 +43,8 @@ const initialState = {
   load: [],
   email: '',
   checked: false,
+  isGettingStore: false,
+  getStoreError: '',
   store: [],
 };
 
@@ -59,6 +65,8 @@ const userReducer = (state = initialState, action) => {
         load: [],
         email: '',
         checked: false,
+        isGettingStore: false,
+        getStoreError: '',
         store: [],
       };
     case SIGN_IN_REQUEST:
@@ -159,7 +167,6 @@ const userReducer = (state = initialState, action) => {
         isMailCheck: true,
         mailCheckError: '',
         checked: false,
-        store: [],
       };
     case MAIL_CHECK_SUCCESS:
       return {
@@ -167,7 +174,6 @@ const userReducer = (state = initialState, action) => {
         isMailCheck: false,
         mailCheckError: '',
         checked: true,
-        store: action.payload.data,
       };
     case MAIL_CHECK_FAILURE:
       return {
@@ -175,6 +181,26 @@ const userReducer = (state = initialState, action) => {
         isMailCheck: false,
         mailCheckError: action.error,
         checked: false,
+      };
+    case STORE_LIST_REQUEST:
+      return {
+        ...state,
+        isGettingStore: true,
+        getStoreError: '',
+        store: [],
+      };
+    case STORE_LIST_SUCCESS:
+      return {
+        ...state,
+        isGettingStore: false,
+        getStoreError: '',
+        store: [...action.payload.data],
+      };
+    case STORE_LIST_FAILURE:
+      return {
+        ...state,
+        isGettingStore: false,
+        getStoreError: action.error,
         store: [],
       };
     default: {
