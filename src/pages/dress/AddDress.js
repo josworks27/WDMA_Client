@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import { Redirect } from 'react-router-dom';
 import AddDressInput from '../../components/addDress/AddDressInput';
 
-const AddDress = () => {
+const AddDress = ({ history }) => {
   let token = Cookies.get('token');
 
   return (
@@ -13,7 +13,7 @@ const AddDress = () => {
       ) : (
         <>
           <h1>Add Dress</h1>
-          <AddDressInput />
+          <AddDressInput history={history} />
         </>
       )}
     </>

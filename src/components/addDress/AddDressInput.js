@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import StoreList from '../signup/StoreList';
-import { POST_DRESS_REQUEST } from '../../store/modules/dress/dress';
+import {
+  POST_DRESS_REQUEST,
+  DRESS_RESET,
+} from '../../store/modules/dress/dress';
 
-const AddDressInput = () => {
+const AddDressInput = ({ history }) => {
   const [addDress, setAddDress] = useState({
     model: '',
     price: '',
@@ -14,7 +17,18 @@ const AddDressInput = () => {
     images: [],
   });
 
+  const { dressId } = useSelector((state) => state.dressReducer);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    // 드레스 리스트로 이동
+    if (dressId) {
+      history.push(`/dress/${dressId}`);
+    }
+
+    // 다시 추가할 수 있도록 state 초기화
+    dispatch({ type: DRESS_RESET });
+  }, [dressId]);
 
   const handleSelect = (event) => {
     const { files } = event.target;
@@ -36,7 +50,8 @@ const AddDressInput = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Add 드레스 서버에 포스트하기
+
+    // POST 요청할 폼데이터 작성
     let formData = new FormData();
     for (let i = 0; i < addDress.images.length; i += 1) {
       formData.append(`images`, addDress.images[i]);

@@ -17,6 +17,9 @@ import {
   PUT_DRESS_SUCCESS,
   PUT_DRESS_FAILURE,
   PUT_DRESS_REQUEST,
+  SEARCH_DRESS_REQUEST,
+  SEARCH_DRESS_SUCCESS,
+  SEARCH_DRESS_FAILURE,
 } from './dress';
 
 // dress saga 세팅
@@ -124,6 +127,25 @@ function* watchPutDressAsync() {
   yield takeLatest(PUT_DRESS_REQUEST, putDressAsync);
 }
 
+// * Search Dress
+function searchDressAPI(data) {
+  return axios.post('/dresses/search', data);
+}
+
+function* searchDressAsync(action) {
+  try {
+    const result = yield call(searchDressAPI, action.data);
+
+    yield put({ type: SEARCH_DRESS_SUCCESS, payload: result.data });
+  } catch (err) {
+    yield put({ type: SEARCH_DRESS_FAILURE, error: err });
+  }
+}
+
+function* watchSearchDressAsync() {
+  yield takeLatest(SEARCH_DRESS_REQUEST, searchDressAsync);
+}
+
 // ! fork
 function* dressSaga() {
   yield all([
@@ -132,6 +154,7 @@ function* dressSaga() {
     fork(watchPostEventAsync),
     fork(watchPostDressAsync),
     fork(watchPutDressAsync),
+    fork(watchSearchDressAsync),
   ]);
 }
 

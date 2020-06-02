@@ -21,6 +21,10 @@ export const PUT_DRESS_REQUEST = 'PUT_DRESS_REQUEST';
 export const PUT_DRESS_SUCCESS = 'PUT_DRESS_SUCCESS';
 export const PUT_DRESS_FAILURE = 'PUT_DRESS_FAILURE';
 
+export const SEARCH_DRESS_REQUEST = 'SEARCH_DRESS_REQUEST';
+export const SEARCH_DRESS_SUCCESS = 'SEARCH_DRESS_SUCCESS';
+export const SEARCH_DRESS_FAILURE = 'SEARCH_DRESS_FAILURE';
+
 // 리듀서 초기값 정의
 const initialState = {
   isFindingDresses: false,
@@ -40,10 +44,12 @@ const initialState = {
   isPuttingDress: false,
   putDressError: '',
   putDress: false,
+  isSearchingDress: false,
+  searchDreseError: '',
+  searchResult: [],
 };
 
 const dressReducer = (state = initialState, action) => {
-  console.log('action is ?', action);
   switch (action.type) {
     case DRESS_RESET:
       return {
@@ -65,6 +71,9 @@ const dressReducer = (state = initialState, action) => {
         isPuttingDress: false,
         putDressError: '',
         putDress: false,
+        isSearchingDress: false,
+        searchDreseError: '',
+        searchResult: [],
       };
     case ALL_DRESS_REQUEST:
       return {
@@ -178,6 +187,27 @@ const dressReducer = (state = initialState, action) => {
         isPuttingDress: false,
         putDressError: action.error,
         putDress: false,
+      };
+    case SEARCH_DRESS_REQUEST:
+      return {
+        ...state,
+        isSearchingDress: true,
+        searchDreseError: '',
+        searchResult: [],
+      };
+    case SEARCH_DRESS_SUCCESS:
+      return {
+        ...state,
+        isSearchingDress: false,
+        searchDreseError: '',
+        searchResult: [...action.payload.data],
+      };
+    case SEARCH_DRESS_FAILURE:
+      return {
+        ...state,
+        isSearchingDress: false,
+        searchDreseError: action.error,
+        searchResult: [],
       };
     default: {
       return state;

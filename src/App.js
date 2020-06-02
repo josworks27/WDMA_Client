@@ -14,6 +14,7 @@ import Signup from './pages/signup/Signup';
 import Forgot from './pages/forgot/Forgot';
 import ForgotMail from './pages/forgot/ForgotMail';
 import ForgotPassword from './pages/forgot/ForgotPassword';
+import Profile from './pages/profile/Profile';
 import NotFound from './pages/NotFound';
 
 import './App.css';
@@ -35,6 +36,7 @@ const App = () => {
         <Route path="/forgot/mail" component={ForgotMail} />
         <Route path="/forgot/password" component={ForgotPassword} />
         <Route exact path="/forgot" component={Forgot} />
+        <Route path="/Profile" component={Profile} />
         <Route component={NotFound} />
       </Switch>
     </div>
