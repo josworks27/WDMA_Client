@@ -1,33 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import ReactModal from 'react-modal';
+import { useDispatch } from 'react-redux';
 import StoreList from '../signup/StoreList';
 
-const customStyles = {
-  overlay: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(255, 255, 255, 0.75)',
-  },
-  content: {
-    position: 'absolute',
-    top: '40px',
-    left: '40px',
-    right: '40px',
-    bottom: '40px',
-    border: '1px solid #ccc',
-    background: '#fff',
-    overflow: 'auto',
-    WebkitOverflowScrolling: 'touch',
-    borderRadius: '4px',
-    outline: 'none',
-    padding: '20px',
-  },
-};
+import modalStyle from '../../lib/modalStyle';
+import { PUT_DRESS_REQUEST } from '../../store/modules/dress/dress';
 
-const EditDressModal = ({ showModal, handleCloseModal, dress }) => {
+const EditDressModal = ({
+  match,
+  showModal,
+  setShowModal,
+  handleCloseModal,
+  dress,
+}) => {
+  const dressId = match.params.id;
   const [editDress, setEditDress] = useState({
     model: '',
     price: '',
@@ -37,6 +23,8 @@ const EditDressModal = ({ showModal, handleCloseModal, dress }) => {
     store: 'Yokohama',
     images: [],
   });
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setEditDress({
@@ -58,7 +46,6 @@ const EditDressModal = ({ showModal, handleCloseModal, dress }) => {
       ...editDress,
       [name]: value,
     });
-    console.log(editDress);
   };
 
   const handleSelect = (event) => {
@@ -72,30 +59,45 @@ const EditDressModal = ({ showModal, handleCloseModal, dress }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('onSubmit 작동');
-    // Add 드레스 서버에 포스트하기
-    // let formData = new FormData();
-    // for (let i = 0; i < editDress.images.length; i += 1) {
-    //   formData.append(`images`, editDress.images[i]);
-    // }
+    let formData = new FormData();
+    if (editDress.images.length > 0) {
+      for (let i = 0; i < editDress.images.length; i += 1) {
+        formData.append(`images`, editDress.images[i]);
+      }
+    }
 
-    // formData.append('model', editDress.model);
-    // formData.append('price', editDress.price);
-    // formData.append('accessoryOne', editDress.accessoryOne);
-    // formData.append('accessoryTwo', editDress.accessoryTwo);
-    // formData.append('accessoryThree', editDress.accessoryThree);
-    // formData.append('store', editDress.store);
+    formData.append('model', editDress.model);
+    formData.append('price', editDress.price);
+    formData.append('accessoryOne', editDress.accessoryOne);
+    formData.append('accessoryTwo', editDress.accessoryTwo);
+    formData.append('accessoryThree', editDress.accessoryThree);
+    formData.append('store', editDress.store);
 
-    // // 디스패치 하기
-    // dispatch({
-    //   type: POST_DRESS_REQUEST,
-    //   data: { formData },
-    // });
+    dispatch({
+      type: PUT_DRESS_REQUEST,
+      data: {
+        dressId,
+        formData,
+      },
+    });
+
+    // state 초기화
+    setEditDress({
+      model: '',
+      price: '',
+      accessoryOne: '',
+      accessoryTwo: '',
+      accessoryThree: '',
+      store: 'Yokohama',
+      images: [],
+    });
+
+    setShowModal(false);
   };
-  console.log('dress is ', dress);
+
   return (
     <>
-      <ReactModal isOpen={showModal} style={customStyles}>
+      <ReactModal isOpen={showModal} style={modalStyle}>
         <h1>edit dress modal</h1>
         <>
           <div className="container">
@@ -180,3 +182,5 @@ export default EditDressModal;
 // 기존의 드레스의 정보를 받은 input이 존재
 //      => 수정가능하며, 수정 후에는 서버에 요청보내기
 // 보낸 후에는 모달창이 꺼지고, 정보 변경된 Dress Detail 컴포넌트 렌더링
+
+// ! edit dress는 스테이트와 디스패치를 별도로 관리

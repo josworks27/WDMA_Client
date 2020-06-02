@@ -104,7 +104,7 @@ function* watchPostDressAsync() {
 function putDressAPI(data) {
   return axios({
     method: 'put',
-    url: '/dresses',
+    url: `/dresses/${data.dressId}`,
     data: data.formData,
     headers: { 'Content-Type': 'multipart/form-data' },
   });

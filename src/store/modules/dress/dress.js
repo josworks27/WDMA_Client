@@ -39,10 +39,11 @@ const initialState = {
   dressId: '',
   isPuttingDress: false,
   putDressError: '',
-  putDressId: '',
+  putDress: false,
 };
 
 const dressReducer = (state = initialState, action) => {
+  console.log('action is ?', action);
   switch (action.type) {
     case DRESS_RESET:
       return {
@@ -63,7 +64,7 @@ const dressReducer = (state = initialState, action) => {
         dressId: '',
         isPuttingDress: false,
         putDressError: '',
-        putDressId: '',
+        putDress: false,
       };
     case ALL_DRESS_REQUEST:
       return {
@@ -160,21 +161,23 @@ const dressReducer = (state = initialState, action) => {
         ...state,
         isPuttingDress: true,
         putDressError: '',
-        putDressId: '',
+        putDress: false,
       };
     case PUT_DRESS_SUCCESS:
       return {
         ...state,
         isPuttingDress: false,
         putDressError: '',
-        putDressId: action.payload.data,
+        putDress: true,
+        dress: { ...action.payload.dressData },
+        images: [...action.payload.imageData],
       };
     case PUT_DRESS_FAILURE:
       return {
         ...state,
         isPuttingDress: false,
         putDressError: action.error,
-        putDressId: '',
+        putDress: false,
       };
     default: {
       return state;

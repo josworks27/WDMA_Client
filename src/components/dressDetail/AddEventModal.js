@@ -3,36 +3,12 @@ import ReactModal from 'react-modal';
 import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import ja from 'date-fns/locale/ja';
 
+import modalStyle from '../../lib/modalStyle';
 import 'react-datepicker/dist/react-datepicker.css';
 
 // Register React-datepicker
 registerLocale('ja', ja);
 setDefaultLocale('ja');
-
-const customStyles = {
-  overlay: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(255, 255, 255, 0.75)',
-  },
-  content: {
-    position: 'absolute',
-    top: '40px',
-    left: '40px',
-    right: '40px',
-    bottom: '40px',
-    border: '1px solid #ccc',
-    background: '#fff',
-    overflow: 'auto',
-    WebkitOverflowScrolling: 'touch',
-    borderRadius: '4px',
-    outline: 'none',
-    padding: '20px',
-  },
-};
 
 const AddEventModal = ({
   showModal,
@@ -45,7 +21,7 @@ const AddEventModal = ({
   return (
     <>
       <div>
-        <ReactModal isOpen={showModal} style={customStyles}>
+        <ReactModal isOpen={showModal} style={modalStyle}>
           {addEvent.eventType === 'customerRent' ||
           addEvent.eventType === 'fitting' ? (
             <form>

@@ -11,7 +11,7 @@ import {
 } from '../../store/modules/dress/dress';
 import EditDressModal from './EditDressModal';
 
-const DressDetail = ({ match }) => {
+const DressDetail = ({ match, history }) => {
   let token = Cookies.get('token');
   const { id } = match.params;
 
@@ -144,7 +144,6 @@ const DressDetail = ({ match }) => {
               handleChange={handleChange}
               addEvent={addEvent}
               setAddEvent={setAddEvent}
-              // handleSelected={handleSelected}
             />
           </div>
           <button
@@ -156,10 +155,11 @@ const DressDetail = ({ match }) => {
           </button>
           <div>
             <EditDressModal
+              match={match}
               showModal={showEditDressModal}
+              setShowModal={setShowEditDressModal}
               handleCloseModal={handleCloseModal}
               dress={dress}
-              // handleChange={}
             />
             <button
               type="button"
