@@ -104,6 +104,7 @@ const dressReducer = (state = initialState, action) => {
         dress: {},
         events: [],
         images: [],
+        dressId: '',
       };
     case GET_DRESS_SUCCESS:
       return {
@@ -113,6 +114,7 @@ const dressReducer = (state = initialState, action) => {
         dress: { ...action.payload.dressData },
         events: [...action.payload.eventData],
         images: [...action.payload.imageData],
+        dressId: '',
       };
     case GET_DRESS_FAILURE:
       return {
@@ -122,6 +124,7 @@ const dressReducer = (state = initialState, action) => {
         dress: {},
         events: [],
         images: [],
+        dressId: '',
       };
     case POST_EVENT_REQUEST:
       return {

@@ -1,9 +1,9 @@
 import React from 'react';
-import Cookies from 'js-cookie';
 import { Redirect, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import SearchDressInput from '../../components/search/SearchDressInput';
+import Cookies from 'js-cookie';
 
+import SearchDressInput from '../../components/search/SearchDressInput';
 import sampleImg from '../../asset/sample.jpg';
 
 const SearchDress = () => {
@@ -16,7 +16,7 @@ const SearchDress = () => {
   if (!token) return <Redirect to="/signin" />;
 
   return (
-    <>
+    <div className="container">
       <SearchDressInput />
       {searchResult.length ? (
         <>
@@ -40,7 +40,7 @@ const SearchDress = () => {
         </>
       ) : null}
       {searchDreseError ? <div>No Result</div> : null}
-    </>
+    </div>
   );
 };
 
