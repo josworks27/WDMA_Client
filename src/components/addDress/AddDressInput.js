@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import StoreList from '../signup/StoreList';
-import {
-  POST_DRESS_REQUEST,
-  DRESS_RESET,
-} from '../../store/modules/dress/dress';
+import { POST_DRESS_REQUEST } from '../../store/modules/dress/dress';
 
 const AddDressInput = ({ history }) => {
   const [addDress, setAddDress] = useState({
@@ -25,10 +22,7 @@ const AddDressInput = ({ history }) => {
     if (dressId) {
       history.push(`/dress/${dressId}`);
     }
-
-    // 다시 추가할 수 있도록 state 초기화
-    dispatch({ type: DRESS_RESET });
-  }, [dressId]);
+  }, [dressId, history]);
 
   const handleSelect = (event) => {
     const { files } = event.target;

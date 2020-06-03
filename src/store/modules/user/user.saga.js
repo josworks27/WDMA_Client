@@ -25,6 +25,12 @@ import {
   STORE_LIST_REQUEST,
   STORE_LIST_SUCCESS,
   STORE_LIST_FAILURE,
+  PUT_USER_REQUEST,
+  PUT_USER_SUCCESS,
+  PUT_USER_FAILURE,
+  PUT_PASSWORD_REQUEST,
+  PUT_PASSWORD_SUCCESS,
+  PUT_PASSWORD_FAILURE,
 } from './user';
 
 // user saga 세팅
@@ -66,13 +72,13 @@ function* watchSignoutAsync() {
 }
 
 // * Load User
-function loadUserAPI(data) {
-  return axios.get(`/users/${data.id}`);
+function loadUserAPI() {
+  return axios.get('/users');
 }
 
-function* loadUserAsync(action) {
+function* loadUserAsync() {
   try {
-    const result = yield call(loadUserAPI, action.data);
+    const result = yield call(loadUserAPI);
     yield put({ type: LOAD_USER_SUCCESS, payload: result.data });
   } catch (err) {
     yield put({ type: LOAD_USER_FAILURE, error: err });
@@ -159,6 +165,44 @@ function* watchStoreListAsync() {
   yield takeLatest(STORE_LIST_REQUEST, storeListAsync);
 }
 
+// * Put User
+function putUserAPI(data) {
+  return axios.put('/users', data);
+}
+
+function* putUserAsync(action) {
+  try {
+    const result = yield call(putUserAPI, action.data);
+
+    yield put({ type: PUT_USER_SUCCESS, payload: result.data });
+  } catch (err) {
+    yield put({ type: PUT_USER_FAILURE, error: err });
+  }
+}
+
+function* watchPutUserAsync() {
+  yield takeLatest(PUT_USER_REQUEST, putUserAsync);
+}
+
+// * Put Password
+function putPasswordAPI(data) {
+  return axios.put('/users/password', data);
+}
+
+function* putPasswordAsync(action) {
+  try {
+    const result = yield call(putPasswordAPI, action.data);
+
+    yield put({ type: PUT_PASSWORD_SUCCESS, payload: result.data });
+  } catch (err) {
+    yield put({ type: PUT_PASSWORD_FAILURE, error: err });
+  }
+}
+
+function* watchPutPasswordAsync() {
+  yield takeLatest(PUT_PASSWORD_REQUEST, putPasswordAsync);
+}
+
 // ! fork
 function* userSaga() {
   yield all([
@@ -169,6 +213,8 @@ function* userSaga() {
     fork(watchMailAuthAsync),
     fork(watchMailCheckAsync),
     fork(watchStoreListAsync),
+    fork(watchPutUserAsync),
+    fork(watchPutPasswordAsync),
   ]);
 }
 

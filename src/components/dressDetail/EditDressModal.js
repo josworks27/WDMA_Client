@@ -28,7 +28,6 @@ const EditDressModal = ({
 
   useEffect(() => {
     setEditDress({
-      ...editDress,
       model: dress.model,
       price: dress.price,
       accessoryOne: dress.accessoryOne,

@@ -29,23 +29,39 @@ export const STORE_LIST_REQUEST = 'STORE_LIST_REQUEST';
 export const STORE_LIST_SUCCESS = 'STORE_LIST_SUCCESS';
 export const STORE_LIST_FAILURE = 'STORE_LIST_FAILURE';
 
+export const PUT_USER_REQUEST = 'PUT_USER_REQUEST';
+export const PUT_USER_SUCCESS = 'PUT_USER_SUCCESS';
+export const PUT_USER_FAILURE = 'PUT_USER_FAILURE';
+
+export const PUT_PASSWORD_REQUEST = 'PUT_PASSWORD_REQUEST';
+export const PUT_PASSWORD_SUCCESS = 'PUT_PASSWORD_SUCCESS';
+export const PUT_PASSWORD_FAILURE = 'PUT_PASSWORD_FAILURE';
+
 // 리듀서 초기값 정의
 const initialState = {
   isSignin: false,
   signinError: '',
   isSignup: false,
   signupError: '',
+  me: null,
   isMailAuth: false,
   mailAuthError: '',
+  email: '',
   isMailCheck: false,
   mailCheckError: '',
-  me: null,
-  load: [],
-  email: '',
   checked: false,
   isGettingStore: false,
   getStoreError: '',
   store: [],
+  isLoadingUser: false,
+  loadUserError: '',
+  load: [],
+  isPuttingUser: false,
+  putUserError: '',
+  updateUser: false,
+  isPuttingPassword: false,
+  putPasswordError: '',
+  updatePassword: false,
 };
 
 // 리듀서 정의
@@ -57,17 +73,25 @@ const userReducer = (state = initialState, action) => {
         signinError: '',
         isSignup: false,
         signupError: '',
+        me: null,
         isMailAuth: false,
         mailAuthError: '',
+        email: '',
         isMailCheck: false,
         mailCheckError: '',
-        me: null,
-        load: [],
-        email: '',
         checked: false,
         isGettingStore: false,
         getStoreError: '',
         store: [],
+        isLoadingUser: false,
+        loadUserError: '',
+        load: [],
+        isPuttingUser: false,
+        putUserError: '',
+        updateUser: false,
+        isPuttingPassword: false,
+        putPasswordError: '',
+        updatePassword: false,
       };
     case SIGN_IN_REQUEST:
       return {
@@ -107,17 +131,38 @@ const userReducer = (state = initialState, action) => {
     case LOAD_USER_REQUEST:
       return {
         ...state,
-        signinError: '',
+        isLoadingUser: true,
+        loadUserError: '',
+        me: null,
+        load: [],
+        updateUser: false,
+        putUserError: '',
+        putPasswordError: '',
+        updatePassword: false,
       };
     case LOAD_USER_SUCCESS:
       return {
         ...state,
-        load: action.payload,
+        isLoadingUser: false,
+        loadUserError: '',
+        me: action.payload.userData,
+        load: [...action.payload.eventData],
+        updateUser: false,
+        putUserError: '',
+        putPasswordError: '',
+        updatePassword: false,
       };
     case LOAD_USER_FAILURE:
       return {
         ...state,
-        signinError: action.error,
+        isLoadingUser: false,
+        loadUserError: action.error,
+        me: null,
+        load: [],
+        updateUser: false,
+        putUserError: '',
+        putPasswordError: '',
+        updatePassword: false,
       };
     case SIGN_UP_REQUEST:
       return {
@@ -202,6 +247,48 @@ const userReducer = (state = initialState, action) => {
         isGettingStore: false,
         getStoreError: action.error,
         store: [],
+      };
+    case PUT_USER_REQUEST:
+      return {
+        ...state,
+        isPuttingUser: true,
+        putUserError: '',
+        updateUser: false,
+      };
+    case PUT_USER_SUCCESS:
+      return {
+        ...state,
+        isPuttingUser: false,
+        putUserError: '',
+        updateUser: true,
+      };
+    case PUT_USER_FAILURE:
+      return {
+        ...state,
+        isPuttingUser: false,
+        putUserError: action.error,
+        updateUser: false,
+      };
+    case PUT_PASSWORD_REQUEST:
+      return {
+        ...state,
+        isPuttingPassword: true,
+        putPasswordError: '',
+        updatePassword: false,
+      };
+    case PUT_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        isPuttingPassword: false,
+        putPasswordError: '',
+        updatePassword: true,
+      };
+    case PUT_PASSWORD_FAILURE:
+      return {
+        ...state,
+        isPuttingPassword: false,
+        putPasswordError: action.error,
+        updatePassword: false,
       };
     default: {
       return state;
