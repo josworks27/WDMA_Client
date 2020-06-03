@@ -1,47 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Cookies from 'js-cookie';
 import { Redirect, Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import SearchDressModal from '../../components/search/SearchDressModal';
+import { useSelector } from 'react-redux';
+import SearchDressInput from '../../components/search/SearchDressInput';
 
 import sampleImg from '../../asset/sample.jpg';
-import { DRESS_RESET } from '../../store/modules/dress/dress';
 
-const SearchDress = ({ history }) => {
+const SearchDress = () => {
   let token = Cookies.get('token');
 
-  const [showSearchModal, setShowSearchModal] = useState(false);
   const { searchResult, searchDreseError } = useSelector(
     (state) => state.dressReducer,
   );
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (searchDreseError) {
-      // 에러 시 경고
-      alert(searchDreseError);
-
-      // state 초기화
-      dispatch({ type: DRESS_RESET });
-
-      // dress list로 이동
-      history.push('/dress');
-    }
-  }, [searchDreseError]);
-
-  const handleClick = (event) => {
-    event.preventDefault();
-    setShowSearchModal(true);
-  };
 
   if (!token) return <Redirect to="/signin" />;
 
   return (
     <>
+      <SearchDressInput />
       {searchResult.length ? (
         <>
-          <h1>Search Result</h1>
+          <h2>Search Result</h2>
           <ul>
             {searchResult.map((dress) => {
               return (
@@ -58,25 +37,9 @@ const SearchDress = ({ history }) => {
               );
             })}
           </ul>
-          <button type="button" onClick={handleClick}>
-            Search Again
-          </button>
-          {showSearchModal ? (
-            <SearchDressModal
-              history={history}
-              setShowSearchModal={setShowSearchModal}
-            />
-          ) : null}
         </>
-      ) : (
-        <>
-          <h1>Search Dress</h1>
-          <SearchDressModal
-            history={history}
-            setShowSearchModal={setShowSearchModal}
-          />
-        </>
-      )}
+      ) : null}
+      {searchDreseError ? <div>No Result</div> : null}
     </>
   );
 };
