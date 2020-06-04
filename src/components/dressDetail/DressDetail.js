@@ -168,6 +168,14 @@ const DressDetail = ({ match, history }) => {
             >
               Edit dress
             </button>
+            <br />
+            <button
+              type="button"
+              name="delete-dress-button"
+              // onClick={handleOpenModal}
+            >
+              Delete dress
+            </button>
           </div>
         </>
       )}
@@ -176,9 +184,3 @@ const DressDetail = ({ match, history }) => {
 };
 
 export default DressDetail;
-
-// match.params로 드레스 아이디 찾아서 해당 드레스의 정보 렌더링
-
-// 1. 드레스 정보 컴포넌트
-// 2. 드레스 이벤트 이력 컴포넌트
-// 3. 캘린더 컴포넌트
