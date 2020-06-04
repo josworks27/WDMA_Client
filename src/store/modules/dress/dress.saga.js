@@ -17,6 +17,9 @@ import {
   PUT_DRESS_SUCCESS,
   PUT_DRESS_FAILURE,
   PUT_DRESS_REQUEST,
+  DELETE_DRESS_REQUEST,
+  DELETE_DRESS_SUCCESS,
+  DELETE_DRESS_FAILURE,
   SEARCH_DRESS_REQUEST,
   SEARCH_DRESS_SUCCESS,
   SEARCH_DRESS_FAILURE,
@@ -127,6 +130,26 @@ function* watchPutDressAsync() {
   yield takeLatest(PUT_DRESS_REQUEST, putDressAsync);
 }
 
+// * Delete Dress
+function deleteDressAPI(data) {
+  console.log('axios id ', data.dressId);
+  return axios.delete(`/dresses/${data.dressId}`);
+}
+
+function* deleteDressAsync(action) {
+  try {
+    const result = yield call(deleteDressAPI, action.data);
+
+    yield put({ type: DELETE_DRESS_SUCCESS, payload: result.data });
+  } catch (err) {
+    yield put({ type: DELETE_DRESS_FAILURE, error: err });
+  }
+}
+
+function* watchDeleteDressAsync() {
+  yield takeLatest(DELETE_DRESS_REQUEST, deleteDressAsync);
+}
+
 // * Search Dress
 function searchDressAPI(data) {
   return axios.post('/dresses/search', data);
@@ -155,6 +178,7 @@ function* dressSaga() {
     fork(watchPostDressAsync),
     fork(watchPutDressAsync),
     fork(watchSearchDressAsync),
+    fork(watchDeleteDressAsync),
   ]);
 }
 

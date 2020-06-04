@@ -21,6 +21,10 @@ export const PUT_DRESS_REQUEST = 'PUT_DRESS_REQUEST';
 export const PUT_DRESS_SUCCESS = 'PUT_DRESS_SUCCESS';
 export const PUT_DRESS_FAILURE = 'PUT_DRESS_FAILURE';
 
+export const DELETE_DRESS_REQUEST = 'DELETE_DRESS_REQUEST';
+export const DELETE_DRESS_SUCCESS = 'DELETE_DRESS_SUCCESS';
+export const DELETE_DRESS_FAILURE = 'DELETE_DRESS_FAILURE';
+
 export const SEARCH_DRESS_REQUEST = 'SEARCH_DRESS_REQUEST';
 export const SEARCH_DRESS_SUCCESS = 'SEARCH_DRESS_SUCCESS';
 export const SEARCH_DRESS_FAILURE = 'SEARCH_DRESS_FAILURE';
@@ -47,6 +51,9 @@ const initialState = {
   isSearchingDress: false,
   searchDreseError: '',
   searchResult: [],
+  isDelettingDress: false,
+  deleteDressError: '',
+  deleteDress: false,
 };
 
 const dressReducer = (state = initialState, action) => {
@@ -74,6 +81,9 @@ const dressReducer = (state = initialState, action) => {
         isSearchingDress: false,
         searchDreseError: '',
         searchResult: [],
+        isDelettingDress: false,
+        deleteDressError: '',
+        deleteDress: false,
       };
     case ALL_DRESS_REQUEST:
       return {
@@ -81,6 +91,8 @@ const dressReducer = (state = initialState, action) => {
         isFindingDresses: true,
         findDressesError: '',
         dresses: [],
+        deleteDressError: '',
+        deleteDress: false,
       };
     case ALL_DRESS_SUCCESS:
       return {
@@ -88,6 +100,8 @@ const dressReducer = (state = initialState, action) => {
         isFindingDresses: false,
         findDressesError: '',
         dresses: action.payload.data,
+        deleteDressError: '',
+        deleteDress: false,
       };
     case ALL_DRESS_FAILURE:
       return {
@@ -95,6 +109,8 @@ const dressReducer = (state = initialState, action) => {
         isFindingDresses: false,
         findDressesError: action.error,
         dresses: [],
+        deleteDressError: '',
+        deleteDress: false,
       };
     case GET_DRESS_REQUEST:
       return {
@@ -190,6 +206,27 @@ const dressReducer = (state = initialState, action) => {
         isPuttingDress: false,
         putDressError: action.error,
         putDress: false,
+      };
+    case DELETE_DRESS_REQUEST:
+      return {
+        ...state,
+        isDelettingDress: true,
+        deleteDressError: '',
+        deleteDress: false,
+      };
+    case DELETE_DRESS_SUCCESS:
+      return {
+        ...state,
+        isDelettingDress: false,
+        deleteDressError: '',
+        deleteDress: true,
+      };
+    case DELETE_DRESS_FAILURE:
+      return {
+        ...state,
+        isDelettingDress: false,
+        deleteDressError: action.error,
+        deleteDress: false,
       };
     case SEARCH_DRESS_REQUEST:
       return {

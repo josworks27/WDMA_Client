@@ -7,7 +7,7 @@ const Main = () => {
 
   return (
     <div>
-      <div>Main</div>
+      <h1>Main</h1>
       <div>About</div>
       <div>
         {token ? (

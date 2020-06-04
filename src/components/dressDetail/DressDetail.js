@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+
 import DressDetailInfo from './DressDetailInfo';
 import DressDetailEvent from './DressDetailEvent';
 import AddEventModal from './AddEventModal';
+import EditDressModal from './EditDressModal';
 import {
   GET_DRESS_REQUEST,
   POST_EVENT_REQUEST,
+  DELETE_DRESS_REQUEST,
 } from '../../store/modules/dress/dress';
-import EditDressModal from './EditDressModal';
 
 const DressDetail = ({ match, history }) => {
   let token = Cookies.get('token');
@@ -25,9 +29,14 @@ const DressDetail = ({ match, history }) => {
   });
   const [showAddEventModal, setShowAddEventModal] = useState(false);
   const [showEditDressModal, setShowEditDressModal] = useState(false);
-  const { dress, images, events, eventId, postEventError } = useSelector(
-    (state) => state.dressReducer,
-  );
+  const {
+    dress,
+    images,
+    events,
+    eventId,
+    deleteDress,
+    postEventError,
+  } = useSelector((state) => state.dressReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,6 +47,12 @@ const DressDetail = ({ match, history }) => {
       },
     });
   }, [dispatch, id, eventId]);
+
+  useEffect(() => {
+    if (deleteDress) {
+      history.push('/dress');
+    }
+  }, [history, deleteDress]);
 
   const handleOpenModal = (event) => {
     if (event.target.name === 'add-event-button') {
@@ -125,6 +140,33 @@ const DressDetail = ({ match, history }) => {
     });
   };
 
+  // Delete dress 팝업창
+  const handleDelete = () => {
+    confirmAlert({
+      title: 'Confirm to Delete',
+      message: 'Are you sure to do this?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            dispatch({
+              type: DELETE_DRESS_REQUEST,
+              data: {
+                dressId: id,
+              },
+            });
+          },
+        },
+        {
+          label: 'No',
+          onClick: () => {
+            console.log('did not confirm');
+          },
+        },
+      ],
+    });
+  };
+
   return (
     <>
       {!token ? (
@@ -172,7 +214,7 @@ const DressDetail = ({ match, history }) => {
             <button
               type="button"
               name="delete-dress-button"
-              // onClick={handleOpenModal}
+              onClick={handleDelete}
             >
               Delete dress
             </button>
