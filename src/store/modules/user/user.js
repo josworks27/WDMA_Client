@@ -33,6 +33,10 @@ export const PUT_USER_REQUEST = 'PUT_USER_REQUEST';
 export const PUT_USER_SUCCESS = 'PUT_USER_SUCCESS';
 export const PUT_USER_FAILURE = 'PUT_USER_FAILURE';
 
+export const DELETE_USER_REQUEST = 'DELETE_USER_REQUEST';
+export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS';
+export const DELETE_USER_FAILURE = 'DELETE_USER_FAILURE';
+
 export const PUT_PASSWORD_REQUEST = 'PUT_PASSWORD_REQUEST';
 export const PUT_PASSWORD_SUCCESS = 'PUT_PASSWORD_SUCCESS';
 export const PUT_PASSWORD_FAILURE = 'PUT_PASSWORD_FAILURE';
@@ -59,6 +63,9 @@ const initialState = {
   isPuttingUser: false,
   putUserError: '',
   updateUser: false,
+  isDeletingUser: false,
+  deleteUserError: '',
+  deleteUser: false,
   isPuttingPassword: false,
   putPasswordError: '',
   updatePassword: false,
@@ -89,6 +96,9 @@ const userReducer = (state = initialState, action) => {
         isPuttingUser: false,
         putUserError: '',
         updateUser: false,
+        isDeletingUser: false,
+        deleteUserError: '',
+        deleteUser: false,
         isPuttingPassword: false,
         putPasswordError: '',
         updatePassword: false,
@@ -268,6 +278,27 @@ const userReducer = (state = initialState, action) => {
         isPuttingUser: false,
         putUserError: action.error,
         updateUser: false,
+      };
+    case DELETE_USER_REQUEST:
+      return {
+        ...state,
+        isDeletingUser: true,
+        deleteUserError: '',
+        deleteUser: false,
+      };
+    case DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        isDeletingUser: false,
+        deleteUserError: '',
+        deleteUser: true,
+      };
+    case DELETE_USER_FAILURE:
+      return {
+        ...state,
+        isDeletingUser: false,
+        deleteUserError: action.error,
+        deleteUser: false,
       };
     case PUT_PASSWORD_REQUEST:
       return {

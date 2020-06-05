@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import Cookies from 'js-cookie';
+
 import StoreList from '../signup/StoreList';
-import { PUT_USER_REQUEST } from '../../store/modules/user/user';
+import {
+  PUT_USER_REQUEST,
+  DELETE_USER_REQUEST,
+} from '../../store/modules/user/user';
 
 const MyAccountInput = ({ me, history }) => {
   const [toggle, setToggle] = useState(true);
@@ -12,7 +17,7 @@ const MyAccountInput = ({ me, history }) => {
     manager: false,
   });
 
-  const { updateUser, putUserError } = useSelector(
+  const { updateUser, putUserError, deleteUser, deleteUserError } = useSelector(
     (state) => state.userReducer,
   );
 
@@ -31,14 +36,30 @@ const MyAccountInput = ({ me, history }) => {
       history.push('/profile');
     }
 
+    if (deleteUser) {
+      Cookies.remove('token');
+      history.push('/');
+      window.location.reload();
+    }
+
     if (putUserError) {
       alert(putUserError);
     }
-  }, [updateUser, putUserError, history]);
+
+    if (deleteUserError) {
+      alert(deleteUserError);
+    }
+  }, [updateUser, putUserError, deleteUser, history]);
 
   const handleClick = (event) => {
-    event.preventDefault();
-    setToggle(false);
+    const { name } = event.target;
+
+    if (name === 'edit-account') {
+      event.preventDefault();
+      setToggle(false);
+    } else {
+      dispatch({ type: DELETE_USER_REQUEST });
+    }
   };
 
   const handleSubmit = (event) => {
@@ -82,10 +103,15 @@ const MyAccountInput = ({ me, history }) => {
             <input type="text" value={me['store.name']} readOnly />
           </div>
           <div>
-            <button type="button" onClick={handleClick}>
+            <button type="button" name="edit-account" onClick={handleClick}>
               Edit Account
             </button>
             <br />
+            <div>
+              <button type="button" name="resign" onClick={handleClick}>
+                Resign membership
+              </button>
+            </div>
             <button type="button">
               <Link to="/profile">Back</Link>
             </button>
