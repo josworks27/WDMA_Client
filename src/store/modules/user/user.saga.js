@@ -28,6 +28,9 @@ import {
   PUT_USER_REQUEST,
   PUT_USER_SUCCESS,
   PUT_USER_FAILURE,
+  DELETE_USER_REQUEST,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAILURE,
   PUT_PASSWORD_REQUEST,
   PUT_PASSWORD_SUCCESS,
   PUT_PASSWORD_FAILURE,
@@ -184,6 +187,25 @@ function* watchPutUserAsync() {
   yield takeLatest(PUT_USER_REQUEST, putUserAsync);
 }
 
+// * Delete User
+function deleteUserAPI() {
+  return axios.delete('/users');
+}
+
+function* deleteUserAsync() {
+  try {
+    const result = yield call(deleteUserAPI);
+
+    yield put({ type: DELETE_USER_SUCCESS, payload: result.data });
+  } catch (err) {
+    yield put({ type: DELETE_USER_FAILURE, error: err });
+  }
+}
+
+function* watchDeleteUserAsync() {
+  yield takeLatest(DELETE_USER_REQUEST, deleteUserAsync);
+}
+
 // * Put Password
 function putPasswordAPI(data) {
   return axios.put('/users/password', data);
@@ -214,6 +236,7 @@ function* userSaga() {
     fork(watchMailCheckAsync),
     fork(watchStoreListAsync),
     fork(watchPutUserAsync),
+    fork(watchDeleteUserAsync),
     fork(watchPutPasswordAsync),
   ]);
 }
