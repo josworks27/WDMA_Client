@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   FORGOT_STORE_REQUEST,
   FORGOT_MAIL_REQUEST,
+  FORGOT_RESET,
 } from '../../store/modules/forgot/forgot';
 import StoreList from '../signup/StoreList';
 import ForgotMailCheck from './ForgotMailCheck';
@@ -31,6 +32,9 @@ const ForgotMailInput = ({ history }) => {
 
     if (findMailError) {
       alert(findMailError);
+      dispatch({
+        type: FORGOT_RESET,
+      });
     }
   }, [findStoreError, findMailError, dispatch]);
 

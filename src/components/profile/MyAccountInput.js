@@ -49,7 +49,7 @@ const MyAccountInput = ({ me, history }) => {
     if (deleteUserError) {
       alert(deleteUserError);
     }
-  }, [updateUser, putUserError, deleteUser, history]);
+  }, [updateUser, putUserError, deleteUser, deleteUserError, history]);
 
   const handleClick = (event) => {
     const { name } = event.target;

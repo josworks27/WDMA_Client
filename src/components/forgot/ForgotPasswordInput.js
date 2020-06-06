@@ -21,7 +21,6 @@ const ForgotPasswordInput = ({ history }) => {
         display: 'block',
       });
 
-      // 스테이트 초기화
       dispatch({
         type: FORGOT_RESET,
       });
@@ -29,6 +28,9 @@ const ForgotPasswordInput = ({ history }) => {
 
     if (findPasswordError) {
       alert(findPasswordError);
+      dispatch({
+        type: FORGOT_RESET,
+      });
     }
   }, [changed, findPasswordError, email, dispatch]);
 
