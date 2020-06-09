@@ -4,10 +4,6 @@ import { Route, Switch } from 'react-router-dom';
 import Nav from './pages/nav/Nav';
 import Main from './pages/Main';
 import Dress from './pages/dress/Dress';
-import DressDetail from './components/dressDetail/DressDetail';
-import AddDress from './pages/dress/AddDress';
-import SearchDress from './pages/dress/SearchDress';
-import DressStats from './pages/dress/DressStats';
 import Signin from './pages/signin/Signin';
 import Validation from './pages/signup/Validation';
 import Signup from './pages/signup/Signup';
@@ -28,11 +24,7 @@ const App = () => {
       <Nav />
       <Switch>
         <Route exact path="/" component={Main} />
-        <Route path="/dress/add" component={AddDress} />
-        <Route path="/dress/search" component={SearchDress} />
-        <Route path="/dress/stats" component={DressStats} />
-        <Route path="/dress/:id" component={DressDetail} />
-        <Route exact path="/dress" component={Dress} />
+        <Route path="/dress" component={Dress} />
         <Route path="/signin" component={Signin} />
         <Route path="/signup" component={Signup} />
         <Route path="/validation" component={Validation} />
