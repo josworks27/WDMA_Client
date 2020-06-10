@@ -10,9 +10,9 @@ const DressStats = () => {
       {!token ? (
         <Redirect to="/signin" />
       ) : (
-        <>
+        <main>
           <h1>Dress Stats</h1>
-        </>
+        </main>
       )}
     </>
   );

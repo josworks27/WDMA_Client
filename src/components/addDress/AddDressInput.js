@@ -69,8 +69,8 @@ const AddDressInput = ({ history }) => {
     <>
       <main>
         <div className="container">
-          <form className="input-form" onSubmit={handleSubmit}>
-            <div className="form-group">
+          <form className="add-dress-form" onSubmit={handleSubmit}>
+            <div className="add-dress__group">
               <label>Model</label>
               <input
                 type="text"
@@ -81,7 +81,7 @@ const AddDressInput = ({ history }) => {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className="add-dress__group">
               <label>Price</label>
               <input
                 type="number"
@@ -92,7 +92,7 @@ const AddDressInput = ({ history }) => {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className="add-dress__group">
               <label>Accessories</label>
               <input
                 type="text"
@@ -116,11 +116,11 @@ const AddDressInput = ({ history }) => {
                 onChange={handleChange}
               />
             </div>
-            <div className="form-group">
+            <div className="add-dress__group">
               <label>Store</label>
               <StoreList belongStore={addDress.store} onChange={handleChange} />
             </div>
-            <div className="form-group">
+            <div className="add-dress__group">
               <label>Image</label>
               <input
                 type="file"

@@ -13,17 +13,19 @@ const ImageSlider = ({ images }) => {
     slidesToScroll: 1,
   };
   return (
-    <>
-      <Slider {...settings}>
-        {images.map((image) => {
+    <Slider {...settings}>
+      {images.length ? (
+        images.map((image) => {
           return (
             <div key={image.id}>
               <img src={image.filePath} alt="" />
             </div>
           );
-        })}
-      </Slider>
-    </>
+        })
+      ) : (
+        <div>없음</div>
+      )}
+    </Slider>
   );
 };
 

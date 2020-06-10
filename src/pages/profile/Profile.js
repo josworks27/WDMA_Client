@@ -22,38 +22,37 @@ const Profile = () => {
 
   if (!token) return <Redirect to="/signin" />;
   return (
-    <div className="container">
-      <h1>Profile</h1>
-      <button type="button">
-        <Link
-          to={{
-            pathname: '/profile/account',
-            state: {
-              me,
-            },
-          }}
-        >
-          My Account
-        </Link>
-      </button>
-      <br />
-      <button type="button">
-        <Link
-          to={{
-            pathname: '/profile/history',
-            state: {
-              load,
-            },
-          }}
-        >
-          My History
-        </Link>
-      </button>
-      <br />
-      <button type="button">
-        <Link to="/profile/change">Change Password</Link>
-      </button>
-    </div>
+    <main>
+      <div className="profile-buttons">
+        <button type="button">
+          <Link
+            to={{
+              pathname: '/profile/account',
+              state: {
+                me,
+              },
+            }}
+          >
+            My Account
+          </Link>
+        </button>
+        <button type="button">
+          <Link
+            to={{
+              pathname: '/profile/history',
+              state: {
+                load,
+              },
+            }}
+          >
+            My History
+          </Link>
+        </button>
+        <button type="button">
+          <Link to="/profile/change">Change Password</Link>
+        </button>
+      </div>
+    </main>
   );
 };
 

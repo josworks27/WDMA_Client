@@ -15,7 +15,6 @@ const SearchDressInput = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // dispatch 하기
     dispatch({
       type: SEARCH_DRESS_REQUEST,
       data: {
@@ -25,20 +24,18 @@ const SearchDressInput = () => {
   };
 
   return (
-    <>
-      <form className="input-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <input
-            type="text"
-            name="model"
-            placeholder="Search Dresses..."
-            value={searchModel}
-            onChange={handleChange}
-            required
-          />
-        </div>
-      </form>
-    </>
+    <form className="search-dress-form" onSubmit={handleSubmit}>
+      <div className="search-dress-form__group">
+        <input
+          type="text"
+          name="model"
+          placeholder="Search Dresses..."
+          value={searchModel}
+          onChange={handleChange}
+          required
+        />
+      </div>
+    </form>
   );
 };
 

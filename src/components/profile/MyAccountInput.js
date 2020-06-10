@@ -88,74 +88,77 @@ const MyAccountInput = ({ me, history }) => {
   };
 
   return (
-    <>
+    <main>
       {toggle ? (
-        <>
-          <div>
-            <h2>My Account</h2>
-            <div>Account E-mail</div>
-            <input type="text" value={me.email} readOnly />
-            <br />
-            <div>Name</div>
-            <input type="text" value={me.name} readOnly />
-            <br />
-            <div>Store Name</div>
-            <input type="text" value={me['store.name']} readOnly />
+        <div className="container">
+          <div className="my-account">
+            <div className="my-account__group">
+              <label>Account E-mail</label>
+              <input type="text" value={me.email} readOnly />
+            </div>
+            <div className="my-account__group">
+              <label>Name</label>
+              <input type="text" value={me.name} readOnly />
+            </div>
+            <div className="my-account__group">
+              <label>Store Name</label>
+              <input type="text" value={me['store.name']} readOnly />
+            </div>
           </div>
-          <div>
+          <div className="my-account-buttons">
             <button type="button" name="edit-account" onClick={handleClick}>
               Edit Account
             </button>
-            <br />
-            <div>
-              <button type="button" name="resign" onClick={handleClick}>
-                Resign membership
-              </button>
-            </div>
+            <button type="button" name="resign" onClick={handleClick}>
+              Resign membership
+            </button>
             <button type="button">
               <Link to="/profile">Back</Link>
             </button>
           </div>
-        </>
+        </div>
       ) : (
-        <>
-          <h2>My Account</h2>
-          <form onSubmit={handleSubmit}>
-            <div>Account E-mail</div>
-            <input type="text" name="email" value={me.email} readOnly />
-            <br />
-            <div>Name</div>
-            <input
-              type="text"
-              name="name"
-              value={editAccount.name}
-              onChange={handleChange}
-            />
-            <br />
-            <div>Store Name</div>
-            <StoreList
-              onChange={handleChange}
-              belongStore={editAccount.store}
-            />
-            <br />
-            <div>Manager</div>
-            <input
-              name="manager"
-              type="checkbox"
-              checked={editAccount.manager}
-              onChange={handleChange}
-            />
-            <br />
+        <div className="container">
+          <form className="edit-account-form" onSubmit={handleSubmit}>
+            <div className="edit-account-form__group">
+              <label>Account E-mail</label>
+              <input type="text" name="email" value={me.email} readOnly />
+            </div>
+            <div className="edit-account-form__group">
+              <label>Name</label>
+              <input
+                type="text"
+                name="name"
+                value={editAccount.name}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="edit-account-form__group">
+              <label>Store Name</label>
+              <StoreList
+                onChange={handleChange}
+                belongStore={editAccount.store}
+              />
+            </div>
+            <div className="edit-account-form__group">
+              <label>Manager</label>
+              <input
+                name="manager"
+                type="checkbox"
+                checked={editAccount.manager}
+                onChange={handleChange}
+              />
+            </div>
             <button type="submit">Edit</button>
           </form>
-          <div>
+          <div className="edit-account-button">
             <button type="button">
               <Link to="/profile">Back</Link>
             </button>
           </div>
-        </>
+        </div>
       )}
-    </>
+    </main>
   );
 };
 

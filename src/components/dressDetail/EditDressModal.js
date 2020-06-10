@@ -97,8 +97,8 @@ const EditDressModal = ({
   return (
     <>
       <ReactModal isOpen={showModal} style={modalStyle}>
-        <form className="input-form" onSubmit={handleSubmit}>
-          <div className="input-form__group">
+        <form className="edit-dress-form" onSubmit={handleSubmit}>
+          <div className="edit-dress-form__group">
             <label>Model</label>
             <input
               type="text"
@@ -109,7 +109,7 @@ const EditDressModal = ({
               required
             />
           </div>
-          <div className="input-form__group">
+          <div className="edit-dress-form__group">
             <label>Price</label>
             <input
               type="number"
@@ -120,7 +120,7 @@ const EditDressModal = ({
               required
             />
           </div>
-          <div className="input-form__group">
+          <div className="edit-dress-form__group">
             <label>Accessories</label>
             <input
               type="text"
@@ -130,7 +130,7 @@ const EditDressModal = ({
               onChange={handleChange}
             />
           </div>
-          <div className="input-form__group">
+          <div className="edit-dress-form__group">
             <input
               type="text"
               name="accessoryTwo"
@@ -139,7 +139,7 @@ const EditDressModal = ({
               onChange={handleChange}
             />
           </div>
-          <div className="input-form__group">
+          <div className="edit-dress-form__group">
             <input
               type="text"
               name="accessoryThree"
@@ -148,11 +148,11 @@ const EditDressModal = ({
               onChange={handleChange}
             />
           </div>
-          <div className="input-form__group">
+          <div className="edit-dress-form__group">
             <label>Store</label>
             <StoreList belongStore={editDress.store} onChange={handleChange} />
           </div>
-          <div className="input-form__group">
+          <div className="edit-dress-form__group">
             <label>Image</label>
             <input
               type="file"

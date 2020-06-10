@@ -41,7 +41,7 @@ const SearchDress = () => {
             </ul>
           </div>
         ) : null}
-        {searchDreseError ? <div>No Result</div> : null}
+        {searchDreseError ? <div className="search-fail">No Result</div> : null}
       </div>
     </main>
   );

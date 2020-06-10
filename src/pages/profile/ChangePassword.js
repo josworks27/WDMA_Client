@@ -8,11 +8,7 @@ const ChangePassword = ({ history }) => {
 
   if (!token) return <Redirect to="/signin" />;
 
-  return (
-    <>
-      <ChangePasswordInput history={history} />
-    </>
-  );
+  return <ChangePasswordInput history={history} />;
 };
 
 export default ChangePassword;
