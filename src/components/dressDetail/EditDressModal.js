@@ -97,89 +97,84 @@ const EditDressModal = ({
   return (
     <>
       <ReactModal isOpen={showModal} style={modalStyle}>
-        <h1>edit dress modal</h1>
-        <>
-          <div className="container">
-            <form onSubmit={handleSubmit}>
-              <span>Model: </span>
-              <input
-                type="text"
-                name="model"
-                placeholder="model"
-                value={editDress.model}
-                onChange={handleChange}
-                required
-              />
-              <br />
-              <span>Price: </span>
-              <input
-                type="number"
-                name="price"
-                placeholder="price"
-                value={editDress.price}
-                onChange={handleChange}
-                required
-              />
-              <br />
-              <span>Accessories: </span>
-              <input
-                type="text"
-                name="accessoryOne"
-                placeholder="option 1"
-                value={editDress.accessoryOne}
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                name="accessoryTwo"
-                placeholder="option 2"
-                value={editDress.accessoryTwo}
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                name="accessoryThree"
-                placeholder="option 3"
-                value={editDress.accessoryThree}
-                onChange={handleChange}
-              />
-              <br />
-              <span>Store: </span>
-              <StoreList
-                belongStore={editDress.store}
-                onChange={handleChange}
-              />
-              <br />
-              <span>Image: </span>
-              <input
-                type="file"
-                name="images"
-                multiple="multiple"
-                onChange={handleSelect}
-              />
-              <br />
-              <button type="submit">Edit Dress</button>
-            </form>
+        <form className="input-form" onSubmit={handleSubmit}>
+          <div className="input-form__group">
+            <label>Model</label>
+            <input
+              type="text"
+              name="model"
+              placeholder="model"
+              value={editDress.model}
+              onChange={handleChange}
+              required
+            />
           </div>
-        </>
-        <button
-          type="button"
-          name="close-edit-dress-modal"
-          onClick={handleCloseModal}
-        >
-          Close
-        </button>
+          <div className="input-form__group">
+            <label>Price</label>
+            <input
+              type="number"
+              name="price"
+              placeholder="price"
+              value={editDress.price}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="input-form__group">
+            <label>Accessories</label>
+            <input
+              type="text"
+              name="accessoryOne"
+              placeholder="option 1"
+              value={editDress.accessoryOne}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="input-form__group">
+            <input
+              type="text"
+              name="accessoryTwo"
+              placeholder="option 2"
+              value={editDress.accessoryTwo}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="input-form__group">
+            <input
+              type="text"
+              name="accessoryThree"
+              placeholder="option 3"
+              value={editDress.accessoryThree}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="input-form__group">
+            <label>Store</label>
+            <StoreList belongStore={editDress.store} onChange={handleChange} />
+          </div>
+          <div className="input-form__group">
+            <label>Image</label>
+            <input
+              type="file"
+              name="images"
+              multiple="multiple"
+              onChange={handleSelect}
+            />
+          </div>
+          <button type="submit">Edit Dress</button>
+        </form>
+        <div className="input-form__buttons">
+          <button
+            type="button"
+            name="close-edit-dress-modal"
+            onClick={handleCloseModal}
+          >
+            Close
+          </button>
+        </div>
       </ReactModal>
     </>
   );
 };
 
 export default EditDressModal;
-
-// edit dress 버튼을 누르면
-// editDressModal 창이 켜지고
-// 기존의 드레스의 정보를 받은 input이 존재
-//      => 수정가능하며, 수정 후에는 서버에 요청보내기
-// 보낸 후에는 모달창이 꺼지고, 정보 변경된 Dress Detail 컴포넌트 렌더링
-
-// ! edit dress는 스테이트와 디스패치를 별도로 관리

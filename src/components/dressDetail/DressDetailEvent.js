@@ -2,9 +2,9 @@ import React from 'react';
 
 const DressDetailInfo = ({ events }) => {
   return (
-    <>
-      <div>
-        <h3>Event List</h3>
+    <section className="dress-event">
+      <h1>Event List</h1>
+      <div className="dress-event__list">
         <ul>
           {events.map((event) => (
             <li key={event.id}>
@@ -15,7 +15,7 @@ const DressDetailInfo = ({ events }) => {
           ))}
         </ul>
       </div>
-    </>
+    </section>
   );
 };
 

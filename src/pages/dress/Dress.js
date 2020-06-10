@@ -16,8 +16,7 @@ const Dress = ({ match }) => {
       {!token ? (
         <Redirect to="/signin" />
       ) : (
-        <div>
-          <h1>Dress</h1>
+        <div className="container">
           <Switch>
             <Route exact path={`${match.path}`} component={DressList} />
             <Route path={`${match.path}/add`} component={AddDress} />

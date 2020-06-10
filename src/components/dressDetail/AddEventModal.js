@@ -20,20 +20,21 @@ const AddEventModal = ({
 }) => {
   return (
     <>
-      <div>
-        <ReactModal isOpen={showModal} style={modalStyle}>
-          {addEvent.eventType === 'customerRent' ||
-          addEvent.eventType === 'fitting' ? (
-            <form>
-              <span>Event type: </span>
+      <ReactModal isOpen={showModal} style={modalStyle}>
+        {addEvent.eventType === 'customerRent' ||
+        addEvent.eventType === 'fitting' ? (
+          <form className="input-form">
+            <div className="input-form__group">
+              <label>Event type</label>
               <select name="eventType" onChange={handleChange}>
                 <option value="customerRent">Customer rent</option>
                 <option value="fitting">Fitting</option>
                 <option value="cleaning">Cleaning</option>
                 <option value="storeRent">Store rent</option>
               </select>
-              <br />
-              <span>Date: </span>
+            </div>
+            <div className="input-form__group">
+              <label>Date</label>
               <DatePicker
                 // 데이트픽커 시작 날짜
                 selected={addEvent.date}
@@ -46,8 +47,9 @@ const AddEventModal = ({
                 }}
                 dateFormat="yyyy MMMM d"
               />
-              <br />
-              <span>Details: </span>
+            </div>
+            <div className="input-form__group">
+              <label>Details</label>
               <input
                 type="text"
                 name="details"
@@ -55,46 +57,51 @@ const AddEventModal = ({
                 onChange={handleChange}
                 value={addEvent.details}
               />
-              <div>
-                <span>Customer name: </span>
-                <input
-                  type="text"
-                  name="customerName"
-                  placeholder="customer name"
-                  onChange={handleChange}
-                  value={addEvent.customerMame}
-                />
-                <br />
-                <span>Customer Birthday: </span>
-                <DatePicker
-                  selected={addEvent.customerBirth}
-                  onChange={(date) => {
-                    setAddEvent({
-                      ...addEvent,
-                      customerBirth: date,
-                    });
-                  }}
-                  dateFormat="yyyy MMMM d"
-                />
-                <br />
-                <span>Customer gender: </span>
-                <select name="customerGender" onChange={handleChange}>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                </select>
-              </div>
-            </form>
-          ) : (
-            <form>
-              <span>Event type: </span>
+            </div>
+            <div className="input-form__group">
+              <label>Customer name</label>
+              <input
+                type="text"
+                name="customerName"
+                placeholder="customer name"
+                onChange={handleChange}
+                value={addEvent.customerMame}
+              />
+            </div>
+            <div className="input-form__group">
+              <label>Customer Birthday</label>
+              <DatePicker
+                selected={addEvent.customerBirth}
+                onChange={(date) => {
+                  setAddEvent({
+                    ...addEvent,
+                    customerBirth: date,
+                  });
+                }}
+                dateFormat="yyyy MMMM d"
+              />
+            </div>
+            <div className="input-form__group">
+              <label>Customer gender</label>
+              <select name="customerGender" onChange={handleChange}>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+          </form>
+        ) : (
+          <form className="input-form">
+            <div className="input-form__group">
+              <label>Event type</label>
               <select name="eventType" onChange={handleChange}>
                 <option value="customerRent">Customer rent</option>
                 <option value="fitting">Fitting</option>
                 <option value="cleaning">Cleaning</option>
                 <option value="storeRent">Store rent</option>
               </select>
-              <br />
-              <span>Date: </span>
+            </div>
+            <div className="input-form__group">
+              <label>Date</label>
               <DatePicker
                 selected={addEvent.date}
                 onChange={(date) => {
@@ -105,8 +112,9 @@ const AddEventModal = ({
                 }}
                 dateFormat="yyyy MMMM d"
               />
-              <br />
-              <span>Details: </span>
+            </div>
+            <div className="input-form__group">
+              <label>Details</label>
               <input
                 type="text"
                 name="details"
@@ -114,9 +122,10 @@ const AddEventModal = ({
                 onChange={handleChange}
                 value={addEvent.details}
               />
-            </form>
-          )}
-
+            </div>
+          </form>
+        )}
+        <div className="input-form__buttons">
           <button type="button" onClick={handleSaveModal}>
             Save an event
           </button>
@@ -127,8 +136,8 @@ const AddEventModal = ({
           >
             Close
           </button>
-        </ReactModal>
-      </div>
+        </div>
+      </ReactModal>
     </>
   );
 };

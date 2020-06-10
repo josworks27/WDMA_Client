@@ -23,8 +23,7 @@ const DressList = ({ match }) => {
   }, [findDressesError]);
 
   return (
-    <>
-      <h2>Dress list</h2>
+    <div className="dress-list">
       <ul>
         {dresses.map((item) => {
           return (
@@ -41,7 +40,7 @@ const DressList = ({ match }) => {
           );
         })}
       </ul>
-    </>
+    </div>
   );
 };
 

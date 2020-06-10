@@ -173,52 +173,51 @@ const DressDetail = ({ match, history }) => {
         <Redirect to="/signin" />
       ) : (
         <>
-          <div>
-            <h2>{`No.${match.params.id} dress's Detail`}</h2>
+          <h1>{`No.${match.params.id} dress's Detail`}</h1>
+          <main>
             <DressDetailInfo dress={dress} images={images} />
             <DressDetailEvent events={events} />
-          </div>
-          <div>
-            <AddEventModal
-              showModal={showAddEventModal}
-              handleSaveModal={handleSaveModal}
-              handleCloseModal={handleCloseModal}
-              handleChange={handleChange}
-              addEvent={addEvent}
-              setAddEvent={setAddEvent}
-            />
-          </div>
-          <button
-            type="button"
-            name="add-event-button"
-            onClick={handleOpenModal}
-          >
-            Add event
-          </button>
-          <div>
-            <EditDressModal
-              match={match}
-              showModal={showEditDressModal}
-              setShowModal={setShowEditDressModal}
-              handleCloseModal={handleCloseModal}
-              dress={dress}
-            />
-            <button
-              type="button"
-              name="edit-dress-button"
-              onClick={handleOpenModal}
-            >
-              Edit dress
-            </button>
-            <br />
-            <button
-              type="button"
-              name="delete-dress-button"
-              onClick={handleDelete}
-            >
-              Delete dress
-            </button>
-          </div>
+          </main>
+          <footer>
+            <div className="wrapper">
+              <AddEventModal
+                showModal={showAddEventModal}
+                handleSaveModal={handleSaveModal}
+                handleCloseModal={handleCloseModal}
+                handleChange={handleChange}
+                addEvent={addEvent}
+                setAddEvent={setAddEvent}
+              />
+              <button
+                type="button"
+                name="add-event-button"
+                onClick={handleOpenModal}
+              >
+                Add event
+              </button>
+              <EditDressModal
+                match={match}
+                showModal={showEditDressModal}
+                setShowModal={setShowEditDressModal}
+                handleCloseModal={handleCloseModal}
+                dress={dress}
+              />
+              <button
+                type="button"
+                name="edit-dress-button"
+                onClick={handleOpenModal}
+              >
+                Edit dress
+              </button>
+              <button
+                type="button"
+                name="delete-dress-button"
+                onClick={handleDelete}
+              >
+                Delete dress
+              </button>
+            </div>
+          </footer>
         </>
       )}
     </>

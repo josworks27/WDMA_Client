@@ -15,7 +15,7 @@ const Nav = () => {
   return (
     <>
       {token || me ? (
-        <div className="container">
+        <nav>
           <ul>
             <li>
               <Link to="/">Main</Link>
@@ -44,9 +44,9 @@ const Nav = () => {
               </Link>
             </li>
           </ul>
-        </div>
+        </nav>
       ) : (
-        <div className="container">
+        <nav>
           <ul>
             <li>
               <Link to="/">Main</Link>
@@ -73,7 +73,7 @@ const Nav = () => {
               <Link to="/signin">SignIn</Link>
             </li>
           </ul>
-        </div>
+        </nav>
       )}
     </>
   );

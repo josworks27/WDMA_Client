@@ -20,8 +20,10 @@ import './App.css';
 
 const App = () => {
   return (
-    <div>
-      <Nav />
+    <>
+      <header>
+        <Nav />
+      </header>
       <Switch>
         <Route exact path="/" component={Main} />
         <Route path="/dress" component={Dress} />
@@ -37,7 +39,7 @@ const App = () => {
         <Route exact path="/profile" component={Profile} />
         <Route component={NotFound} />
       </Switch>
-    </div>
+    </>
   );
 };
 
