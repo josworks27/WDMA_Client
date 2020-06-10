@@ -23,24 +23,26 @@ const DressList = ({ match }) => {
   }, [findDressesError]);
 
   return (
-    <div className="dress-list">
-      <ul>
-        {dresses.map((item) => {
-          return (
-            <li key={item.id}>
-              <Link to={`${match.path}/${item.id}`}>
-                {item['images.filePath'] ? (
-                  <img src={item['images.filePath']} alt="img" />
-                ) : (
-                  <img src={sampleImg} alt="img" />
-                )}
-                <div>{item.model}</div>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+    <main>
+      <div className="container">
+        <ul>
+          {dresses.map((item) => {
+            return (
+              <li key={item.id}>
+                <Link to={`${match.path}/${item.id}`}>
+                  {item['images.filePath'] ? (
+                    <img src={item['images.filePath']} alt="img" />
+                  ) : (
+                    <img src={sampleImg} alt="img" />
+                  )}
+                  <div>{item.model}</div>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </main>
   );
 };
 

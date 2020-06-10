@@ -39,6 +39,9 @@ const App = () => {
         <Route exact path="/profile" component={Profile} />
         <Route component={NotFound} />
       </Switch>
+      <footer>
+        <div>footer</div>
+      </footer>
     </>
   );
 };

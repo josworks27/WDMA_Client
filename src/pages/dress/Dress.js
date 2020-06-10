@@ -16,15 +16,13 @@ const Dress = ({ match }) => {
       {!token ? (
         <Redirect to="/signin" />
       ) : (
-        <div className="container">
-          <Switch>
-            <Route exact path={`${match.path}`} component={DressList} />
-            <Route path={`${match.path}/add`} component={AddDress} />
-            <Route path={`${match.path}/search`} component={SearchDress} />
-            <Route path={`${match.path}/stats`} component={DressStats} />
-            <Route path={`${match.path}/:id`} component={DressDetail} />
-          </Switch>
-        </div>
+        <Switch>
+          <Route exact path={`${match.path}`} component={DressList} />
+          <Route path={`${match.path}/add`} component={AddDress} />
+          <Route path={`${match.path}/search`} component={SearchDress} />
+          <Route path={`${match.path}/stats`} component={DressStats} />
+          <Route path={`${match.path}/:id`} component={DressDetail} />
+        </Switch>
       )}
     </>
   );

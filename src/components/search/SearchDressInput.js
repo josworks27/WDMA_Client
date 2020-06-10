@@ -26,9 +26,8 @@ const SearchDressInput = () => {
 
   return (
     <>
-      <h1>Search Dress</h1>
-      <div className="container">
-        <form onSubmit={handleSubmit}>
+      <form className="input-form" onSubmit={handleSubmit}>
+        <div className="form-group">
           <input
             type="text"
             name="model"
@@ -37,8 +36,8 @@ const SearchDressInput = () => {
             onChange={handleChange}
             required
           />
-        </form>
-      </div>
+        </div>
+      </form>
     </>
   );
 };

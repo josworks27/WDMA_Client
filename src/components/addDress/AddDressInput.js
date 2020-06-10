@@ -67,65 +67,72 @@ const AddDressInput = ({ history }) => {
 
   return (
     <>
-      <div className="container">
-        <form onSubmit={handleSubmit}>
-          <span>Model: </span>
-          <input
-            type="text"
-            name="model"
-            placeholder="model"
-            value={addDress.model}
-            onChange={handleChange}
-            required
-          />
-          <br />
-          <span>Price: </span>
-          <input
-            type="number"
-            name="price"
-            placeholder="price"
-            value={addDress.price}
-            onChange={handleChange}
-            required
-          />
-          <br />
-          <span>Accessories: </span>
-          <input
-            type="text"
-            name="accessoryOne"
-            placeholder="option 1"
-            value={addDress.accessoryOne}
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            name="accessoryTwo"
-            placeholder="option 2"
-            value={addDress.accessoryTwo}
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            name="accessoryThree"
-            placeholder="option 3"
-            value={addDress.accessoryThree}
-            onChange={handleChange}
-          />
-          <br />
-          <span>Store: </span>
-          <StoreList belongStore={addDress.store} onChange={handleChange} />
-          <br />
-          <span>Image: </span>
-          <input
-            type="file"
-            name="images"
-            multiple="multiple"
-            onChange={handleSelect}
-          />
-          <br />
-          <button type="submit">Add Dress</button>
-        </form>
-      </div>
+      <main>
+        <div className="container">
+          <form className="input-form" onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>Model</label>
+              <input
+                type="text"
+                name="model"
+                placeholder="model"
+                value={addDress.model}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Price</label>
+              <input
+                type="number"
+                name="price"
+                placeholder="price"
+                value={addDress.price}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Accessories</label>
+              <input
+                type="text"
+                name="accessoryOne"
+                placeholder="option 1"
+                value={addDress.accessoryOne}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                name="accessoryTwo"
+                placeholder="option 2"
+                value={addDress.accessoryTwo}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                name="accessoryThree"
+                placeholder="option 3"
+                value={addDress.accessoryThree}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label>Store</label>
+              <StoreList belongStore={addDress.store} onChange={handleChange} />
+            </div>
+            <div className="form-group">
+              <label>Image</label>
+              <input
+                type="file"
+                name="images"
+                multiple="multiple"
+                onChange={handleSelect}
+              />
+            </div>
+            <button type="submit">Add Dress</button>
+          </form>
+        </div>
+      </main>
     </>
   );
 };

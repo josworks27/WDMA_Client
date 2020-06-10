@@ -8,14 +8,7 @@ const AddDress = ({ history }) => {
 
   return (
     <>
-      {!token ? (
-        <Redirect to="/signin" />
-      ) : (
-        <>
-          <h1>Add Dress</h1>
-          <AddDressInput history={history} />
-        </>
-      )}
+      {!token ? <Redirect to="/signin" /> : <AddDressInput history={history} />}
     </>
   );
 };

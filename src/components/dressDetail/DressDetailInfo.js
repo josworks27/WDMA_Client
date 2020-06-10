@@ -6,7 +6,6 @@ const DressDetailInfo = ({ images, dress }) => {
   return (
     <>
       <section className="dress-info">
-        <h1>Dress Info</h1>
         <div className="dress-info__slider">
           <ImageSlider images={images} />
         </div>
