@@ -64,51 +64,49 @@ const ChangePasswordInput = ({ history }) => {
   };
 
   return (
-    <main>
-      <div className="container">
-        <form className="change-password-form" onSubmit={handleSubmit}>
-          <div className="change-password-form__group">
-            <label>Current Password</label>
-            <input
-              type="password"
-              name="currPassword"
-              placeholder="current password"
-              value={currPassword}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="change-password-form__group">
-            <label>New Password</label>
-            <input
-              type="password"
-              name="newPassword"
-              placeholder="new password"
-              value={newPassword}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="change-password-form__group">
-            <label>Check Password</label>
-            <input
-              type="password"
-              name="checkPassword"
-              placeholder="check password"
-              value={checkPassword}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <button type="submit">Change</button>
-        </form>
-        <div className="change-password-button">
-          <button type="button">
-            <Link to="/profile">Back</Link>
-          </button>
+    <div className="container">
+      <form className="change-password-form" onSubmit={handleSubmit}>
+        <div className="change-password-form__group">
+          <label>Current Password</label>
+          <input
+            type="password"
+            name="currPassword"
+            placeholder="current password"
+            value={currPassword}
+            onChange={handleChange}
+            required
+          />
         </div>
+        <div className="change-password-form__group">
+          <label>New Password</label>
+          <input
+            type="password"
+            name="newPassword"
+            placeholder="new password"
+            value={newPassword}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="change-password-form__group">
+          <label>Check Password</label>
+          <input
+            type="password"
+            name="checkPassword"
+            placeholder="check password"
+            value={checkPassword}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <button type="submit">Change</button>
+      </form>
+      <div className="change-password-button">
+        <button type="button">
+          <Link to="/profile">Back</Link>
+        </button>
       </div>
-    </main>
+    </div>
   );
 };
 

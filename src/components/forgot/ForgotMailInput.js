@@ -65,20 +65,20 @@ const ForgotMailInput = ({ history }) => {
         <ForgotMailCheck history={history} user={user} />
       ) : (
         <div className="container">
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              name="name"
-              onChange={handleChange}
-              value={userInfo.name}
-              placeholder="name"
-              required
-            />
-            <StoreList
-              // stores={store}
-              onChange={handleChange}
-              value={userInfo.store}
-            />
+          <form className="forgot-mail-form" onSubmit={handleSubmit}>
+            <div className="forgot-mail-form__group">
+              <input
+                type="text"
+                name="name"
+                onChange={handleChange}
+                value={userInfo.name}
+                placeholder="name"
+                required
+              />
+            </div>
+            <div className="forgot-mail-form__group">
+              <StoreList onChange={handleChange} value={userInfo.store} />
+            </div>
             <button type="submit">Find</button>
           </form>
         </div>

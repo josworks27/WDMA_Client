@@ -8,7 +8,11 @@ const MyHistory = ({ history }) => {
   const { load } = history.location.state;
 
   if (!token) return <Redirect to="/signin" />;
-  return <MyHistoryEntry data={load} />;
+  return (
+    <main>
+      <MyHistoryEntry data={load} />
+    </main>
+  );
 };
 
 export default MyHistory;

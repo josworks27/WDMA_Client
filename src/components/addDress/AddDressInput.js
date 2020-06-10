@@ -66,74 +66,70 @@ const AddDressInput = ({ history }) => {
   };
 
   return (
-    <>
-      <main>
-        <div className="container">
-          <form className="add-dress-form" onSubmit={handleSubmit}>
-            <div className="add-dress__group">
-              <label>Model</label>
-              <input
-                type="text"
-                name="model"
-                placeholder="model"
-                value={addDress.model}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="add-dress__group">
-              <label>Price</label>
-              <input
-                type="number"
-                name="price"
-                placeholder="price"
-                value={addDress.price}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="add-dress__group">
-              <label>Accessories</label>
-              <input
-                type="text"
-                name="accessoryOne"
-                placeholder="option 1"
-                value={addDress.accessoryOne}
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                name="accessoryTwo"
-                placeholder="option 2"
-                value={addDress.accessoryTwo}
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                name="accessoryThree"
-                placeholder="option 3"
-                value={addDress.accessoryThree}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="add-dress__group">
-              <label>Store</label>
-              <StoreList belongStore={addDress.store} onChange={handleChange} />
-            </div>
-            <div className="add-dress__group">
-              <label>Image</label>
-              <input
-                type="file"
-                name="images"
-                multiple="multiple"
-                onChange={handleSelect}
-              />
-            </div>
-            <button type="submit">Add Dress</button>
-          </form>
+    <div className="container">
+      <form className="add-dress-form" onSubmit={handleSubmit}>
+        <div className="add-dress__group">
+          <label>Model</label>
+          <input
+            type="text"
+            name="model"
+            placeholder="model"
+            value={addDress.model}
+            onChange={handleChange}
+            required
+          />
         </div>
-      </main>
-    </>
+        <div className="add-dress__group">
+          <label>Price</label>
+          <input
+            type="number"
+            name="price"
+            placeholder="price"
+            value={addDress.price}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="add-dress__group">
+          <label>Accessories</label>
+          <input
+            type="text"
+            name="accessoryOne"
+            placeholder="option 1"
+            value={addDress.accessoryOne}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="accessoryTwo"
+            placeholder="option 2"
+            value={addDress.accessoryTwo}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="accessoryThree"
+            placeholder="option 3"
+            value={addDress.accessoryThree}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="add-dress__group">
+          <label>Store</label>
+          <StoreList belongStore={addDress.store} onChange={handleChange} />
+        </div>
+        <div className="add-dress__group">
+          <label>Image</label>
+          <input
+            type="file"
+            name="images"
+            multiple="multiple"
+            onChange={handleSelect}
+          />
+        </div>
+        <button type="submit">Add Dress</button>
+      </form>
+    </div>
   );
 };
 

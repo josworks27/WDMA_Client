@@ -36,8 +36,8 @@ const ValidationCheck = () => {
       ) : (
         <div className="container">
           <h1>Please input the number you received</h1>
-          <div className="input-form">
-            <form onSubmit={handleSubmit}>
+          <form className="valid-check-form" onSubmit={handleSubmit}>
+            <div className="valid-check-form__group">
               <input
                 type="text"
                 name="auth"
@@ -46,10 +46,10 @@ const ValidationCheck = () => {
                 onChange={handleChange}
                 required
               />
-              <button type="submit">OK</button>
-            </form>
-            <div />
-          </div>
+            </div>
+            <button type="submit">OK</button>
+          </form>
+          <div />
         </div>
       )}
     </>

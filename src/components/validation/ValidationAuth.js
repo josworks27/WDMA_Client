@@ -42,8 +42,8 @@ const ValidationAuth = () => {
       ) : (
         <div className="container">
           <h1>Please input your Email address</h1>
-          <div className="input-form">
-            <form onSubmit={handleSubmit}>
+          <form className="valid-auth-form" onSubmit={handleSubmit}>
+            <div className="valid-auth-form__group">
               <input
                 type="text"
                 name="email"
@@ -52,10 +52,10 @@ const ValidationAuth = () => {
                 onChange={handleChange}
                 required
               />
-              <button type="submit">Send</button>
-            </form>
-            <div />
-          </div>
+            </div>
+            <button type="submit">Send</button>
+          </form>
+          <div />
         </div>
       )}
     </>

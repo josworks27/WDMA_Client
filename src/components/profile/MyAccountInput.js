@@ -88,7 +88,7 @@ const MyAccountInput = ({ me, history }) => {
   };
 
   return (
-    <main>
+    <>
       {toggle ? (
         <div className="container">
           <div className="my-account">
@@ -158,7 +158,7 @@ const MyAccountInput = ({ me, history }) => {
           </div>
         </div>
       )}
-    </main>
+    </>
   );
 };
 

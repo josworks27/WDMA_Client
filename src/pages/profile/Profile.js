@@ -15,7 +15,7 @@ const Profile = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (loadUserError) {
+    if (token && loadUserError) {
       alert(loadUserError);
     }
   }, [loadUserError]);

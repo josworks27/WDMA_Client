@@ -56,20 +56,24 @@ const ForgotPasswordInput = ({ history }) => {
 
   return (
     <div className="container">
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleChange}
-          placeholder="email address"
-          required
-        />
+      <form className="forgot-password-form" onSubmit={handleSubmit}>
+        <div className="forgot-password-form__group">
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleChange}
+            placeholder="email address"
+            required
+          />
+        </div>
         <button type="submit">Reset</button>
-        <button type="button" style={display} onClick={handleClick}>
+      </form>
+      <div className="forgot-password-button" style={display}>
+        <button type="button" onClick={handleClick}>
           Back to Sign In
         </button>
-      </form>
+      </div>
     </div>
   );
 };

@@ -95,85 +95,83 @@ const EditDressModal = ({
   };
 
   return (
-    <>
-      <ReactModal isOpen={showModal} style={modalStyle}>
-        <form className="edit-dress-form" onSubmit={handleSubmit}>
-          <div className="edit-dress-form__group">
-            <label>Model</label>
-            <input
-              type="text"
-              name="model"
-              placeholder="model"
-              value={editDress.model}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="edit-dress-form__group">
-            <label>Price</label>
-            <input
-              type="number"
-              name="price"
-              placeholder="price"
-              value={editDress.price}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="edit-dress-form__group">
-            <label>Accessories</label>
-            <input
-              type="text"
-              name="accessoryOne"
-              placeholder="option 1"
-              value={editDress.accessoryOne}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="edit-dress-form__group">
-            <input
-              type="text"
-              name="accessoryTwo"
-              placeholder="option 2"
-              value={editDress.accessoryTwo}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="edit-dress-form__group">
-            <input
-              type="text"
-              name="accessoryThree"
-              placeholder="option 3"
-              value={editDress.accessoryThree}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="edit-dress-form__group">
-            <label>Store</label>
-            <StoreList belongStore={editDress.store} onChange={handleChange} />
-          </div>
-          <div className="edit-dress-form__group">
-            <label>Image</label>
-            <input
-              type="file"
-              name="images"
-              multiple="multiple"
-              onChange={handleSelect}
-            />
-          </div>
-          <button type="submit">Edit Dress</button>
-        </form>
-        <div className="input-form__buttons">
-          <button
-            type="button"
-            name="close-edit-dress-modal"
-            onClick={handleCloseModal}
-          >
-            Close
-          </button>
+    <ReactModal isOpen={showModal} style={modalStyle}>
+      <form className="edit-dress-form" onSubmit={handleSubmit}>
+        <div className="edit-dress-form__group">
+          <label>Model</label>
+          <input
+            type="text"
+            name="model"
+            placeholder="model"
+            value={editDress.model}
+            onChange={handleChange}
+            required
+          />
         </div>
-      </ReactModal>
-    </>
+        <div className="edit-dress-form__group">
+          <label>Price</label>
+          <input
+            type="number"
+            name="price"
+            placeholder="price"
+            value={editDress.price}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="edit-dress-form__group">
+          <label>Accessories</label>
+          <input
+            type="text"
+            name="accessoryOne"
+            placeholder="option 1"
+            value={editDress.accessoryOne}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="edit-dress-form__group">
+          <input
+            type="text"
+            name="accessoryTwo"
+            placeholder="option 2"
+            value={editDress.accessoryTwo}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="edit-dress-form__group">
+          <input
+            type="text"
+            name="accessoryThree"
+            placeholder="option 3"
+            value={editDress.accessoryThree}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="edit-dress-form__group">
+          <label>Store</label>
+          <StoreList belongStore={editDress.store} onChange={handleChange} />
+        </div>
+        <div className="edit-dress-form__group">
+          <label>Image</label>
+          <input
+            type="file"
+            name="images"
+            multiple="multiple"
+            onChange={handleSelect}
+          />
+        </div>
+        <button type="submit">Edit Dress</button>
+      </form>
+      <div className="input-form__buttons">
+        <button
+          type="button"
+          name="close-edit-dress-modal"
+          onClick={handleCloseModal}
+        >
+          Close
+        </button>
+      </div>
+    </ReactModal>
   );
 };
 

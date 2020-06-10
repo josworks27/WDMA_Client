@@ -18,31 +18,29 @@ const SearchDress = () => {
   return (
     <main>
       <div className="container">
-        <div className="search-form">
-          <SearchDressInput />
-        </div>
-        {searchResult.length ? (
-          <div className="search-result">
-            <ul>
-              {searchResult.map((dress) => {
-                return (
-                  <li key={dress.id}>
-                    <Link to={`/dress/${dress.id}`}>
-                      {dress['images.filePath'] ? (
-                        <img src={dress['images.filePath']} alt="img" />
-                      ) : (
-                        <img src={sampleImg} alt="img" />
-                      )}
-                      <div>{dress.model}</div>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        ) : null}
-        {searchDreseError ? <div className="search-fail">No Result</div> : null}
+        <SearchDressInput />
       </div>
+      {searchResult.length ? (
+        <div className="search-result">
+          <ul>
+            {searchResult.map((dress) => {
+              return (
+                <li key={dress.id}>
+                  <Link to={`/dress/${dress.id}`}>
+                    {dress['images.filePath'] ? (
+                      <img src={dress['images.filePath']} alt="img" />
+                    ) : (
+                      <img src={sampleImg} alt="img" />
+                    )}
+                    <div>{dress.model}</div>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ) : null}
+      {searchDreseError ? <div className="search-fail">No Result</div> : null}
     </main>
   );
 };

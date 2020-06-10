@@ -11,8 +11,10 @@ const ForgotMailCheck = ({ history, user }) => {
 
   return (
     <div className="container">
-      <h1>{`Your Email accout is ${email}`}</h1>
-      <div>{`Belongs to ${store}`}</div>
+      <div className="wrapper">
+        <h1>{`Your Email accout is ${email}`}</h1>
+        <h2>{`Belongs to ${store}`}</h2>
+      </div>
       <button type="button" onClick={handleClick}>
         Back to Sign In
       </button>

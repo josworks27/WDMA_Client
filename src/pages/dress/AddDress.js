@@ -6,10 +6,11 @@ import AddDressInput from '../../components/addDress/AddDressInput';
 const AddDress = ({ history }) => {
   let token = Cookies.get('token');
 
+  if (!token) return <Redirect to="/signin" />;
   return (
-    <>
-      {!token ? <Redirect to="/signin" /> : <AddDressInput history={history} />}
-    </>
+    <main>
+      <AddDressInput history={history} />
+    </main>
   );
 };
 

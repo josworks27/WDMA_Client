@@ -9,7 +9,11 @@ const MyAccount = ({ history }) => {
   const { me } = history.location.state;
 
   if (!token) return <Redirect to="/signin" />;
-  return <MyAccountInput me={me} history={history} />;
+  return (
+    <main>
+      <MyAccountInput me={me} history={history} />;
+    </main>
+  );
 };
 
 export default MyAccount;

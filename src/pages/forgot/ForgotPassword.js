@@ -3,9 +3,9 @@ import ForgotPasswordInput from '../../components/forgot/ForgotPasswordInput';
 
 const ForgotPassword = ({ history }) => {
   return (
-    <>
+    <main>
       <ForgotPasswordInput history={history} />
-    </>
+    </main>
   );
 };
 

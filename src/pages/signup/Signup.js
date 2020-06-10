@@ -6,8 +6,11 @@ import SignupInput from '../../components/signup/SignupInput';
 const Signup = ({ history }) => {
   const { checked } = useSelector((state) => state.userReducer);
 
+  if (!checked) return <Redirect to="/" />;
   return (
-    <>{checked ? <SignupInput history={history} /> : <Redirect to="/" />}</>
+    <main>
+      <SignupInput history={history} />
+    </main>
   );
 };
 

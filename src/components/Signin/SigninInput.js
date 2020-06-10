@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { SIGN_IN_REQUEST, USER_RESET } from '../../store/modules/user/user';
 
-import './SigninInput.css';
-
 const SigninInput = ({ history }) => {
   const [account, setAccount] = useState({
     email: '',
@@ -52,8 +50,8 @@ const SigninInput = ({ history }) => {
   return (
     <div className="container">
       <h1>Sign In</h1>
-      <div className="input-form">
-        <form onSubmit={handleSubmit}>
+      <form className="signin-form" onSubmit={handleSubmit}>
+        <div className="signin-form__group">
           <input
             type="text"
             name="email"
@@ -62,6 +60,8 @@ const SigninInput = ({ history }) => {
             onChange={handleChange}
             required
           />
+        </div>
+        <div className="signin-form__group">
           <input
             type="password"
             name="password"
@@ -70,10 +70,10 @@ const SigninInput = ({ history }) => {
             onChange={handleChange}
             required
           />
-          <button type="submit">Sign In</button>
-        </form>
-      </div>
-      <div>
+        </div>
+        <button type="submit">Sign In</button>
+      </form>
+      <div className="signin-buttons">
         <ul>
           <li>
             <Link to="/validation">Sign Up</Link>
@@ -83,8 +83,6 @@ const SigninInput = ({ history }) => {
           </li>
         </ul>
       </div>
-      <div />
-      <div />
     </div>
   );
 };

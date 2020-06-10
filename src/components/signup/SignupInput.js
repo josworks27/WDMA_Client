@@ -70,8 +70,8 @@ const SignupInput = ({ history }) => {
 
   return (
     <div className="container">
-      <div>
-        <form onSubmit={handleSubmit}>
+      <form className="signup-form" onSubmit={handleSubmit}>
+        <div className="signup-form__group">
           <input
             type="text"
             name="name"
@@ -80,7 +80,11 @@ const SignupInput = ({ history }) => {
             value={userInfo.name}
             required
           />
+        </div>
+        <div className="signup-form__group">
           <input type="text" name="email" value={email} readOnly />
+        </div>
+        <div className="signup-form__group">
           <input
             type="password"
             name="password1"
@@ -97,11 +101,15 @@ const SignupInput = ({ history }) => {
             value={userInfo.password2}
             required
           />
+        </div>
+        <div className="signup-form__group">
           <StoreList
             stores={store}
             onChange={handleChange}
             belongStore={userInfo.store}
           />
+        </div>
+        <div className="signup-form__group">
           <span>Are you manager?</span>
           <input
             name="manager"
@@ -109,9 +117,9 @@ const SignupInput = ({ history }) => {
             checked={userInfo.manager}
             onChange={handleChange}
           />
-          <button type="submit">Submit</button>
-        </form>
-      </div>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 };

@@ -8,7 +8,11 @@ const Signin = ({ history }) => {
   let token = Cookies.get('token');
 
   if (token) return <Redirect to="/dress" />;
-  return <SigninInput history={history} />;
+  return (
+    <main>
+      <SigninInput history={history} />
+    </main>
+  );
 };
 
 export default Signin;
