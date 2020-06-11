@@ -49,7 +49,6 @@ const SigninInput = ({ history }) => {
 
   return (
     <div className="container">
-      <h1>Sign In</h1>
       <form className="signin-form" onSubmit={handleSubmit}>
         <div className="signin-form__group">
           <input
