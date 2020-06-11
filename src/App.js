@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import Nav from './pages/nav/Nav';
+import Header from './components/header/Header';
 import Main from './pages/Main';
 import Dress from './pages/dress/Dress';
 import Signin from './pages/signin/Signin';
@@ -15,15 +15,12 @@ import MyAccount from './pages/profile/MyAccount';
 import MyHistory from './pages/profile/MyHistory';
 import ChangePassword from './pages/profile/ChangePassword';
 import NotFound from './pages/NotFound';
-
-import './App.css';
+import Footer from './components/footer/Footer';
 
 const App = () => {
   return (
     <>
-      <header>
-        <Nav />
-      </header>
+      <Header />
       <Switch>
         <Route exact path="/" component={Main} />
         <Route path="/dress" component={Dress} />
@@ -39,9 +36,7 @@ const App = () => {
         <Route exact path="/profile" component={Profile} />
         <Route component={NotFound} />
       </Switch>
-      <footer>
-        <div>footer</div>
-      </footer>
+      <Footer />
     </>
   );
 };
