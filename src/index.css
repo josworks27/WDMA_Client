@@ -28,7 +28,7 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	padding: 55px 0px 55px 0px;
+	padding: 55px 0px 50px 0px;
 	background-color: rgb(20, 20, 20);
 	color:white;
 	line-height: 1;

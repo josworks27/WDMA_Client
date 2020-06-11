@@ -1,38 +1,120 @@
 import React from 'react';
 import Cookies from 'js-cookie';
-import { Link } from 'react-router-dom';
+import Fade from 'react-reveal/Fade';
+import styled from 'styled-components';
+
+const StyledMain = styled.main`
+  background-image: url('https://images.unsplash.com/photo-1544078751-58fee2d8a03b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80');
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Container = styled.div`
+  background-color: rgb(20, 20, 20, 0.9);
+  width: 70%;
+  height: 80%;
+  margin-bottom: 100px;
+  padding: 50px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 70px;
+  h1 {
+    color: ${(props) => props.theme.mainColor};
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+  p {
+    font-size: 1rem;
+    line-height: 1.4;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+`;
+
+const MainLink = styled.div`
+  width: 50%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Button = styled.button`
+  cursor: pointer;
+  width: 40%;
+  height: 40px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: ${(props) =>
+    props.start ? props.theme.thirdColor : props.theme.subColor};
+  border: 2px solid
+    ${(props) => (props.start ? props.theme.thirdColor : props.theme.subColor)};
+  border-radius: 10px;
+  background-color: Transparent;
+  outline: none;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: ease 0.5s;
+  &:hover {
+    border: 2px solid
+      ${(props) =>
+        props.start ? props.theme.subColor : props.theme.thirdColor};
+    color: ${(props) =>
+      props.start ? props.theme.subColor : props.theme.thirdColor};
+  }
+`;
 
 const Main = () => {
   let token = Cookies.get('token');
 
   return (
-    <main>
-      <div className="container">
-        <section className="main-about">
-          <h1>About ANJERI</h1>
-          <p className="about__content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-            mollis, dui eu porttitor ornare, elit diam placerat neque, nec
-            bibendum elit dolor nec dolor. Nunc in porttitor lorem. Suspendisse
-            luctus augue magna, vitae cursus leo ullamcorper id. Quisque quis
-            ullamcorper lectus. Cras a semper ante, vel iaculis ipsum. Ut sit
-            amet nulla ac mi dapibus maximus sit amet a diam. Quisque sit amet
-            tristique erat.
-          </p>
-        </section>
-        <div className="main-link">
+    <StyledMain>
+      <Container>
+        <Section>
+          <Fade bottom>
+            <h1>About ANJERI</h1>
+            <p>
+              ウェディングドレスは結婚式のための「ドレスというだけではなく一生の思い出に残る人生最高の一着として
+              花嫁らしさがあふれるデザインと最上の手仕事で彩りたいその想いをかたちにしたのがアンジェリのウェディングドレスです。
+            </p>
+            <p>
+              デザイナー森田圭伊子が全デザインを手がけるサロンには、毎年新作発表するレンタルドレスからオーダードレスまでを幅広く品ぞろえ。
+              デザイナーの美意識が細部にまでいかされたドレスは来ているほうが心地いいといわれるほどの着ごこちを約束します。
+            </p>
+            <p>
+              ヘア＆メイクからビューティー、アクセサリーまですべて特別なアンジェリメイドでトータルコーディネート。
+              ここにしかないスタイルが、花嫁を誰よりもまばゆく輝かせます。
+            </p>
+          </Fade>
+        </Section>
+        <MainLink>
           {token ? (
-            <button type="button">
-              <Link to="/dress">START</Link>
-            </button>
+            <Button start as="a" href="/dress">
+              START
+            </Button>
           ) : (
-            <button type="button">
-              <Link to="/signin">Sign In</Link>
-            </button>
+            <Button as="a" href="/signin">
+              SIGNIN
+            </Button>
           )}
-        </div>
-      </div>
-    </main>
+        </MainLink>
+      </Container>
+    </StyledMain>
   );
 };
 

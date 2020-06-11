@@ -3,13 +3,13 @@ import styled from 'styled-components';
 
 const StyledFooter = styled.footer`
   z-index: 10;
-  background-color: rgba(20, 20, 20);
-  border-top: 1px solid white;
+  background-color: ${(props) => props.theme.bgColor};
+  border-top: 1px dotted white;
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 50px;
+  height: 30px;
 `;
 
 const Container = styled.div`
@@ -20,14 +20,14 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     width: 50%;
-    height: 40px;
+    height: 20px;
+    font-size: 0.8rem;
     p {
-      font-size: 0.8rem;
       color: white;
     }
   }
   div:first-child {
-    color: ${(props) => props.theme.subColor};
+    color: ${(props) => props.theme.thirdColor};
     span {
       margin-right: 10px;
     }
@@ -40,7 +40,7 @@ const Footer = () => {
       <Container>
         <div>
           <span>Address</span>
-          <p>Basyamichi, Minatomirai-ku, Yokohama-si, Kanagawa-ken, Japan</p>
+          <p>74-1 Yamashitachō, Naka-ku, Yokohama, Kanagawa, Japan</p>
         </div>
         <div>
           <p>Copyright © ANJERY Corp. All rights reserved.</p>
