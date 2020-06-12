@@ -4,58 +4,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { SIGN_IN_REQUEST, USER_RESET } from '../../store/modules/user/user';
-
-const Container = styled.div`
-  // border: 1px solid red;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  height: 500px;
-  margin-bottom: 100px;
-  padding: 20px 0;
-`;
-
-const InputForm = styled.form`
-  border: 1px solid ${(props) => props.theme.mainColor};
-  width: 50%;
-  height: 70%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-bottom: 20px;
-  div:last-child {
-    margin-top: 20px;
-  }
-`;
-
-const FormGroup = styled.div`
-  display: flex;
-  justify-content: center;
-  height: 50px;
-  margin-bottom: 10px;
-  input {
-    border: none;
-    width: 60%;
-    padding: 20px;
-    font-size: 1.2rem;
-  }
-`;
-
-const Button = styled.button`
-  border: none;
-  cursor: pointer;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: white;
-  text-transform: uppercase;
-  width: 40%;
-  background-color: ${(props) => props.theme.subColor};
-  outline: none;
-`;
+import { Container, FormGroup, Button, InputForm } from '../../lib/extends';
 
 const LinkWrapper = styled.div`
-  // border: 1px solid lime;
   width: 50%;
   height: 10%;
   display: flex;

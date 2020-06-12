@@ -1,11 +1,12 @@
 import React from 'react';
 import ValidationAuth from '../../components/validation/ValidationAuth';
+import { StyledMain } from '../../lib/extends';
 
 const validation = () => {
   return (
-    <main>
+    <StyledMain>
       <ValidationAuth />
-    </main>
+    </StyledMain>
   );
 };
 

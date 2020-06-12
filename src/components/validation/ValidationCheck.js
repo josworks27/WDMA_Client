@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import useOnlyNumber from '../../util/hooks/useOnlyNumber';
 import { MAIL_CHECK_REQUEST } from '../../store/modules/user/user';
+import { Container, FormGroup, Button, InputForm, H1 } from '../../lib/extends';
 
 const ValidationCheck = () => {
   const dispatch = useDispatch();
@@ -34,10 +35,12 @@ const ValidationCheck = () => {
       {checked ? (
         <Redirect to="/signup" />
       ) : (
-        <div className="container">
-          <h1>Please input the number you received</h1>
-          <form className="valid-check-form" onSubmit={handleSubmit}>
-            <div className="valid-check-form__group">
+        <Container>
+          <InputForm onSubmit={handleSubmit}>
+            <H1>
+              Please input the <span>number</span> you received
+            </H1>
+            <FormGroup>
               <input
                 type="text"
                 name="auth"
@@ -46,11 +49,10 @@ const ValidationCheck = () => {
                 onChange={handleChange}
                 required
               />
-            </div>
-            <button type="submit">OK</button>
-          </form>
-          <div />
-        </div>
+            </FormGroup>
+            <Button type="submit">OK</Button>
+          </InputForm>
+        </Container>
       )}
     </>
   );

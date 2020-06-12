@@ -1,7 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 import StoreList from './StoreList';
 import { SIGN_UP_REQUEST, USER_RESET } from '../../store/modules/user/user';
+import { Container, InputForm, FormGroup, Button } from '../../lib/extends';
+
+const SignupContainer = styled(Container)`
+  height: 800px;
+`;
+
+const SignupInputForm = styled(InputForm)`
+  div:nth-child(3) {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    input {
+      height: 20px;
+      margin-bottom: 10px;
+    }
+  }
+`;
+
+const SignupFormGroup = styled(FormGroup)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  span {
+    margin-bottom: 10px;
+  }
+`;
 
 const SignupInput = ({ history }) => {
   const [userInfo, setUserInfo] = useState({
@@ -69,22 +99,22 @@ const SignupInput = ({ history }) => {
   };
 
   return (
-    <div className="container">
-      <form className="signup-form" onSubmit={handleSubmit}>
-        <div className="signup-form__group">
+    <SignupContainer>
+      <SignupInputForm onSubmit={handleSubmit}>
+        <FormGroup>
           <input
             type="text"
             name="name"
-            placeholder="Name"
+            placeholder="name"
             onChange={handleChange}
             value={userInfo.name}
             required
           />
-        </div>
-        <div className="signup-form__group">
+        </FormGroup>
+        <FormGroup>
           <input type="text" name="email" value={email} readOnly />
-        </div>
-        <div className="signup-form__group">
+        </FormGroup>
+        <FormGroup>
           <input
             type="password"
             name="password1"
@@ -96,20 +126,26 @@ const SignupInput = ({ history }) => {
           <input
             type="password"
             name="password2"
-            placeholder="repeat password"
+            placeholder="again password"
             onChange={handleChange}
             value={userInfo.password2}
             required
           />
-        </div>
-        <div className="signup-form__group">
+        </FormGroup>
+        <SignupFormGroup>
+          <span>
+            Shop Name
+            <span role="img" aria-label="point">
+              👇
+            </span>
+          </span>
           <StoreList
             stores={store}
             onChange={handleChange}
             belongStore={userInfo.store}
           />
-        </div>
-        <div className="signup-form__group">
+        </SignupFormGroup>
+        <SignupFormGroup>
           <span>Are you manager?</span>
           <input
             name="manager"
@@ -117,10 +153,10 @@ const SignupInput = ({ history }) => {
             checked={userInfo.manager}
             onChange={handleChange}
           />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+        </SignupFormGroup>
+        <Button type="submit">Submit</Button>
+      </SignupInputForm>
+    </SignupContainer>
   );
 };
 

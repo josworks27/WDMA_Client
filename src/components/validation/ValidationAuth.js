@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
 import ValidationCheck from './ValidationCheck';
 import { MAIL_AUTH_REQUEST } from '../../store/modules/user/user';
+
+import { Container, FormGroup, Button, InputForm, H1 } from '../../lib/extends';
 
 const ValidationAuth = () => {
   const [userInputEmail, setUserInputEmail] = useState('');
@@ -40,23 +41,24 @@ const ValidationAuth = () => {
       {email ? (
         <ValidationCheck />
       ) : (
-        <div className="container">
-          <h1>Please input your Email address</h1>
-          <form className="valid-auth-form" onSubmit={handleSubmit}>
-            <div className="valid-auth-form__group">
+        <Container>
+          <InputForm onSubmit={handleSubmit}>
+            <H1>
+              Please input your <span>Email</span> address
+            </H1>
+            <FormGroup>
               <input
                 type="text"
                 name="email"
-                placeholder="Email address"
+                placeholder="email"
                 value={userInputEmail}
                 onChange={handleChange}
                 required
               />
-            </div>
-            <button type="submit">Send</button>
-          </form>
-          <div />
-        </div>
+            </FormGroup>
+            <Button type="submit">Send</Button>
+          </InputForm>
+        </Container>
       )}
     </>
   );
