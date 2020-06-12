@@ -18,10 +18,11 @@ const Container = styled.div`
   width: 70%;
   height: 80%;
   margin-bottom: 100px;
-  padding: 50px 20px;
+  padding: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 20px;
 `;
 
 const Section = styled.section`
@@ -37,7 +38,7 @@ const Section = styled.section`
     margin-bottom: 30px;
   }
   p {
-    font-size: 1rem;
+    font-size: 1.2rem;
     line-height: 1.4;
     text-align: center;
     margin-bottom: 20px;
@@ -46,7 +47,7 @@ const Section = styled.section`
 
 const MainLink = styled.div`
   width: 50%;
-  height: 80px;
+  // height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,14 +55,12 @@ const MainLink = styled.div`
 
 const Button = styled.button`
   cursor: pointer;
-  width: 40%;
-  height: 40px;
-  font-size: 1rem;
+  width: 60%;
+  height: 60px;
+  font-size: 1.5rem;
   font-weight: bold;
-  color: ${(props) =>
-    props.start ? props.theme.thirdColor : props.theme.subColor};
-  border: 2px solid
-    ${(props) => (props.start ? props.theme.thirdColor : props.theme.subColor)};
+  color: ${(props) => props.color};
+  border: 2px solid ${(props) => props.color};
   border-radius: 10px;
   background-color: Transparent;
   outline: none;
@@ -69,7 +68,7 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: ease 0.5s;
+  transition: ease 0.3s;
   &:hover {
     border: 2px solid
       ${(props) =>
@@ -104,11 +103,11 @@ const Main = () => {
         </Section>
         <MainLink>
           {token ? (
-            <Button start as="a" href="/dress">
+            <Button color="white" start as="a" href="/dress">
               START
             </Button>
           ) : (
-            <Button as="a" href="/signin">
+            <Button color="white" as="a" href="/signin">
               SIGNIN
             </Button>
           )}
