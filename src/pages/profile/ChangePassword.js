@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import ChangePasswordInput from '../../components/profile/ChangePasswordInput';
+import { StyledMain } from '../../lib/extends';
 
 const ChangePassword = ({ history }) => {
   let token = Cookies.get('token');
@@ -9,9 +10,9 @@ const ChangePassword = ({ history }) => {
   if (!token) return <Redirect to="/signin" />;
 
   return (
-    <main>
-      <ChangePasswordInput history={history} />;
-    </main>
+    <StyledMain>
+      <ChangePasswordInput history={history} />
+    </StyledMain>
   );
 };
 

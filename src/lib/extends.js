@@ -56,6 +56,7 @@ export const Button = styled.button`
   text-transform: uppercase;
   height: 50px;
   width: 40%;
+  max-width: 150px;
   background-color: ${(props) => props.theme.subColor};
   outline: none;
 `;

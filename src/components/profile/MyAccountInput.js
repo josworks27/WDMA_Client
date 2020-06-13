@@ -1,13 +1,41 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
-
+import styled from 'styled-components';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import StoreList from '../signup/StoreList';
 import {
   PUT_USER_REQUEST,
   DELETE_USER_REQUEST,
 } from '../../store/modules/user/user';
+import { Container, FormGroup, InputForm, H1, Button } from '../../lib/extends';
+
+const MyAccountContainer = styled(Container)`
+  height: ${(props) => props.height};
+`;
+
+const MyAccountFormGroup = styled(FormGroup)`
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  margin-bottom: 30px;
+  label {
+    margin-bottom: 10px;
+  }
+  span {
+    margin-bottom: 10px;
+  }
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  button {
+    margin: 0 10px;
+  }
+`;
 
 const MyAccountInput = ({ me, history }) => {
   const [toggle, setToggle] = useState(true);
@@ -58,14 +86,30 @@ const MyAccountInput = ({ me, history }) => {
       event.preventDefault();
       setToggle(false);
     } else {
-      dispatch({ type: DELETE_USER_REQUEST });
+      confirmAlert({
+        title: 'Confirm to Delete',
+        message: 'Are you sure to do this?',
+        buttons: [
+          {
+            label: 'Yes',
+            onClick: () => {
+              dispatch({ type: DELETE_USER_REQUEST });
+            },
+          },
+          {
+            label: 'No',
+            onClick: () => {
+              console.log('did not confirm');
+            },
+          },
+        ],
+      });
     }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // ! 디스패치 하기
     dispatch({
       type: PUT_USER_REQUEST,
       data: {
@@ -90,41 +134,44 @@ const MyAccountInput = ({ me, history }) => {
   return (
     <>
       {toggle ? (
-        <div className="container">
-          <div className="my-account">
-            <div className="my-account__group">
+        <MyAccountContainer height="600px">
+          <H1>
+            My <span>Personal</span> information
+          </H1>
+          <InputForm>
+            <MyAccountFormGroup>
               <label>Account E-mail</label>
               <input type="text" value={me.email} readOnly />
-            </div>
-            <div className="my-account__group">
+            </MyAccountFormGroup>
+            <MyAccountFormGroup>
               <label>Name</label>
               <input type="text" value={me.name} readOnly />
-            </div>
-            <div className="my-account__group">
+            </MyAccountFormGroup>
+            <MyAccountFormGroup>
               <label>Store Name</label>
               <input type="text" value={me['store.name']} readOnly />
-            </div>
-          </div>
-          <div className="my-account-buttons">
-            <button type="button" name="edit-account" onClick={handleClick}>
+            </MyAccountFormGroup>
+          </InputForm>
+          <ButtonGroup>
+            <Button type="button" name="edit-account" onClick={handleClick}>
               Edit Account
-            </button>
-            <button type="button" name="resign" onClick={handleClick}>
+            </Button>
+            <Button type="button" name="resign" onClick={handleClick}>
               Resign membership
-            </button>
-            <button type="button">
-              <Link to="/profile">Back</Link>
-            </button>
-          </div>
-        </div>
+            </Button>
+          </ButtonGroup>
+        </MyAccountContainer>
       ) : (
-        <div className="container">
-          <form className="edit-account-form" onSubmit={handleSubmit}>
-            <div className="edit-account-form__group">
-              <label>Account E-mail</label>
+        <MyAccountContainer height="600px">
+          <H1>
+            <span>Edit</span> my personal information
+          </H1>
+          <InputForm onSubmit={handleSubmit}>
+            <MyAccountFormGroup>
+              <label>Account E-mail (Disable)</label>
               <input type="text" name="email" value={me.email} readOnly />
-            </div>
-            <div className="edit-account-form__group">
+            </MyAccountFormGroup>
+            <MyAccountFormGroup>
               <label>Name</label>
               <input
                 type="text"
@@ -132,31 +179,33 @@ const MyAccountInput = ({ me, history }) => {
                 value={editAccount.name}
                 onChange={handleChange}
               />
-            </div>
-            <div className="edit-account-form__group">
-              <label>Store Name</label>
+            </MyAccountFormGroup>
+            <MyAccountFormGroup>
+              <span>
+                Shop Name
+                <span role="img" aria-label="point">
+                  👇
+                </span>
+              </span>
               <StoreList
                 onChange={handleChange}
                 belongStore={editAccount.store}
               />
-            </div>
-            <div className="edit-account-form__group">
-              <label>Manager</label>
+            </MyAccountFormGroup>
+            <MyAccountFormGroup>
+              <span>Are you manager?</span>
               <input
                 name="manager"
                 type="checkbox"
                 checked={editAccount.manager}
                 onChange={handleChange}
               />
-            </div>
-            <button type="submit">Edit</button>
-          </form>
-          <div className="edit-account-button">
-            <button type="button">
-              <Link to="/profile">Back</Link>
-            </button>
-          </div>
-        </div>
+            </MyAccountFormGroup>
+            <ButtonGroup>
+              <Button type="submit">Edit</Button>
+            </ButtonGroup>
+          </InputForm>
+        </MyAccountContainer>
       )}
     </>
   );

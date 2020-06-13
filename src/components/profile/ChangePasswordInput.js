@@ -1,7 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 import { PUT_PASSWORD_REQUEST } from '../../store/modules/user/user';
+import { Container, H1, Button, InputForm, FormGroup } from '../../lib/extends';
+
+const ChangePasswordContainer = styled(Container)`
+  height: 650px;
+`;
+
+const ChangePasswordFormGroup = styled(FormGroup)`
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  margin-bottom: 30px;
+  label {
+    margin-bottom: 10px;
+  }
+  span {
+    margin-bottom: 10px;
+  }
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  button {
+    margin: 0 10px;
+  }
+`;
 
 const ChangePasswordInput = ({ history }) => {
   const [password, setPassword] = useState({
@@ -43,7 +70,6 @@ const ChangePasswordInput = ({ history }) => {
       });
       alert('Please Check the password');
     } else {
-      // dispatch
       dispatch({
         type: PUT_PASSWORD_REQUEST,
         data: {
@@ -64,9 +90,12 @@ const ChangePasswordInput = ({ history }) => {
   };
 
   return (
-    <div className="container">
-      <form className="change-password-form" onSubmit={handleSubmit}>
-        <div className="change-password-form__group">
+    <ChangePasswordContainer>
+      <H1>
+        <span>Edit</span> my password
+      </H1>
+      <InputForm onSubmit={handleSubmit}>
+        <ChangePasswordFormGroup>
           <label>Current Password</label>
           <input
             type="password"
@@ -76,8 +105,8 @@ const ChangePasswordInput = ({ history }) => {
             onChange={handleChange}
             required
           />
-        </div>
-        <div className="change-password-form__group">
+        </ChangePasswordFormGroup>
+        <ChangePasswordFormGroup>
           <label>New Password</label>
           <input
             type="password"
@@ -87,8 +116,8 @@ const ChangePasswordInput = ({ history }) => {
             onChange={handleChange}
             required
           />
-        </div>
-        <div className="change-password-form__group">
+        </ChangePasswordFormGroup>
+        <ChangePasswordFormGroup>
           <label>Check Password</label>
           <input
             type="password"
@@ -98,15 +127,12 @@ const ChangePasswordInput = ({ history }) => {
             onChange={handleChange}
             required
           />
-        </div>
-        <button type="submit">Change</button>
-      </form>
-      <div className="change-password-button">
-        <button type="button">
-          <Link to="/profile">Back</Link>
-        </button>
-      </div>
-    </div>
+        </ChangePasswordFormGroup>
+        <ButtonGroup>
+          <Button type="submit">Change</Button>
+        </ButtonGroup>
+      </InputForm>
+    </ChangePasswordContainer>
   );
 };
 
