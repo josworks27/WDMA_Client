@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Nav from '../nav/Nav';
 
 const StyledHeader = styled.header`
-  z-index: 10;
+  z-index: 1000;
   background-color: ${(props) => props.theme.bgColor};
   padding: 0 20px;
   position: fixed;
