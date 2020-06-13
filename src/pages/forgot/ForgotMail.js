@@ -1,11 +1,12 @@
 import React from 'react';
 import ForgotMailInput from '../../components/forgot/ForgotMailInput';
+import { StyledMain } from '../../lib/extends';
 
 const ForgotMail = ({ history }) => {
   return (
-    <main>
+    <StyledMain>
       <ForgotMailInput history={history} />
-    </main>
+    </StyledMain>
   );
 };
 

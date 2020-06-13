@@ -1,11 +1,12 @@
 import React from 'react';
 import ForgotPasswordInput from '../../components/forgot/ForgotPasswordInput';
+import { StyledMain } from '../../lib/extends';
 
 const ForgotPassword = ({ history }) => {
   return (
-    <main>
+    <StyledMain>
       <ForgotPasswordInput history={history} />
-    </main>
+    </StyledMain>
   );
 };
 

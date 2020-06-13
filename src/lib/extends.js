@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledMain = styled.main`
+  // border: 1px solid red;
   height: 100vh;
   width: 100%;
   display: flex;
@@ -9,6 +10,7 @@ export const StyledMain = styled.main`
 `;
 
 export const Container = styled.div`
+  // border: 1px solid red;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,7 +22,7 @@ export const Container = styled.div`
 `;
 
 export const InputForm = styled.form`
-  border: 1px solid ${(props) => props.theme.mainColor};
+  // border: 1px solid ${(props) => props.theme.mainColor};
   width: 50%;
   height: 70%;
   display: flex;
@@ -59,7 +61,6 @@ export const Button = styled.button`
 `;
 
 export const H1 = styled.h1`
-  // border: 1px solid red;
   width: 80%;
   height: 40px;
   margin-bottom: 20px;
@@ -70,4 +71,21 @@ export const H1 = styled.h1`
     text-transform: uppercase;
     font-weight: bold;
   }
+`;
+
+export const Section = styled.section`
+  // border: 1px solid red;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+`;
+
+export const ButtonTitle = styled.div`
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: ${(props) => props.theme.subColor};
 `;

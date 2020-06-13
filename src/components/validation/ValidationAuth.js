@@ -44,7 +44,7 @@ const ValidationAuth = () => {
         <Container>
           <InputForm onSubmit={handleSubmit}>
             <H1>
-              Please input your <span>Email</span> address
+              Please <span>input</span> your Email address
             </H1>
             <FormGroup>
               <input

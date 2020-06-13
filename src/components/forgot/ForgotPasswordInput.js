@@ -4,10 +4,10 @@ import {
   FORGOT_PASSWORD_REQUEST,
   FORGOT_RESET,
 } from '../../store/modules/forgot/forgot';
+import { Container, InputForm, FormGroup, Button, H1 } from '../../lib/extends';
 
 const ForgotPasswordInput = ({ history }) => {
   const [email, setEmail] = useState('');
-  const [display, setDisplay] = useState({ display: 'none' });
   const dispatch = useDispatch();
   const { changed, findPasswordError } = useSelector(
     (state) => state.forgotReducer,
@@ -17,13 +17,11 @@ const ForgotPasswordInput = ({ history }) => {
     if (changed) {
       alert(`Sent to ${email}`);
 
-      setDisplay({
-        display: 'block',
-      });
-
       dispatch({
         type: FORGOT_RESET,
       });
+
+      history.push('/signin');
     }
 
     if (findPasswordError) {
@@ -32,7 +30,7 @@ const ForgotPasswordInput = ({ history }) => {
         type: FORGOT_RESET,
       });
     }
-  }, [changed, findPasswordError, email, dispatch]);
+  }, [changed, findPasswordError, email, dispatch, history]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -49,15 +47,13 @@ const ForgotPasswordInput = ({ history }) => {
     setEmail(event.target.value);
   };
 
-  const handleClick = (event) => {
-    event.preventDefault();
-    history.push('/signin');
-  };
-
   return (
-    <div className="container">
-      <form className="forgot-password-form" onSubmit={handleSubmit}>
-        <div className="forgot-password-form__group">
+    <Container>
+      <InputForm onSubmit={handleSubmit}>
+        <H1>
+          Please <span>input</span> your Eamil address
+        </H1>
+        <FormGroup>
           <input
             type="email"
             name="email"
@@ -66,15 +62,12 @@ const ForgotPasswordInput = ({ history }) => {
             placeholder="email address"
             required
           />
-        </div>
-        <button type="submit">Reset</button>
-      </form>
-      <div className="forgot-password-button" style={display}>
-        <button type="button" onClick={handleClick}>
-          Back to Sign In
-        </button>
-      </div>
-    </div>
+        </FormGroup>
+        <FormGroup>
+          <Button type="submit">Reset</Button>
+        </FormGroup>
+      </InputForm>
+    </Container>
   );
 };
 

@@ -17,12 +17,12 @@ const LinkWrapper = styled.div`
     display: flex;
     justify-content: center;
     li {
-      flex-basis: 100px;
+      padding: 0 10px;
       text-align: center;
       a {
         text-decoration: none;
         color: white;
-        font-size: 1.2rem;
+        font-size: 1rem;
         text-transform: uppercase;
       }
     }
@@ -30,6 +30,21 @@ const LinkWrapper = styled.div`
       border-left: 1px solid white;
     }
   }
+`;
+
+const MainLink = styled(Link)`
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 7px;
+  font-weight: bold;
+  height: 30px;
+  background: linear-gradient(
+    to right,
+    ${(props) => props.theme.mainColor},
+    ${(props) => props.theme.thirdColor}
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 `;
 
 const SigninInput = ({ history }) => {
@@ -44,6 +59,7 @@ const SigninInput = ({ history }) => {
 
   useEffect(() => {
     if (me) {
+      dispatch({ type: USER_RESET });
       history.push('/');
     }
 
@@ -78,6 +94,7 @@ const SigninInput = ({ history }) => {
 
   return (
     <Container>
+      <MainLink to="/">anjeri</MainLink>
       <InputForm onSubmit={handleSubmit}>
         <FormGroup>
           <input
@@ -102,17 +119,17 @@ const SigninInput = ({ history }) => {
         <FormGroup>
           <Button type="submit">Signin</Button>
         </FormGroup>
+        <LinkWrapper>
+          <ul>
+            <li>
+              <Link to="/validation">Signup</Link>
+            </li>
+            <li>
+              <Link to="/forgot">Forgot</Link>
+            </li>
+          </ul>
+        </LinkWrapper>
       </InputForm>
-      <LinkWrapper>
-        <ul>
-          <li>
-            <Link to="/validation">Signup</Link>
-          </li>
-          <li>
-            <Link to="/forgot">Forgot</Link>
-          </li>
-        </ul>
-      </LinkWrapper>
     </Container>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 import {
   FORGOT_STORE_REQUEST,
   FORGOT_MAIL_REQUEST,
@@ -7,6 +8,17 @@ import {
 } from '../../store/modules/forgot/forgot';
 import StoreList from '../signup/StoreList';
 import ForgotMailCheck from './ForgotMailCheck';
+import { Container, InputForm, FormGroup, Button, H1 } from '../../lib/extends';
+
+const ForgotMailFormGroup = styled(FormGroup)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  span {
+    margin-bottom: 10px;
+  }
+`;
 
 const ForgotMailInput = ({ history }) => {
   const [userInfo, setUserInfo] = useState({
@@ -64,9 +76,12 @@ const ForgotMailInput = ({ history }) => {
       {user.length > 0 ? (
         <ForgotMailCheck history={history} user={user} />
       ) : (
-        <div className="container">
-          <form className="forgot-mail-form" onSubmit={handleSubmit}>
-            <div className="forgot-mail-form__group">
+        <Container>
+          <InputForm onSubmit={handleSubmit}>
+            <H1>
+              Please <span>input</span> your personal infomation
+            </H1>
+            <FormGroup>
               <input
                 type="text"
                 name="name"
@@ -75,13 +90,19 @@ const ForgotMailInput = ({ history }) => {
                 placeholder="name"
                 required
               />
-            </div>
-            <div className="forgot-mail-form__group">
+            </FormGroup>
+            <ForgotMailFormGroup>
+              <span>
+                Shop Name
+                <span role="img" aria-label="point">
+                  👇
+                </span>
+              </span>
               <StoreList onChange={handleChange} value={userInfo.store} />
-            </div>
-            <button type="submit">Find</button>
-          </form>
-        </div>
+            </ForgotMailFormGroup>
+            <Button type="submit">Find</Button>
+          </InputForm>
+        </Container>
       )}
     </>
   );

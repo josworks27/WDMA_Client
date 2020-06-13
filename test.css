@@ -1,3 +1,5 @@
-main:last-child {
-border: none;
+main:nth-child() {
+    text-decoration: none;
+    transform: translate(10, 10);
+    transition: ease-in-out;
 }

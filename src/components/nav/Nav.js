@@ -29,10 +29,6 @@ const StyledLink = styled(Link)`
   text-transform: uppercase;
   font-size: 0.9rem;
   color: white;
-  :hover {
-    color: #ff4757;
-    transition: linear 0.3s;
-  }
 `;
 
 const MainLink = styled(StyledLink)`

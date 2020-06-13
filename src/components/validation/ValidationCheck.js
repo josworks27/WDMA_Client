@@ -38,7 +38,7 @@ const ValidationCheck = () => {
         <Container>
           <InputForm onSubmit={handleSubmit}>
             <H1>
-              Please input the <span>number</span> you received
+              Please <span>input</span> the number you received
             </H1>
             <FormGroup>
               <input

@@ -103,7 +103,7 @@ const Main = () => {
         </Section>
         <MainLink>
           {token ? (
-            <Button color="white" start as="a" href="/dress">
+            <Button color="white" start="true" as="a" href="/dress">
               START
             </Button>
           ) : (
