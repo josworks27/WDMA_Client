@@ -2,9 +2,22 @@ import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
-
+import styled from 'styled-components';
 import SearchDressInput from '../../components/search/SearchDressInput';
 import sampleImg from '../../asset/sample.jpg';
+
+const SearchMain = styled.main`
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const SearchResult = styled.div`
+  // display: grid;
+  // grid-template-columns: repeat(auto-fill, 125px);
+`;
 
 const SearchDress = () => {
   let token = Cookies.get('token');
@@ -16,12 +29,10 @@ const SearchDress = () => {
   if (!token) return <Redirect to="/signin" />;
 
   return (
-    <main>
-      <div className="container">
-        <SearchDressInput />
-      </div>
+    <SearchMain>
+      <SearchDressInput />
       {searchResult.length ? (
-        <div className="search-result">
+        <SearchResult>
           <ul>
             {searchResult.map((dress) => {
               return (
@@ -38,10 +49,10 @@ const SearchDress = () => {
               );
             })}
           </ul>
-        </div>
+        </SearchResult>
       ) : null}
       {searchDreseError ? <div className="search-fail">No Result</div> : null}
-    </main>
+    </SearchMain>
   );
 };
 

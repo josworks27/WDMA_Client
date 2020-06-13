@@ -1,7 +1,59 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 import StoreList from '../signup/StoreList';
 import { POST_DRESS_REQUEST } from '../../store/modules/dress/dress';
+import { Container, H1, InputForm, FormGroup, Button } from '../../lib/extends';
+
+const AddDressContainer = styled(Container)`
+  height: 800px;
+`;
+
+const AddDressInputForm = styled(InputForm)`
+  div:nth-child(3) {
+    input {
+      margin-bottom: 5px;
+    }
+  }
+`;
+
+const AddDressFormGroup = styled(FormGroup)`
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  margin-bottom: 10px;
+  label {
+    margin-bottom: 10px;
+  }
+  span {
+    margin-bottom: 10px;
+  }
+  input {
+    height: 30px;
+  }
+`;
+
+const ImageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+  label {
+    margin-bottom: 10px;
+  }
+  input {
+    color: ${(props) => props.theme.thirdColor};
+  }
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  button {
+    margin: 0 10px;
+  }
+`;
 
 const AddDressInput = ({ history }) => {
   const [addDress, setAddDress] = useState({
@@ -18,7 +70,6 @@ const AddDressInput = ({ history }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // 드레스 리스트로 이동
     if (dressId) {
       history.push(`/dress/${dressId}`);
     }
@@ -45,7 +96,6 @@ const AddDressInput = ({ history }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // POST 요청할 폼데이터 작성
     let formData = new FormData();
     for (let i = 0; i < addDress.images.length; i += 1) {
       formData.append(`images`, addDress.images[i]);
@@ -58,7 +108,6 @@ const AddDressInput = ({ history }) => {
     formData.append('accessoryThree', addDress.accessoryThree);
     formData.append('store', addDress.store);
 
-    // 디스패치 하기
     dispatch({
       type: POST_DRESS_REQUEST,
       data: { formData },
@@ -66,9 +115,12 @@ const AddDressInput = ({ history }) => {
   };
 
   return (
-    <div className="container">
-      <form className="add-dress-form" onSubmit={handleSubmit}>
-        <div className="add-dress__group">
+    <AddDressContainer>
+      <H1>
+        Please <span>Input</span> a new dress
+      </H1>
+      <AddDressInputForm onSubmit={handleSubmit}>
+        <AddDressFormGroup>
           <label>Model</label>
           <input
             type="text"
@@ -78,8 +130,8 @@ const AddDressInput = ({ history }) => {
             onChange={handleChange}
             required
           />
-        </div>
-        <div className="add-dress__group">
+        </AddDressFormGroup>
+        <AddDressFormGroup>
           <label>Price</label>
           <input
             type="number"
@@ -89,8 +141,8 @@ const AddDressInput = ({ history }) => {
             onChange={handleChange}
             required
           />
-        </div>
-        <div className="add-dress__group">
+        </AddDressFormGroup>
+        <AddDressFormGroup>
           <label>Accessories</label>
           <input
             type="text"
@@ -113,23 +165,35 @@ const AddDressInput = ({ history }) => {
             value={addDress.accessoryThree}
             onChange={handleChange}
           />
-        </div>
-        <div className="add-dress__group">
-          <label>Store</label>
+        </AddDressFormGroup>
+        <AddDressFormGroup>
+          <span>
+            Select Shop
+            <span role="img" aria-label="point">
+              👇
+            </span>
+          </span>
           <StoreList belongStore={addDress.store} onChange={handleChange} />
-        </div>
-        <div className="add-dress__group">
-          <label>Image</label>
+        </AddDressFormGroup>
+        <ImageWrapper>
+          <label>
+            Select Image
+            <span role="img" aria-label="point">
+              👇
+            </span>
+          </label>
           <input
             type="file"
             name="images"
             multiple="multiple"
             onChange={handleSelect}
           />
-        </div>
-        <button type="submit">Add Dress</button>
-      </form>
-    </div>
+        </ImageWrapper>
+        <ButtonGroup>
+          <Button type="submit">Add Dress</Button>
+        </ButtonGroup>
+      </AddDressInputForm>
+    </AddDressContainer>
   );
 };
 

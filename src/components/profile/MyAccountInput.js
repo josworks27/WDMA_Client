@@ -182,7 +182,7 @@ const MyAccountInput = ({ me, history }) => {
             </MyAccountFormGroup>
             <MyAccountFormGroup>
               <span>
-                Shop Name
+                Select Shop
                 <span role="img" aria-label="point">
                   👇
                 </span>

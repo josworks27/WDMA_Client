@@ -33,6 +33,7 @@ export const InputForm = styled.form`
 `;
 
 export const FormGroup = styled.div`
+  // border: 1px solid red;
   display: flex;
   justify-content: center;
   width: 100%;

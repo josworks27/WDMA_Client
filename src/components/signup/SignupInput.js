@@ -134,7 +134,7 @@ const SignupInput = ({ history }) => {
         </FormGroup>
         <SignupFormGroup>
           <span>
-            Shop Name
+            Select Shop
             <span role="img" aria-label="point">
               👇
             </span>
