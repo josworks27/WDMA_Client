@@ -3,8 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
 import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css';
-
+import styled from 'styled-components';
 import DressDetailInfo from './DressDetailInfo';
 import DressDetailEvent from './DressDetailEvent';
 import AddEventModal from './AddEventModal';
@@ -14,6 +13,41 @@ import {
   POST_EVENT_REQUEST,
   DELETE_DRESS_REQUEST,
 } from '../../store/modules/dress/dress';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { Container, Button } from '../../lib/extends';
+
+const DetailMain = styled.main`
+  border: 1px solid red;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const DetailContainer = styled(Container)`
+  height: 650px;
+`;
+
+const DetailWrapper = styled.div`
+  border: 1px solid green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 100%;
+  margin-bottom: 20px;
+`;
+
+const ButtonWrapper = styled.div`
+  border: 1px solid green;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  button:nth-child(2) {
+    margin: 0 20px;
+  }
+`;
 
 const DressDetail = ({ match, history }) => {
   let token = Cookies.get('token');
@@ -172,48 +206,52 @@ const DressDetail = ({ match, history }) => {
       {!token ? (
         <Redirect to="/signin" />
       ) : (
-        <main>
-          <DressDetailInfo dress={dress} images={images} />
-          <DressDetailEvent events={events} />
-          <div className="dress-buttons">
-            <AddEventModal
-              showModal={showAddEventModal}
-              handleSaveModal={handleSaveModal}
-              handleCloseModal={handleCloseModal}
-              handleChange={handleChange}
-              addEvent={addEvent}
-              setAddEvent={setAddEvent}
-            />
-            <button
-              type="button"
-              name="add-event-button"
-              onClick={handleOpenModal}
-            >
-              Add event
-            </button>
-            <EditDressModal
-              match={match}
-              showModal={showEditDressModal}
-              setShowModal={setShowEditDressModal}
-              handleCloseModal={handleCloseModal}
-              dress={dress}
-            />
-            <button
-              type="button"
-              name="edit-dress-button"
-              onClick={handleOpenModal}
-            >
-              Edit dress
-            </button>
-            <button
-              type="button"
-              name="delete-dress-button"
-              onClick={handleDelete}
-            >
-              Delete dress
-            </button>
-          </div>
-        </main>
+        <DetailMain>
+          <DetailContainer>
+            <DetailWrapper>
+              <DressDetailInfo dress={dress} images={images} />
+              <DressDetailEvent events={events} />
+            </DetailWrapper>
+            <ButtonWrapper>
+              <AddEventModal
+                showModal={showAddEventModal}
+                handleSaveModal={handleSaveModal}
+                handleCloseModal={handleCloseModal}
+                handleChange={handleChange}
+                addEvent={addEvent}
+                setAddEvent={setAddEvent}
+              />
+              <Button
+                type="button"
+                name="add-event-button"
+                onClick={handleOpenModal}
+              >
+                Add event
+              </Button>
+              <EditDressModal
+                match={match}
+                showModal={showEditDressModal}
+                setShowModal={setShowEditDressModal}
+                handleCloseModal={handleCloseModal}
+                dress={dress}
+              />
+              <Button
+                type="button"
+                name="edit-dress-button"
+                onClick={handleOpenModal}
+              >
+                Edit dress
+              </Button>
+              <Button
+                type="button"
+                name="delete-dress-button"
+                onClick={handleDelete}
+              >
+                Delete dress
+              </Button>
+            </ButtonWrapper>
+          </DetailContainer>
+        </DetailMain>
       )}
     </>
   );

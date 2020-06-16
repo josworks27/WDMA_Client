@@ -4,7 +4,7 @@ import Fade from 'react-reveal/Fade';
 import styled from 'styled-components';
 
 const StyledMain = styled.main`
-  background-image: url('https://images.unsplash.com/photo-1544078751-58fee2d8a03b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80');
+  background-image: url('/images/bg.jpeg');
   background-size: cover;
   height: 100vh;
   width: 100%;

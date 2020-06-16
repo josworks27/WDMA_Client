@@ -29,6 +29,10 @@ const StyledLink = styled(Link)`
   text-transform: uppercase;
   font-size: 0.9rem;
   color: white;
+  transition: ease 0.3s;
+  &:hover {
+    color: ${(props) => props.theme.mainColor};
+  }
 `;
 
 const MainLink = styled(StyledLink)`

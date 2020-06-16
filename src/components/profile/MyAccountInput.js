@@ -15,6 +15,10 @@ const MyAccountContainer = styled(Container)`
   height: ${(props) => props.height};
 `;
 
+// const MyAccountInputForm = styled(InputForm)`
+
+// `;
+
 const MyAccountFormGroup = styled(FormGroup)`
   flex-direction: column;
   align-items: center;
@@ -162,7 +166,7 @@ const MyAccountInput = ({ me, history }) => {
           </ButtonGroup>
         </MyAccountContainer>
       ) : (
-        <MyAccountContainer height="600px">
+        <MyAccountContainer height="700px">
           <H1>
             <span>Edit</span> my personal information
           </H1>

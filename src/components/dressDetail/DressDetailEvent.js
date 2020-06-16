@@ -1,8 +1,17 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const DetailEventSection = styled.section`
+  border: 1px solid ${(props) => props.theme.mainColor};
+  width: 50%;
+  height: 450px;
+  height: 100%;
+  padding: 20px;
+`;
 
 const DressDetailInfo = ({ events }) => {
   return (
-    <section className="dress-event">
+    <DetailEventSection>
       <h1>Event List</h1>
       <div className="dress-event__list">
         <ul>
@@ -15,7 +24,7 @@ const DressDetailInfo = ({ events }) => {
           ))}
         </ul>
       </div>
-    </section>
+    </DetailEventSection>
   );
 };
 

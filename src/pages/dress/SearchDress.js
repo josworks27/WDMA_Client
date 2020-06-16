@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
 import styled from 'styled-components';
 import SearchDressInput from '../../components/search/SearchDressInput';
-import sampleImg from '../../asset/sample.jpg';
 
 const SearchMain = styled.main`
   height: 100vh;
@@ -15,8 +14,33 @@ const SearchMain = styled.main`
 `;
 
 const SearchResult = styled.div`
-  // display: grid;
-  // grid-template-columns: repeat(auto-fill, 125px);
+  ul {
+    li {
+      a {
+        text-decoration: none;
+        &:hover {
+          img {
+            opacity: 0.5;
+          }
+          div {
+            color: ${(props) => props.theme.subColor};
+          }
+        }
+      }
+      img {
+        width: auto;
+        height: auto;
+        max-width: 300px;
+        max-height: 300px;
+        margin-bottom: 10px;
+      }
+      div {
+        color: white;
+        text-align: center;
+        font-size: 1.5rem;
+      }
+    }
+  }
 `;
 
 const SearchDress = () => {
@@ -41,7 +65,7 @@ const SearchDress = () => {
                     {dress['images.filePath'] ? (
                       <img src={dress['images.filePath']} alt="img" />
                     ) : (
-                      <img src={sampleImg} alt="img" />
+                      <img src="/images/bg.jpeg" alt="search-dress" />
                     )}
                     <div>{dress.model}</div>
                   </Link>
