@@ -1,39 +1,65 @@
-import React from 'react';
-import Slider from 'react-slick';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+const SliderWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const Image = styled.img`
   width: auto;
   height: auto;
   max-width: 100%;
-  max-height: 300px;
+  max-height: 250px;
+  margin-bottom: 5px;
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  button {
+    margin: 0 5px;
+  }
 `;
 
 const ImageSlider = ({ images }) => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+  const [imageNum, setImageNum] = useState(0);
+
+  const handleClick = (event) => {
+    const { name } = event.target;
+    if (name === 'prev') {
+      if (imageNum === 0) {
+        setImageNum(images.length - 1);
+      } else {
+        setImageNum((data) => data - 1);
+      }
+    } else if (imageNum === images.length - 1) {
+      setImageNum(0);
+    } else {
+      setImageNum((data) => data + 1);
+    }
   };
+
   return (
-    <Slider {...settings}>
+    <>
       {images.length ? (
-        images.map((image) => {
-          return (
-            <div key={image.id}>
-              <Image src={image.filePath} alt="dress-image" />
-            </div>
-          );
-        })
+        <SliderWrapper>
+          <Image src={images[imageNum].filePath} alt="dress-image" />
+          {images.length > 1 ? (
+            <Buttons onClick={handleClick}>
+              <button type="button" name="prev">
+                Prev
+              </button>
+              <button type="button" name="next">
+                Next
+              </button>
+            </Buttons>
+          ) : null}
+        </SliderWrapper>
       ) : (
         <Image src="/images/bg.jpeg" alt="dress-image" />
       )}
-    </Slider>
+    </>
   );
 };
 

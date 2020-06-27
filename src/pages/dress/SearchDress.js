@@ -16,6 +16,12 @@ const SearchMain = styled.main`
 const SearchResult = styled.div`
   ul {
     li {
+      h1 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+      }
       a {
         text-decoration: none;
         &:hover {
@@ -43,6 +49,11 @@ const SearchResult = styled.div`
   }
 `;
 
+const SearchFail = styled.div`
+  font-size: 1.5rem;
+  font-weight: bold;
+`;
+
 const SearchDress = () => {
   let token = Cookies.get('token');
 
@@ -61,6 +72,7 @@ const SearchDress = () => {
             {searchResult.map((dress) => {
               return (
                 <li key={dress.id}>
+                  <h1>Search Result</h1>
                   <Link to={`/dress/${dress.id}`}>
                     {dress['images.filePath'] ? (
                       <img src={dress['images.filePath']} alt="img" />
@@ -75,7 +87,7 @@ const SearchDress = () => {
           </ul>
         </SearchResult>
       ) : null}
-      {searchDreseError ? <div className="search-fail">No Result</div> : null}
+      {searchDreseError ? <SearchFail>No Result</SearchFail> : null}
     </SearchMain>
   );
 };

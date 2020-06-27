@@ -19,9 +19,32 @@ const DetailInfoSection = styled.section`
 `;
 
 const Slider = styled.div`
+  border: 1px solid blue;
+  display: flex;
+  justify-content: center;
   width: 80%;
   margin-bottom: 30px;
   // height: 200px;
+`;
+
+const Contents = styled.div`
+  border: 1px solid blue;
+  width: 100%;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+const Section = styled.section`
+  border: 1px solid yellow;
+  width: 100%;
+`;
+const Article = styled.article`
+  width: 100%;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 `;
 
 const DressDetailInfo = ({ images, dress }) => {
@@ -31,28 +54,30 @@ const DressDetailInfo = ({ images, dress }) => {
       <Slider>
         <ImageSlider images={images} />
       </Slider>
-      <div className="dress-info__content">
-        <div className="wrapper">
-          <div className="content__model">
-            <span>Model</span>
+      <Contents>
+        <Section>
+          <Article>
+            <h1>Model</h1>
             <span>{dress.model}</span>
-          </div>
-          <div className="content__price">
-            <span>Price</span>
+          </Article>
+          <Article>
+            <h1>Price</h1>
             <span>{dress.price}</span>
-          </div>
-          <div className="content__store">
-            <span>Store</span>
+          </Article>
+          <Article>
+            <h1>Store</h1>
             <span>{dress['store.name']}</span>
-          </div>
-          <div className="content__accessory">
-            <span>Accessory</span>
+          </Article>
+        </Section>
+        <Section>
+          <Article>
+            <h1>Accessory</h1>
             <span>{dress.accessoryOne}</span>
             <span>{dress.accessoryTwo}</span>
             <span>{dress.accessoryThree}</span>
-          </div>
-        </div>
-      </div>
+          </Article>
+        </Section>
+      </Contents>
     </DetailInfoSection>
   );
 };
