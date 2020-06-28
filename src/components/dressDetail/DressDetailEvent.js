@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import MaterialTable from 'material-table';
 
 const DetailEventSection = styled.section`
   border: 1px solid ${(props) => props.theme.mainColor};
@@ -7,23 +8,40 @@ const DetailEventSection = styled.section`
   height: 450px;
   height: 100%;
   padding: 20px;
+  h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: center;
+  }
 `;
 
 const DressDetailInfo = ({ events }) => {
   return (
     <DetailEventSection>
       <h1>Event List</h1>
-      <div className="dress-event__list">
-        <ul>
-          {events.map((event) => (
-            <li key={event.id}>
-              {event.type === 'customerRent' || event.type === 'fitting'
-                ? `[${event.date}] [${event.type}] [${event['customer.name']} San] : ${event.details}`
-                : `[${event.date}] [${event.type}] : ${event.details}`}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <MaterialTable
+        title="Dress Event"
+        columns={[
+          { title: 'Date', field: 'date' },
+          { title: 'Type', field: 'type' },
+          { title: 'Detail', field: 'details' },
+          { title: 'Customer', field: 'customer.name' },
+        ]}
+        data={events}
+        options={{
+          search: false,
+          paging: false,
+          headerStyle: {
+            backgroundColor: '#ff4757',
+            color: 'white',
+          },
+          rowStyle: {
+            backgroundColor: 'rgb(20, 20, 20)',
+            color: 'white',
+          },
+        }}
+      />
     </DetailEventSection>
   );
 };

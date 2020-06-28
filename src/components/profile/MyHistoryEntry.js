@@ -3,13 +3,10 @@ import React from 'react';
 import MaterialTable from 'material-table';
 
 const MyHistoryEntry = ({ data }) => {
-  console.log(data);
-
   return (
     <MaterialTable
       title="My Event History"
       columns={[
-        // { title: 'ID', field: 'id', width: '10px' },
         { title: 'Date', field: 'date', type: 'date' },
         { title: 'Model', field: 'dress.model' },
         { title: 'Type', field: 'type' },

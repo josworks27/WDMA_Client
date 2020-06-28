@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ImageSlider from './ImageSlider';
 
 const DetailInfoSection = styled.section`
-  border: 1px solid ${(props) => props.theme.mainColor};
+  /* border: 1px solid ${(props) => props.theme.mainColor}; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,37 +14,51 @@ const DetailInfoSection = styled.section`
   h1 {
     font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 `;
 
 const Slider = styled.div`
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   display: flex;
   justify-content: center;
   width: 80%;
   margin-bottom: 30px;
-  // height: 200px;
+  button {
+    border-radius: 30px;
+    border: none;
+    &:focus {
+      outline: none;
+    }
+  }
 `;
 
 const Contents = styled.div`
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   width: 100%;
   padding: 0 30px;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: space-between;
 `;
 const Section = styled.section`
-  border: 1px solid yellow;
+  /* border: 1px solid yellow; */
   width: 100%;
+  article:first-child {
+    margin-bottom: 30px;
+  }
 `;
 const Article = styled.article`
+  /* border: 1px solid red; */
   width: 100%;
-  border: 1px solid red;
+  /* margin-bottom: 30px; */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
+  h1 {
+    color: ${(props) => props.theme.subColor};
+  }
 `;
 
 const DressDetailInfo = ({ images, dress }) => {
@@ -64,12 +78,12 @@ const DressDetailInfo = ({ images, dress }) => {
             <h1>Price</h1>
             <span>{dress.price}</span>
           </Article>
+        </Section>
+        <Section>
           <Article>
             <h1>Store</h1>
             <span>{dress['store.name']}</span>
           </Article>
-        </Section>
-        <Section>
           <Article>
             <h1>Accessory</h1>
             <span>{dress.accessoryOne}</span>

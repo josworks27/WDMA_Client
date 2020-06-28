@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledMain = styled.main`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   height: 100vh;
   width: 100%;
   display: flex;
@@ -10,7 +10,7 @@ export const StyledMain = styled.main`
 `;
 
 export const Container = styled.div`
-  // border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,7 +22,7 @@ export const Container = styled.div`
 `;
 
 export const InputForm = styled.form`
-  // border: 1px solid ${(props) => props.theme.mainColor};
+  /* border: 1px solid ${(props) => props.theme.mainColor}; */
   width: 50%;
   height: 70%;
   display: flex;
@@ -33,7 +33,7 @@ export const InputForm = styled.form`
 `;
 
 export const FormGroup = styled.div`
-  // border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   justify-content: center;
   width: 100%;
@@ -76,7 +76,7 @@ export const H1 = styled.h1`
 `;
 
 export const Section = styled.section`
-  // border: 1px solid red;
+  /* border: 1px solid red; */
   width: 80%;
   display: flex;
   justify-content: center;

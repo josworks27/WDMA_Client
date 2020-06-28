@@ -18,7 +18,6 @@ import { Container, Button } from '../../lib/extends';
 
 const DetailMain = styled.main`
   border: 1px solid red;
-
   display: flex;
   flex-direction: column;
   align-items: center;
