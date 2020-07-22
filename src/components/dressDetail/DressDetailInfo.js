@@ -8,7 +8,7 @@ const DetailInfoSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  width: 40%;
   height: 100%;
   padding: 20px;
   h1 {
@@ -35,8 +35,8 @@ const Slider = styled.div`
 
 const Contents = styled.div`
   /* border: 1px solid blue; */
-  width: 100%;
-  padding: 0 30px;
+  width: 80%;
+  /* padding: 0 30px; */
   display: flex;
   /* align-items: center; */
   justify-content: space-between;

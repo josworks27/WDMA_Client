@@ -73,9 +73,9 @@ const Nav = () => {
             <li>
               <StyledLink to="/dress/search">Search</StyledLink>
             </li>
-            <li>
+            {/* <li>
               <StyledLink to="/chat">Chat</StyledLink>
-            </li>
+            </li> */}
             <li>
               <StyledLink to="/dress/stats">Stats</StyledLink>
             </li>

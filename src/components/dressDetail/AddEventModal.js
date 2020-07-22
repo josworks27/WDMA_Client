@@ -1,14 +1,35 @@
 import React from 'react';
 import ReactModal from 'react-modal';
+import styled from 'styled-components';
 import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import ja from 'date-fns/locale/ja';
-
 import modalStyle from '../../lib/modalStyle';
 import 'react-datepicker/dist/react-datepicker.css';
 
 // Register React-datepicker
 registerLocale('ja', ja);
 setDefaultLocale('ja');
+
+const AddEventForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-right: 15px;
+  color: black;
+  label {
+    margin-right: 10px;
+  }
+  select,
+  input {
+    width: 100px;
+    margin-bottom: 10px;
+  }
+`;
+
+const AddEventFormButton = styled.form`
+  display: flex;
+  justify-content: center;
+`;
 
 const AddEventModal = ({
   showModal,
@@ -22,9 +43,9 @@ const AddEventModal = ({
     <ReactModal isOpen={showModal} style={modalStyle}>
       {addEvent.eventType === 'customerRent' ||
       addEvent.eventType === 'fitting' ? (
-        <form className="add-event-form">
+        <AddEventForm>
           <div className="add-event-form__group">
-            <label>Event type</label>
+            <label>Type</label>
             <select name="eventType" onChange={handleChange}>
               <option value="customerRent">Customer rent</option>
               <option value="fitting">Fitting</option>
@@ -56,7 +77,7 @@ const AddEventModal = ({
             />
           </div>
           <div className="add-event-form__group">
-            <label>Customer name</label>
+            <label>Name</label>
             <input
               type="text"
               name="customerName"
@@ -66,7 +87,7 @@ const AddEventModal = ({
             />
           </div>
           <div className="add-event-form__group">
-            <label>Customer Birthday</label>
+            <label>Birthday</label>
             <DatePicker
               selected={addEvent.customerBirth}
               onChange={(date) => {
@@ -79,15 +100,15 @@ const AddEventModal = ({
             />
           </div>
           <div className="add-event-form__group">
-            <label>Customer gender</label>
+            <label>Gender</label>
             <select name="customerGender" onChange={handleChange}>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
             </select>
           </div>
-        </form>
+        </AddEventForm>
       ) : (
-        <form className="add-event-form">
+        <AddEventForm>
           <div className="add-event-form__group">
             <label>Event type</label>
             <select name="eventType" onChange={handleChange}>
@@ -120,11 +141,11 @@ const AddEventModal = ({
               value={addEvent.details}
             />
           </div>
-        </form>
+        </AddEventForm>
       )}
-      <div className="input-form__buttons">
+      <AddEventFormButton>
         <button type="button" onClick={handleSaveModal}>
-          Save an event
+          Save
         </button>
         <button
           type="button"
@@ -133,7 +154,7 @@ const AddEventModal = ({
         >
           Close
         </button>
-      </div>
+      </AddEventFormButton>
     </ReactModal>
   );
 };

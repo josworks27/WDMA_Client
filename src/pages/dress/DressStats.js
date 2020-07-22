@@ -11,7 +11,7 @@ const DressStats = () => {
         <Redirect to="/signin" />
       ) : (
         <main>
-          <h1>Dress Stats</h1>
+          <h1>Creating Dress Stats...</h1>
         </main>
       )}
     </>

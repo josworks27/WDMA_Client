@@ -17,7 +17,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { Container, Button } from '../../lib/extends';
 
 const DetailMain = styled.main`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,7 +29,7 @@ const DetailContainer = styled(Container)`
 `;
 
 const DetailWrapper = styled.div`
-  border: 1px solid green;
+  /* border: 1px solid green; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,7 +39,7 @@ const DetailWrapper = styled.div`
 `;
 
 const ButtonWrapper = styled.div`
-  border: 1px solid green;
+  /* border: 1px solid green; */
   display: flex;
   justify-content: center;
   width: 100%;

@@ -1,10 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import ReactModal from 'react-modal';
 import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
 import StoreList from '../signup/StoreList';
-
 import modalStyle from '../../lib/modalStyle';
 import { PUT_DRESS_REQUEST } from '../../store/modules/dress/dress';
+
+const EditDressForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-right: 15px;
+  color: black;
+  label {
+    margin-right: 10px;
+  }
+  select,
+  input {
+    width: 100px;
+    margin-bottom: 10px;
+  }
+`;
+
+const EditDressFormButton = styled.form`
+  display: flex;
+  justify-content: center;
+`;
 
 const EditDressModal = ({
   match,
@@ -96,7 +117,7 @@ const EditDressModal = ({
 
   return (
     <ReactModal isOpen={showModal} style={modalStyle}>
-      <form className="edit-dress-form" onSubmit={handleSubmit}>
+      <EditDressForm onSubmit={handleSubmit}>
         <div className="edit-dress-form__group">
           <label>Model</label>
           <input
@@ -160,9 +181,9 @@ const EditDressModal = ({
             onChange={handleSelect}
           />
         </div>
+      </EditDressForm>
+      <EditDressFormButton>
         <button type="submit">Edit Dress</button>
-      </form>
-      <div className="input-form__buttons">
         <button
           type="button"
           name="close-edit-dress-modal"
@@ -170,7 +191,7 @@ const EditDressModal = ({
         >
           Close
         </button>
-      </div>
+      </EditDressFormButton>
     </ReactModal>
   );
 };
