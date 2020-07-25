@@ -1,37 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
 import StoreList from './StoreList';
 import { SIGN_UP_REQUEST, USER_RESET } from '../../store/modules/user/user';
-import { Container, InputForm, FormGroup, Button } from '../../lib/extends';
-
-const SignupContainer = styled(Container)`
-  height: 800px;
-`;
-
-const SignupInputForm = styled(InputForm)`
-  div:nth-child(3) {
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    input {
-      height: 20px;
-      margin-bottom: 10px;
-    }
-  }
-`;
-
-const SignupFormGroup = styled(FormGroup)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 30%;
-  span {
-    margin-bottom: 10px;
-  }
-`;
+import { FormGroup, Button } from '../../lib/extends';
+import {
+  SignupContainer,
+  SignupInputForm,
+  SignupFormGroup,
+} from './signupStyles';
 
 const SignupInput = ({ history }) => {
   const [userInfo, setUserInfo] = useState({

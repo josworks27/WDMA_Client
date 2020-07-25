@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
 import { confirmAlert } from 'react-confirm-alert';
-import styled from 'styled-components';
 import DressDetailInfo from './DressDetailInfo';
 import DressDetailEvent from './DressDetailEvent';
 import AddEventModal from './AddEventModal';
@@ -14,39 +13,13 @@ import {
   DELETE_DRESS_REQUEST,
 } from '../../store/modules/dress/dress';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { Container, Button } from '../../lib/extends';
-
-const DetailMain = styled.main`
-  /* border: 1px solid red; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-const DetailContainer = styled(Container)`
-  height: 650px;
-`;
-
-const DetailWrapper = styled.div`
-  /* border: 1px solid green; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 90%;
-  height: 100%;
-  margin-bottom: 20px;
-`;
-
-const ButtonWrapper = styled.div`
-  /* border: 1px solid green; */
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  button:nth-child(2) {
-    margin: 0 20px;
-  }
-`;
+import { Button } from '../../lib/extends';
+import {
+  DetailMain,
+  DetailContainer,
+  DetailWrapper,
+  ButtonWrapper,
+} from './dressDetatilStyles';
 
 const DressDetail = ({ match, history }) => {
   let token = Cookies.get('token');

@@ -1,31 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import ReactModal from 'react-modal';
 import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
 import StoreList from '../signup/StoreList';
 import modalStyle from '../../lib/modalStyle';
 import { PUT_DRESS_REQUEST } from '../../store/modules/dress/dress';
-
-const EditDressForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding-right: 15px;
-  color: black;
-  label {
-    margin-right: 10px;
-  }
-  select,
-  input {
-    width: 100px;
-    margin-bottom: 10px;
-  }
-`;
-
-const EditDressFormButton = styled.form`
-  display: flex;
-  justify-content: center;
-`;
+import { EditDressForm, EditDressFormButton } from './dressDetatilStyles';
 
 const EditDressModal = ({
   match,

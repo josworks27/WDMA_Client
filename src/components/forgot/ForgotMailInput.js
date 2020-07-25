@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
 import {
   FORGOT_STORE_REQUEST,
   FORGOT_MAIL_REQUEST,
@@ -9,16 +8,7 @@ import {
 import StoreList from '../signup/StoreList';
 import ForgotMailCheck from './ForgotMailCheck';
 import { Container, InputForm, FormGroup, Button, H1 } from '../../lib/extends';
-
-const ForgotMailFormGroup = styled(FormGroup)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 30%;
-  span {
-    margin-bottom: 10px;
-  }
-`;
+import { ForgotMailFormGroup } from './forgotStyles';
 
 const ForgotMailInput = ({ history }) => {
   const [userInfo, setUserInfo] = useState({

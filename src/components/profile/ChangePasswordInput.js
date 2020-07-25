@@ -1,34 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
 import { PUT_PASSWORD_REQUEST } from '../../store/modules/user/user';
-import { Container, H1, Button, InputForm, FormGroup } from '../../lib/extends';
-
-const ChangePasswordContainer = styled(Container)`
-  height: 650px;
-`;
-
-const ChangePasswordFormGroup = styled(FormGroup)`
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  margin-bottom: 30px;
-  label {
-    margin-bottom: 10px;
-  }
-  span {
-    margin-bottom: 10px;
-  }
-`;
-
-const ButtonGroup = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 50%;
-  button {
-    margin: 0 10px;
-  }
-`;
+import { H1, Button, InputForm } from '../../lib/extends';
+import {
+  ChangePasswordContainer,
+  ChangePasswordFormGroup,
+  ButtonGroup,
+} from './profileStyles';
 
 const ChangePasswordInput = ({ history }) => {
   const [password, setPassword] = useState({

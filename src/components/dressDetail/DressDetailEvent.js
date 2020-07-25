@@ -1,21 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import MaterialTable from 'material-table';
-
-const DetailEventSection = styled.section`
-  /* border: 1px solid ${(props) => props.theme.mainColor}; */
-  width: 60%;
-  height: 450px;
-  height: 100%;
-  padding: 20px;
-  overflow-y: auto;
-  h1 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 5px;
-    text-align: center;
-  }
-`;
+import { DetailEventSection } from './dressDetatilStyles';
 
 const DressDetailInfo = ({ events }) => {
   return (

@@ -1,15 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Container, H1 } from '../../lib/extends';
-
-const ForgotMailWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 500px;
-`;
+import { ForgotMailWrapper } from './forgotStyles';
 
 const ForgotMailCheck = ({ user }) => {
   const { email } = user[0];

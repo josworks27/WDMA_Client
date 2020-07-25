@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
-import styled from 'styled-components';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import StoreList from '../signup/StoreList';
@@ -9,37 +8,12 @@ import {
   PUT_USER_REQUEST,
   DELETE_USER_REQUEST,
 } from '../../store/modules/user/user';
-import { Container, FormGroup, InputForm, H1, Button } from '../../lib/extends';
-
-const MyAccountContainer = styled(Container)`
-  height: ${(props) => props.height};
-`;
-
-// const MyAccountInputForm = styled(InputForm)`
-
-// `;
-
-const MyAccountFormGroup = styled(FormGroup)`
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  margin-bottom: 30px;
-  label {
-    margin-bottom: 10px;
-  }
-  span {
-    margin-bottom: 10px;
-  }
-`;
-
-const ButtonGroup = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 50%;
-  button {
-    margin: 0 10px;
-  }
-`;
+import { InputForm, H1, Button } from '../../lib/extends';
+import {
+  MyAccountContainer,
+  MyAccountFormGroup,
+  ButtonGroup,
+} from './profileStyles';
 
 const MyAccountInput = ({ me, history }) => {
   const [toggle, setToggle] = useState(true);

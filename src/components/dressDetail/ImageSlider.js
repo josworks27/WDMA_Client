@@ -1,26 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-
-const SliderWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Image = styled.img`
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 250px;
-  margin-bottom: 5px;
-`;
-
-const Buttons = styled.div`
-  display: flex;
-  button {
-    margin: 0 5px;
-  }
-`;
+import { SliderWrapper, Image, Buttons } from './dressDetatilStyles';
 
 const ImageSlider = ({ images }) => {
   const [imageNum, setImageNum] = useState(0);

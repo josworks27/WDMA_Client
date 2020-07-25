@@ -1,35 +1,14 @@
 import React from 'react';
 import ReactModal from 'react-modal';
-import styled from 'styled-components';
 import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import ja from 'date-fns/locale/ja';
 import modalStyle from '../../lib/modalStyle';
 import 'react-datepicker/dist/react-datepicker.css';
+import { AddEventForm, AddEventFormButton } from './dressDetatilStyles';
 
 // Register React-datepicker
 registerLocale('ja', ja);
 setDefaultLocale('ja');
-
-const AddEventForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding-right: 15px;
-  color: black;
-  label {
-    margin-right: 10px;
-  }
-  select,
-  input {
-    width: 100px;
-    margin-bottom: 10px;
-  }
-`;
-
-const AddEventFormButton = styled.form`
-  display: flex;
-  justify-content: center;
-`;
 
 const AddEventModal = ({
   showModal,

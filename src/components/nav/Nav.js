@@ -1,53 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
-
-const NavBar = styled.nav`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  ul {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    li {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      margin-right: 30px;
-    }
-  }
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  color: white;
-  transition: ease 0.3s;
-  &:hover {
-    color: ${(props) => props.theme.mainColor};
-  }
-`;
-
-const MainLink = styled(StyledLink)`
-  height: 30px;
-  font-weight: bold;
-  letter-spacing: 7px;
-  font-size: 2rem;
-  background: linear-gradient(
-    to right,
-    ${(props) => props.theme.mainColor},
-    ${(props) => props.theme.thirdColor}
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-`;
+import { NavBar, StyledLink, MainLink } from './navStyles';
 
 const Nav = () => {
   let token = Cookies.get('token');
@@ -76,9 +30,9 @@ const Nav = () => {
             {/* <li>
               <StyledLink to="/chat">Chat</StyledLink>
             </li> */}
-            <li>
+            {/* <li>
               <StyledLink to="/dress/stats">Stats</StyledLink>
-            </li>
+            </li> */}
             <li>
               <StyledLink to="/profile">Profile</StyledLink>
             </li>
@@ -102,12 +56,12 @@ const Nav = () => {
             <li>
               <StyledLink to="/dress/search">Search</StyledLink>
             </li>
-            <li>
+            {/* <li>
               <StyledLink to="/chat">Chat</StyledLink>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <StyledLink to="/dress/stats">Stats</StyledLink>
-            </li>
+            </li> */}
             <li>
               <StyledLink to="/profile">Profile</StyledLink>
             </li>
