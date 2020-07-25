@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import ReactModal from 'react-modal';
 import { useDispatch } from 'react-redux';
 import StoreList from '../signup/StoreList';
@@ -38,61 +38,70 @@ const EditDressModal = ({
     });
   }, [dress]);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  const handleChange = useCallback(
+    (event) => {
+      const { name, value } = event.target;
 
-    setEditDress({
-      ...editDress,
-      [name]: value,
-    });
-  };
+      setEditDress({
+        ...editDress,
+        [name]: value,
+      });
+    },
+    [editDress],
+  );
 
-  const handleSelect = (event) => {
-    const { files } = event.target;
+  const handleSelect = useCallback(
+    (event) => {
+      const { files } = event.target;
 
-    setEditDress({
-      ...editDress,
-      images: [...files],
-    });
-  };
+      setEditDress({
+        ...editDress,
+        images: [...files],
+      });
+    },
+    [editDress],
+  );
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    let formData = new FormData();
-    if (editDress.images.length > 0) {
-      for (let i = 0; i < editDress.images.length; i += 1) {
-        formData.append(`images`, editDress.images[i]);
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      let formData = new FormData();
+      if (editDress.images.length > 0) {
+        for (let i = 0; i < editDress.images.length; i += 1) {
+          formData.append(`images`, editDress.images[i]);
+        }
       }
-    }
 
-    formData.append('model', editDress.model);
-    formData.append('price', editDress.price);
-    formData.append('accessoryOne', editDress.accessoryOne);
-    formData.append('accessoryTwo', editDress.accessoryTwo);
-    formData.append('accessoryThree', editDress.accessoryThree);
-    formData.append('store', editDress.store);
+      formData.append('model', editDress.model);
+      formData.append('price', editDress.price);
+      formData.append('accessoryOne', editDress.accessoryOne);
+      formData.append('accessoryTwo', editDress.accessoryTwo);
+      formData.append('accessoryThree', editDress.accessoryThree);
+      formData.append('store', editDress.store);
 
-    dispatch({
-      type: PUT_DRESS_REQUEST,
-      data: {
-        dressId,
-        formData,
-      },
-    });
+      dispatch({
+        type: PUT_DRESS_REQUEST,
+        data: {
+          dressId,
+          formData,
+        },
+      });
 
-    // state 초기화
-    setEditDress({
-      model: '',
-      price: '',
-      accessoryOne: '',
-      accessoryTwo: '',
-      accessoryThree: '',
-      store: 'Yokohama',
-      images: [],
-    });
+      // state 초기화
+      setEditDress({
+        model: '',
+        price: '',
+        accessoryOne: '',
+        accessoryTwo: '',
+        accessoryThree: '',
+        store: 'Yokohama',
+        images: [],
+      });
 
-    setShowModal(false);
-  };
+      setShowModal(false);
+    },
+    [dispatch, dressId, editDress, setShowModal],
+  );
 
   return (
     <ReactModal isOpen={showModal} style={modalStyle}>

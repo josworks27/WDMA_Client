@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
 import { confirmAlert } from 'react-confirm-alert';
@@ -57,57 +57,66 @@ const MyAccountInput = ({ me, history }) => {
     }
   }, [updateUser, putUserError, deleteUser, deleteUserError, history]);
 
-  const handleClick = (event) => {
-    const { name } = event.target;
+  const handleClick = useCallback(
+    (event) => {
+      const { name } = event.target;
 
-    if (name === 'edit-account') {
+      if (name === 'edit-account') {
+        event.preventDefault();
+        setToggle((prev) => !prev);
+      } else {
+        confirmAlert({
+          title: 'Confirm to Delete',
+          message: 'Are you sure to do this?',
+          buttons: [
+            {
+              label: 'Yes',
+              onClick: () => {
+                dispatch({ type: DELETE_USER_REQUEST });
+              },
+            },
+            {
+              label: 'No',
+              onClick: () => {
+                console.log('did not confirm');
+              },
+            },
+          ],
+        });
+      }
+    },
+    [dispatch],
+  );
+
+  const handleSubmit = useCallback(
+    (event) => {
       event.preventDefault();
-      setToggle(false);
-    } else {
-      confirmAlert({
-        title: 'Confirm to Delete',
-        message: 'Are you sure to do this?',
-        buttons: [
-          {
-            label: 'Yes',
-            onClick: () => {
-              dispatch({ type: DELETE_USER_REQUEST });
-            },
-          },
-          {
-            label: 'No',
-            onClick: () => {
-              console.log('did not confirm');
-            },
-          },
-        ],
+
+      dispatch({
+        type: PUT_USER_REQUEST,
+        data: {
+          name: editAccount.name,
+          store: editAccount.store,
+          manager: editAccount.manager,
+        },
       });
-    }
-  };
+    },
+    [dispatch, editAccount],
+  );
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleChange = useCallback(
+    (event) => {
+      const { target } = event;
+      const { name } = target;
+      const value = target.name === 'manager' ? target.checked : target.value;
 
-    dispatch({
-      type: PUT_USER_REQUEST,
-      data: {
-        name: editAccount.name,
-        store: editAccount.store,
-        manager: editAccount.manager,
-      },
-    });
-  };
-
-  const handleChange = (event) => {
-    const { target } = event;
-    const { name } = target;
-    const value = target.name === 'manager' ? target.checked : target.value;
-
-    setEditAccount({
-      ...editAccount,
-      [name]: value,
-    });
-  };
+      setEditAccount({
+        ...editAccount,
+        [name]: value,
+      });
+    },
+    [editAccount],
+  );
 
   return (
     <>

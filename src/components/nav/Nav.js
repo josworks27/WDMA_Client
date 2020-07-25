@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Cookies from 'js-cookie';
 import { useSelector } from 'react-redux';
 import { NavBar, StyledLink, MainLink } from './navStyles';
@@ -7,10 +7,10 @@ const Nav = () => {
   let token = Cookies.get('token');
   const { me } = useSelector((state) => state.userReducer);
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     Cookies.remove('token');
     window.location.reload();
-  };
+  }, []);
 
   return (
     <>

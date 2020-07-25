@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PUT_PASSWORD_REQUEST } from '../../store/modules/user/user';
 import { H1, Button, InputForm } from '../../lib/extends';
@@ -37,35 +37,41 @@ const ChangePasswordInput = ({ history }) => {
     }
   }, [putPasswordError, updatePassword, history]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
 
-    if (newPassword !== checkPassword) {
+      if (newPassword !== checkPassword) {
+        setPassword({
+          currPassword: '',
+          newPassword: '',
+          checkPassword: '',
+        });
+        alert('Please Check the password');
+      } else {
+        dispatch({
+          type: PUT_PASSWORD_REQUEST,
+          data: {
+            currPassword,
+            newPassword,
+          },
+        });
+      }
+    },
+    [checkPassword, currPassword, dispatch, newPassword],
+  );
+
+  const handleChange = useCallback(
+    (event) => {
+      const { name, value } = event.target;
+
       setPassword({
-        currPassword: '',
-        newPassword: '',
-        checkPassword: '',
+        ...password,
+        [name]: value,
       });
-      alert('Please Check the password');
-    } else {
-      dispatch({
-        type: PUT_PASSWORD_REQUEST,
-        data: {
-          currPassword,
-          newPassword,
-        },
-      });
-    }
-  };
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setPassword({
-      ...password,
-      [name]: value,
-    });
-  };
+    },
+    [password],
+  );
 
   return (
     <ChangePasswordContainer>

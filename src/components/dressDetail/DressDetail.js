@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
@@ -60,34 +60,37 @@ const DressDetail = ({ match, history }) => {
     }
   }, [history, deleteDress]);
 
-  const handleOpenModal = (event) => {
+  const handleOpenModal = useCallback((event) => {
     if (event.target.name === 'add-event-button') {
-      setShowAddEventModal(true);
+      setShowAddEventModal((prev) => !prev);
     } else {
-      setShowEditDressModal(true);
+      setShowEditDressModal((prev) => !prev);
     }
-  };
+  }, []);
 
-  const handleCloseModal = (event) => {
-    // 다음 작업을 위해 state 초기화
-    if (event.target.name === 'close-add-event-modal') {
-      setAddEvent({
-        ...addEvent,
-        eventType: 'customerRent',
-        date: new Date(),
-        details: '',
-        customerName: '',
-        customerBirth: new Date(),
-        customerGender: 'Male',
-      });
+  const handleCloseModal = useCallback(
+    (event) => {
+      // 다음 작업을 위해 state 초기화
+      if (event.target.name === 'close-add-event-modal') {
+        setAddEvent({
+          ...addEvent,
+          eventType: 'customerRent',
+          date: new Date(),
+          details: '',
+          customerName: '',
+          customerBirth: new Date(),
+          customerGender: 'Male',
+        });
 
-      setShowAddEventModal(false);
-    } else {
-      setShowEditDressModal(false);
-    }
-  };
+        setShowAddEventModal((prev) => !prev);
+      } else {
+        setShowEditDressModal((prev) => !prev);
+      }
+    },
+    [addEvent],
+  );
 
-  const handleSaveModal = () => {
+  const handleSaveModal = useCallback(() => {
     if (
       addEvent.eventType === 'cleaning' ||
       addEvent.eventType === 'storeRent'
@@ -136,18 +139,21 @@ const DressDetail = ({ match, history }) => {
       // 아니면 정상적으로 모달창 종료
       setShowAddEventModal(false);
     }
-  };
+  }, [addEvent, dispatch, id, postEventError]);
 
-  const handleChange = (event) => {
-    const { value, name } = event.target;
-    setAddEvent({
-      ...addEvent,
-      [name]: value,
-    });
-  };
+  const handleChange = useCallback(
+    (event) => {
+      const { value, name } = event.target;
+      setAddEvent({
+        ...addEvent,
+        [name]: value,
+      });
+    },
+    [addEvent],
+  );
 
   // Delete dress 팝업창
-  const handleDelete = () => {
+  const handleDelete = useCallback(() => {
     confirmAlert({
       title: 'Confirm to Delete',
       message: 'Are you sure to do this?',
@@ -171,7 +177,7 @@ const DressDetail = ({ match, history }) => {
         },
       ],
     });
-  };
+  }, [dispatch, id]);
 
   return (
     <>

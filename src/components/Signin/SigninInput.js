@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { SIGN_IN_REQUEST, USER_RESET } from '../../store/modules/user/user';
@@ -34,21 +34,27 @@ const SigninInput = ({ history }) => {
     }
   }, [me, signinError, history, dispatch]);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setAccount({ ...account, [name]: value });
-  };
+  const handleChange = useCallback(
+    (event) => {
+      const { name, value } = event.target;
+      setAccount({ ...account, [name]: value });
+    },
+    [account],
+  );
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    dispatch({
-      type: SIGN_IN_REQUEST,
-      data: {
-        email,
-        password,
-      },
-    });
-  };
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      dispatch({
+        type: SIGN_IN_REQUEST,
+        data: {
+          email,
+          password,
+        },
+      });
+    },
+    [dispatch, email, password],
+  );
 
   return (
     <Container>

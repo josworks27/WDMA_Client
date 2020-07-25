@@ -51,4 +51,4 @@ const DressList = ({ match }) => {
   );
 };
 
-export default DressList;
+export default React.memo(DressList);

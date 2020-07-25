@@ -28,4 +28,4 @@ const Dress = ({ match }) => {
   );
 };
 
-export default Dress;
+export default React.memo(Dress);

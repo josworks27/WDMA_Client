@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import useOnlyNumber from '../../util/hooks/useOnlyNumber';
@@ -12,23 +12,26 @@ const ValidationCheck = () => {
   );
   const { authNumber, handleChange } = useOnlyNumber(email);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    dispatch({
-      type: MAIL_CHECK_REQUEST,
-      data: {
-        email,
-        authNumber,
-      },
-    });
-  };
-
   useEffect(() => {
     if (mailCheckError) {
       alert(mailCheckError);
     }
   }, [mailCheckError]);
+
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+
+      dispatch({
+        type: MAIL_CHECK_REQUEST,
+        data: {
+          email,
+          authNumber,
+        },
+      });
+    },
+    [authNumber, dispatch, email],
+  );
 
   return (
     <>

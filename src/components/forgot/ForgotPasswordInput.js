@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   FORGOT_PASSWORD_REQUEST,
@@ -32,20 +32,23 @@ const ForgotPasswordInput = ({ history }) => {
     }
   }, [changed, findPasswordError, email, dispatch, history]);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
 
-    dispatch({
-      type: FORGOT_PASSWORD_REQUEST,
-      data: {
-        email,
-      },
-    });
-  };
+      dispatch({
+        type: FORGOT_PASSWORD_REQUEST,
+        data: {
+          email,
+        },
+      });
+    },
+    [dispatch, email],
+  );
 
-  const handleChange = (event) => {
+  const handleChange = useCallback((event) => {
     setEmail(event.target.value);
-  };
+  }, []);
 
   return (
     <Container>

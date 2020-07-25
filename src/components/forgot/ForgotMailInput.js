@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   FORGOT_STORE_REQUEST,
@@ -40,26 +40,32 @@ const ForgotMailInput = ({ history }) => {
     }
   }, [findStoreError, findMailError, dispatch]);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  const handleChange = useCallback(
+    (event) => {
+      const { name, value } = event.target;
 
-    setUserInfo({
-      ...userInfo,
-      [name]: value,
-    });
-  };
+      setUserInfo({
+        ...userInfo,
+        [name]: value,
+      });
+    },
+    [userInfo],
+  );
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
 
-    dispatch({
-      type: FORGOT_MAIL_REQUEST,
-      data: {
-        name: userInfo.name,
-        store: userInfo.store,
-      },
-    });
-  };
+      dispatch({
+        type: FORGOT_MAIL_REQUEST,
+        data: {
+          name: userInfo.name,
+          store: userInfo.store,
+        },
+      });
+    },
+    [dispatch, userInfo],
+  );
 
   return (
     <>

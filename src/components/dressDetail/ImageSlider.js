@@ -1,23 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { SliderWrapper, Image, Buttons } from './dressDetatilStyles';
 
 const ImageSlider = ({ images }) => {
   const [imageNum, setImageNum] = useState(0);
 
-  const handleClick = (event) => {
-    const { name } = event.target;
-    if (name === 'prev') {
-      if (imageNum === 0) {
-        setImageNum(images.length - 1);
+  const handleClick = useCallback(
+    (event) => {
+      const { name } = event.target;
+      if (name === 'prev') {
+        if (imageNum === 0) {
+          setImageNum(images.length - 1);
+        } else {
+          setImageNum((data) => data - 1);
+        }
+      } else if (imageNum === images.length - 1) {
+        setImageNum(0);
       } else {
-        setImageNum((data) => data - 1);
+        setImageNum((data) => data + 1);
       }
-    } else if (imageNum === images.length - 1) {
-      setImageNum(0);
-    } else {
-      setImageNum((data) => data + 1);
-    }
-  };
+    },
+    [imageNum, images],
+  );
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import StoreList from '../signup/StoreList';
 import { POST_DRESS_REQUEST } from '../../store/modules/dress/dress';
@@ -31,44 +31,53 @@ const AddDressInput = ({ history }) => {
     }
   }, [dressId, history]);
 
-  const handleSelect = (event) => {
-    const { files } = event.target;
+  const handleSelect = useCallback(
+    (event) => {
+      const { files } = event.target;
 
-    setAddDress({
-      ...addDress,
-      images: [...files],
-    });
-  };
+      setAddDress({
+        ...addDress,
+        images: [...files],
+      });
+    },
+    [addDress],
+  );
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  const handleChange = useCallback(
+    (event) => {
+      const { name, value } = event.target;
 
-    setAddDress({
-      ...addDress,
-      [name]: value,
-    });
-  };
+      setAddDress({
+        ...addDress,
+        [name]: value,
+      });
+    },
+    [addDress],
+  );
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
 
-    let formData = new FormData();
-    for (let i = 0; i < addDress.images.length; i += 1) {
-      formData.append(`images`, addDress.images[i]);
-    }
+      let formData = new FormData();
+      for (let i = 0; i < addDress.images.length; i += 1) {
+        formData.append(`images`, addDress.images[i]);
+      }
 
-    formData.append('model', addDress.model);
-    formData.append('price', addDress.price);
-    formData.append('accessoryOne', addDress.accessoryOne);
-    formData.append('accessoryTwo', addDress.accessoryTwo);
-    formData.append('accessoryThree', addDress.accessoryThree);
-    formData.append('store', addDress.store);
+      formData.append('model', addDress.model);
+      formData.append('price', addDress.price);
+      formData.append('accessoryOne', addDress.accessoryOne);
+      formData.append('accessoryTwo', addDress.accessoryTwo);
+      formData.append('accessoryThree', addDress.accessoryThree);
+      formData.append('store', addDress.store);
 
-    dispatch({
-      type: POST_DRESS_REQUEST,
-      data: { formData },
-    });
-  };
+      dispatch({
+        type: POST_DRESS_REQUEST,
+        data: { formData },
+      });
+    },
+    [addDress, dispatch],
+  );
 
   return (
     <AddDressContainer>

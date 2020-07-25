@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ValidationCheck from './ValidationCheck';
 import { MAIL_AUTH_REQUEST } from '../../store/modules/user/user';
@@ -11,30 +11,33 @@ const ValidationAuth = () => {
   const { email, mailAuthError } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
-  const handleChange = (event) => {
-    setUserInputEmail(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    if (!userInputEmail.includes('@') || !userInputEmail.includes('.')) {
-      alert('Please Check your Email address');
-    } else {
-      dispatch({
-        type: MAIL_AUTH_REQUEST,
-        data: {
-          email: userInputEmail,
-        },
-      });
-    }
-  };
-
   useEffect(() => {
     if (mailAuthError.message === 'Request failed with status code 409') {
       alert('Existing Email');
     }
   }, [mailAuthError]);
+
+  const handleChange = useCallback((event) => {
+    setUserInputEmail(event.target.value);
+  }, []);
+
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+
+      if (!userInputEmail.includes('@') || !userInputEmail.includes('.')) {
+        alert('Please Check your Email address');
+      } else {
+        dispatch({
+          type: MAIL_AUTH_REQUEST,
+          data: {
+            email: userInputEmail,
+          },
+        });
+      }
+    },
+    [dispatch, userInputEmail],
+  );
 
   return (
     <>
